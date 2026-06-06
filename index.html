@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>山海兵法 · 逐步動畫</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700;900&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#15110d;--ink2:#1e1813;--panel:#241c15;--panel2:#2c2219;
+  --parch:#e9dcc1;--parch-deep:#d2bd92;--gold:#c9a24b;--gold-b:#e6c878;
+  --cinnabar:#bc362a;--cinnabar-d:#8f241b;--muted:#a3917a;--text:#efe6d2;
+  --wind:#3f9b90;--wind-d:#1f5a52;--forest:#5a8a3c;--forest-d:#2f5421;
+  --fire:#c4452f;--fire-d:#7e2417;--mtn:#b78534;--mtn-d:#73501a;
+  --strat:#b89248;--strat-d:#5d4620;--felt:#21331f;--felt2:#16241a;
+  --sea:#2f6f86;--sea-d:#173d4d;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:radial-gradient(900px 600px at 80% -10%,rgba(188,54,42,.12),transparent 60%),
+  radial-gradient(1100px 700px at 10% 110%,rgba(201,162,75,.1),transparent 55%),var(--ink);
+  color:var(--text);font-family:'Noto Serif SC',Georgia,serif;line-height:1.8;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px;position:relative;z-index:2}
+
+nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(8px);background:linear-gradient(to bottom,rgba(21,17,13,.96),rgba(21,17,13,.82));border-bottom:1px solid rgba(201,162,75,.28)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{font-family:'Ma Shan Zheng',cursive;font-size:1.7rem;color:var(--gold-b);letter-spacing:3px}
+.navlinks{display:flex;gap:3px;flex-wrap:wrap}
+.navlinks a{color:var(--parch);text-decoration:none;font-size:.94rem;padding:6px 11px;border-radius:2px;transition:.25s;letter-spacing:1px}
+.navlinks a:hover{color:var(--gold-b);background:rgba(201,162,75,.1)}
+
+header.hero{position:relative;padding:70px 0 44px;text-align:center;overflow:hidden}
+.hero .seal-bg{position:absolute;top:46%;left:50%;transform:translate(-50%,-50%);font-family:'Noto Serif SC',serif;font-weight:900;font-size:33vw;color:rgba(188,54,42,.05);white-space:nowrap;pointer-events:none;line-height:.8}
+.hero-inner{position:relative;z-index:2}
+.hero h1{font-family:'Ma Shan Zheng',cursive;font-size:clamp(4rem,13vw,8.4rem);color:var(--gold-b);line-height:.95;letter-spacing:10px;text-shadow:0 4px 30px rgba(0,0,0,.6);animation:rise 1s ease both}
+.hero .tag{margin-top:16px;font-size:1.1rem;color:var(--parch);max-width:640px;margin-inline:auto;animation:rise 1s .15s ease both}
+.hero .tag b{color:var(--cinnabar);font-weight:700}
+.cue{margin-top:24px;color:var(--muted);font-size:.95rem;letter-spacing:3px;animation:rise 1s .3s ease both}
+.cue::after{content:"↓";display:block;font-size:1.4rem;color:var(--gold);animation:bob 1.8s ease-in-out infinite;margin-top:4px}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.fan{display:flex;justify-content:center;margin-top:26px;animation:rise 1s .42s ease both;height:188px}
+.fan .bc{margin:0 -24px;box-shadow:0 16px 30px rgba(0,0,0,.55)}
+.fan .bc:nth-child(1){transform:rotate(-13deg) translateY(14px)}
+.fan .bc:nth-child(2){transform:rotate(0) translateY(-6px);z-index:3}
+.fan .bc:nth-child(3){transform:rotate(13deg) translateY(14px)}
+
+section{padding:52px 0;position:relative}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:12px;flex-wrap:wrap}
+.sec-head .num{font-family:'Cinzel',serif;color:var(--cinnabar);font-size:1.05rem;letter-spacing:2px}
+.sec-head h2{font-family:'Ma Shan Zheng',cursive;color:var(--gold-b);font-size:2.5rem;letter-spacing:4px}
+.sec-head .cap{color:var(--muted);font-size:.92rem;margin-left:auto;letter-spacing:2px}
+.lead{color:var(--parch);max-width:800px;margin-bottom:24px;font-size:1.01rem}
+
+/* battlefield */
+.battlefield{border-radius:14px;padding:16px 16px 12px;position:relative;overflow:hidden;
+  background:radial-gradient(120% 90% at 50% 50%,var(--felt),var(--felt2)),var(--felt2);
+  border:1px solid rgba(201,162,75,.35);box-shadow:0 30px 70px rgba(0,0,0,.6),inset 0 0 120px rgba(0,0,0,.5)}
+.battlefield::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;background:repeating-linear-gradient(135deg,rgba(0,0,0,.05) 0 2px,transparent 2px 9px)}
+.bf-side{display:flex;align-items:center;gap:14px;position:relative;z-index:2}
+.bf-tag{position:absolute;top:4px;left:6px;font-family:'Ma Shan Zheng',cursive;font-size:1.4rem;letter-spacing:3px;opacity:.5}
+.field-row{display:flex;gap:11px;align-items:center;flex:1;flex-wrap:wrap;padding:6px 0;min-height:172px;justify-content:center}
+.cmd{display:flex;flex-direction:column;align-items:center;gap:7px;min-width:124px;padding:0 4px;position:relative}
+.orb{width:74px;height:74px;border-radius:50%;display:grid;place-items:center;position:relative;background:radial-gradient(circle at 35% 28%,#7fd6c8,#1e5c52 70%);border:2px solid var(--gold);box-shadow:0 0 22px rgba(63,155,144,.5),inset 0 -6px 14px rgba(0,0,0,.4)}
+.orb.foe{background:radial-gradient(circle at 35% 28%,#e88a7a,#7e2417 72%);box-shadow:0 0 22px rgba(196,69,47,.45),inset 0 -6px 14px rgba(0,0,0,.4)}
+.orb.flash{animation:orbflash .7s}
+@keyframes orbflash{0%,100%{box-shadow:0 0 22px rgba(196,69,47,.45),inset 0 -6px 14px rgba(0,0,0,.4)}45%{box-shadow:0 0 40px rgba(255,90,60,.9),inset 0 -6px 14px rgba(0,0,0,.4)}}
+.orb .num{font-family:'Cinzel',serif;font-weight:700;font-size:1.8rem;color:#fff;text-shadow:0 2px 5px rgba(0,0,0,.6)}
+.orb .lab{position:absolute;bottom:-8px;background:var(--cinnabar);color:#fff;font-size:.6rem;padding:1px 8px;border-radius:8px;letter-spacing:2px;border:1px solid var(--cinnabar-d)}
+.supply{display:flex;align-items:center;gap:5px;font-size:.76rem;color:var(--gold-b)}
+.coins{font-size:.58rem}.coins .on{color:var(--gold-b)}.coins .off{color:rgba(201,162,75,.25)}
+.piles{display:flex;gap:9px;font-size:.64rem;color:var(--muted)}
+.piles b{color:var(--parch);font-family:'Cinzel',serif}
+.bf-line{display:flex;align-items:center;justify-content:center;gap:12px;position:relative;z-index:2;margin:2px 0}
+.bf-line .rule{height:1px;flex:1;background:linear-gradient(90deg,transparent,rgba(201,162,75,.5),transparent)}
+.clash{font-family:'Ma Shan Zheng',cursive;color:#fff;background:var(--cinnabar);border:2px solid var(--cinnabar-d);width:42px;height:42px;border-radius:8px;display:grid;place-items:center;font-size:1.2rem;box-shadow:0 0 0 4px rgba(188,54,42,.22),0 0 24px rgba(188,54,42,.5);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 4px rgba(188,54,42,.22),0 0 18px rgba(188,54,42,.4)}50%{box-shadow:0 0 0 7px rgba(188,54,42,.12),0 0 30px rgba(188,54,42,.7)}}
+
+/* board card */
+.bc{--c:var(--strat);--cd:var(--strat-d);width:104px;aspect-ratio:5/7;border-radius:8px;flex:0 0 auto;position:relative;background:linear-gradient(150deg,var(--parch),var(--parch-deep));padding:4px;box-shadow:0 7px 16px rgba(0,0,0,.45);transition:transform .25s,box-shadow .25s}
+.bc:hover{transform:translateY(-5px) scale(1.04);box-shadow:0 16px 30px rgba(0,0,0,.55)}
+.bc.wind{--c:var(--wind);--cd:var(--wind-d)}.bc.forest{--c:var(--forest);--cd:var(--forest-d)}
+.bc.fire{--c:var(--fire);--cd:var(--fire-d)}.bc.mtn{--c:var(--mtn);--cd:var(--mtn-d)}
+.bc .bi{position:absolute;inset:4px;border:1.4px solid var(--cd);border-radius:5px;background:linear-gradient(170deg,rgba(255,255,255,.35),rgba(0,0,0,.05));display:flex;flex-direction:column;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(201,162,75,.4)}
+.bc-cost{position:absolute;top:3px;left:3px;width:21px;height:21px;border-radius:50%;z-index:3;background:radial-gradient(circle at 35% 30%,var(--gold-b),var(--mtn-d));border:1.4px solid #6b4d18;color:#2a1c06;font-family:'Cinzel',serif;font-weight:700;display:grid;place-items:center;font-size:.78rem}
+.bc-nat{position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;z-index:3;display:grid;place-items:center;font-family:'Ma Shan Zheng',cursive;font-size:.85rem;color:#fff;background:linear-gradient(150deg,var(--c),var(--cd));border:1.2px solid rgba(0,0,0,.25)}
+.bc-art{margin:24px 6px 0;height:44%;border-radius:4px;overflow:hidden;position:relative;border:1px solid var(--cd);background:radial-gradient(circle at 50% 120%,rgba(255,255,255,.5),transparent 55%),linear-gradient(160deg,var(--c),var(--cd));display:grid;place-items:center}
+.bc-sig{font-family:'Noto Serif SC',serif;font-weight:900;font-size:2.4rem;color:rgba(0,0,0,.24);line-height:1}
+.bc-name{text-align:center;font-weight:700;color:#2a1c0c;font-size:.9rem;margin-top:5px;letter-spacing:1px}
+.bc-stats{margin-top:auto;display:flex;justify-content:space-between;align-items:center;padding:0 7px 6px}
+.bc-stats .s{font-family:'Cinzel',serif;font-weight:700;color:#fff;font-size:.82rem;background:var(--fire);border:1.3px solid var(--fire-d);width:21px;height:21px;border-radius:50%;display:grid;place-items:center}
+.bc-stats .x{font-family:'Cinzel',serif;font-weight:700;color:#fff;font-size:.82rem;background:var(--forest);border:1.3px solid var(--forest-d);width:21px;height:23px;display:grid;place-items:center;clip-path:polygon(50% 0,100% 20%,100% 64%,50% 100%,0 64%,0 20%)}
+.bc-kw{position:absolute;left:50%;bottom:30%;transform:translateX(-50%);background:var(--cinnabar);color:#fff;font-size:.58rem;padding:1px 7px;border-radius:7px;letter-spacing:2px;z-index:4;border:1px solid var(--cinnabar-d)}
+.bc.back{background:linear-gradient(150deg,#2a2017,#15100b)}
+.bc.back .bi{border-color:#6b4d18;background:repeating-conic-gradient(from 0deg,rgba(201,162,75,.06) 0 12deg,transparent 12deg 24deg),radial-gradient(circle at 50% 45%,rgba(188,54,42,.35),transparent 60%),#1b140d;align-items:center;justify-content:center}
+.bc.back .bk{font-family:'Ma Shan Zheng',cursive;font-size:2.5rem;color:var(--gold-b);text-shadow:0 0 14px rgba(201,162,75,.5)}
+.bc.back .bkc{position:absolute;bottom:8px;font-size:.58rem;color:var(--muted);letter-spacing:3px}
+
+/* fx */
+@keyframes fxin{from{opacity:0;transform:translateY(20px) scale(.88)}to{opacity:1;transform:none}}
+.bc.fx-enter{animation:fxin .5s both}
+@keyframes fxflip{0%{transform:rotateY(-180deg);opacity:.15}60%{opacity:1}100%{transform:rotateY(0)}}
+.bc.fx-flip{animation:fxflip .65s both}
+@keyframes fxhit{0%,100%{transform:translateX(0)}20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+.bc.fx-hit{animation:fxhit .45s}
+.bc.fx-hit .bi{box-shadow:0 0 0 2px #ff5a3c,0 0 18px rgba(255,90,60,.7),inset 0 0 0 1px rgba(201,162,75,.4)}
+@keyframes fxatk{0%{transform:translateY(0)}45%{transform:translateY(-16px) scale(1.07)}100%{transform:translateY(0)}}
+.bc.fx-atk{animation:fxatk .55s;z-index:5}
+@keyframes fxdie{to{opacity:0;transform:scale(.55) rotate(-9deg);filter:grayscale(1)}}
+.bc.fx-die{animation:fxdie .8s forwards;z-index:1}
+@keyframes fxgrow{0%,100%{transform:scale(1)}50%{transform:scale(1.13)}}
+.bc.fx-grow{animation:fxgrow .6s}
+.bc.fx-grow .bi{box-shadow:0 0 0 2px #8fe06a,0 0 18px rgba(120,224,106,.7),inset 0 0 0 1px rgba(201,162,75,.4)}
+.bc.glow .bi{box-shadow:0 0 0 2px var(--cinnabar),0 0 16px rgba(188,54,42,.6),inset 0 0 0 1px rgba(201,162,75,.45)}
+
+.float{position:absolute;left:50%;top:24%;transform:translateX(-50%);font-family:'Cinzel','Noto Serif SC',serif;font-weight:700;font-size:1.05rem;z-index:9;pointer-events:none;white-space:nowrap;text-shadow:0 2px 5px #000;animation:floatup 1.1s forwards}
+.float.dmg{color:#ff7a5c}.float.heal{color:#86e886}.float.buff{color:var(--gold-b)}.float.info{color:#fff;font-size:.74rem;background:rgba(0,0,0,.5);padding:1px 7px;border-radius:8px}
+@keyframes floatup{0%{opacity:0;transform:translate(-50%,8px)}15%{opacity:1}100%{opacity:0;transform:translate(-50%,-30px)}}
+.ofloat{position:absolute;top:-6px;left:50%;transform:translateX(-50%);font-family:'Cinzel',serif;font-weight:700;font-size:1.1rem;color:#ff7a5c;z-index:9;text-shadow:0 2px 5px #000;animation:floatup 1.1s forwards}
+
+/* terrain */
+.terrain{width:92px;aspect-ratio:5/7;border-radius:8px;flex:0 0 auto;position:relative;padding:4px;background:linear-gradient(150deg,#d9c79c,#b89248);box-shadow:0 6px 14px rgba(0,0,0,.4)}
+.terrain .ti{position:absolute;inset:4px;border:1.4px dashed var(--strat-d);border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(170deg,rgba(255,255,255,.3),rgba(0,0,0,.06));color:#33260f;text-align:center;padding:6px}
+.terrain .tg{font-weight:900;font-size:1.6rem;color:rgba(0,0,0,.3);line-height:1}
+.terrain .tn{font-weight:700;font-size:.78rem;margin-top:4px}
+.terrain .tl{font-size:.58rem;color:var(--strat-d);letter-spacing:2px;margin-top:2px}
+
+/* demo controls */
+.demo-cap{margin-top:16px;background:var(--panel2);border:1px solid rgba(201,162,75,.3);border-left:4px solid var(--cinnabar);border-radius:6px;padding:14px 18px;min-height:64px;display:flex;flex-direction:column;justify-content:center}
+.demo-cap .ph{font-family:'Ma Shan Zheng',cursive;color:var(--gold-b);font-size:1.2rem;letter-spacing:3px;margin-right:10px}
+.demo-cap .txt{color:var(--parch);font-size:1rem}
+.demo-cap .txt b{color:var(--gold-b)}.demo-cap .txt .r{color:#ff8a6c;font-weight:700}
+.demo-ctrl{display:flex;align-items:center;gap:10px;margin-top:14px;flex-wrap:wrap}
+.demo-ctrl button{font-family:'Noto Serif SC',serif;background:var(--cinnabar);color:#fff;border:1px solid var(--cinnabar-d);padding:9px 22px;border-radius:5px;cursor:pointer;letter-spacing:3px;font-size:1rem;transition:.2s}
+.demo-ctrl button:hover{filter:brightness(1.12)}
+.demo-ctrl button.ghost{background:transparent;color:var(--parch);border-color:rgba(201,162,75,.4)}
+.demo-ctrl button:disabled{opacity:.35;cursor:default;filter:none}
+.demo-ctrl .ind{margin-left:auto;color:var(--muted);font-family:'Cinzel',serif;letter-spacing:2px;font-size:.9rem}
+.progress{height:4px;background:rgba(201,162,75,.15);border-radius:3px;margin-top:12px;overflow:hidden}
+.progress .bar{height:100%;background:linear-gradient(90deg,var(--cinnabar),var(--gold));transition:width .4s}
+
+.legend-row{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;justify-content:center;color:var(--muted);font-size:.84rem}
+.legend-row span{display:inline-flex;align-items:center;gap:6px}
+.dotc{width:12px;height:12px;border-radius:3px;display:inline-block}
+
+/* 奇正 flip */
+.qz-grid{display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:center}
+@media(max-width:760px){.qz-grid{grid-template-columns:1fr;justify-items:center}}
+.flip{width:148px;aspect-ratio:5/7;perspective:1000px;cursor:pointer}
+.flip-in{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.4,.1,.2,1);transform-style:preserve-3d}
+.flip.on .flip-in{transform:rotateY(180deg)}
+.flip-face{position:absolute;inset:0;backface-visibility:hidden}
+.flip-face.back-f{transform:rotateY(180deg)}
+.flip-hint{text-align:center;color:var(--gold-b);font-size:.85rem;margin-top:12px;letter-spacing:2px}
+.qz-text h3{font-family:'Ma Shan Zheng',cursive;color:var(--gold-b);font-size:1.5rem;letter-spacing:2px;margin-bottom:6px}
+.qz-text p{color:var(--parch);margin-bottom:14px;max-width:520px}
+.qz-text .ch{color:var(--cinnabar);font-weight:700}
+.duo{display:flex;gap:14px;flex-wrap:wrap}
+.duo .box{flex:1;min-width:200px;background:var(--panel2);border:1px solid rgba(201,162,75,.3);border-radius:6px;padding:14px 16px}
+.duo .box .gz{font-family:'Ma Shan Zheng',cursive;font-size:1.7rem;color:var(--gold-b)}
+.duo .box .gz small{font-size:.7rem;color:var(--cinnabar);letter-spacing:2px;margin-left:8px}
+.duo .box p{font-size:.92rem;color:var(--parch);margin:6px 0 0}
+
+.nat-legend{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:8px}
+@media(max-width:760px){.nat-legend{grid-template-columns:1fr 1fr}}
+.nat-card{border-radius:8px;padding:20px 14px;text-align:center;color:#fff;border:1px solid rgba(255,255,255,.15);box-shadow:0 8px 20px rgba(0,0,0,.4)}
+.nat-card .g{font-family:'Ma Shan Zheng',cursive;font-size:3.3rem;line-height:1}
+.nat-card .nm{font-weight:700;letter-spacing:4px;margin:6px 0 8px;font-size:1rem}
+.nat-card p{font-size:.9rem;opacity:.95}
+.nat-wind{background:linear-gradient(160deg,var(--wind),var(--wind-d))}
+.nat-forest{background:linear-gradient(160deg,var(--forest),var(--forest-d))}
+.nat-fire{background:linear-gradient(160deg,var(--fire),var(--fire-d))}
+.nat-mtn{background:linear-gradient(160deg,var(--mtn),var(--mtn-d))}
+.kw-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.kw{display:inline-grid;grid-template-columns:auto 1fr;border:1px solid rgba(201,162,75,.3);border-radius:5px;overflow:hidden}
+.kw .k{background:var(--cinnabar);color:#fff;font-weight:700;padding:7px 12px;display:grid;place-items:center;font-size:1.05rem}
+.kw.sea .k{background:var(--sea)}
+.kw .d{padding:7px 13px;color:var(--parch);font-size:.85rem;max-width:280px;line-height:1.4}
+.kw .d em{color:var(--gold-b);font-style:normal;font-size:.68rem;letter-spacing:2px;display:block}
+
+.flow{display:flex;align-items:stretch;gap:0;margin-top:8px;flex-wrap:wrap}
+.phase{flex:1;min-width:130px;background:var(--panel2);border:1px solid rgba(201,162,75,.25);border-radius:8px;padding:18px;text-align:center;margin:6px}
+.phase .big{font-family:'Ma Shan Zheng',cursive;font-size:2.5rem;color:var(--gold-b);line-height:1}
+.phase .nm{color:var(--cinnabar);font-size:.76rem;letter-spacing:3px;margin:6px 0}
+.phase p{font-size:.82rem;color:var(--muted)}
+
+/* gallery */
+.deck-banner{display:flex;align-items:center;gap:16px;border-radius:10px;padding:16px 20px;margin-bottom:22px;border:1px solid rgba(201,162,75,.25)}
+.deck-banner.land{background:linear-gradient(110deg,rgba(183,133,52,.22),transparent)}
+.deck-banner.seaB{background:linear-gradient(110deg,rgba(47,111,134,.28),transparent)}
+.deck-banner .em{font-family:'Ma Shan Zheng',cursive;font-size:3rem;line-height:1;width:64px;height:64px;display:grid;place-items:center;border-radius:10px;color:#fff;flex:0 0 auto}
+.deck-banner.land .em{background:linear-gradient(150deg,var(--mtn),var(--mtn-d))}
+.deck-banner.seaB .em{background:linear-gradient(150deg,var(--sea),var(--sea-d))}
+.deck-banner h3{font-family:'Noto Serif SC',serif;color:var(--gold-b);font-size:1.3rem;letter-spacing:1px}
+.deck-banner p{color:var(--parch);font-size:.92rem;margin-top:2px}
+.deck-banner p b{color:var(--gold-b)}
+.filterbar{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 22px}
+.filterbar button{font-family:'Noto Serif SC',serif;background:var(--panel2);color:var(--parch);border:1px solid rgba(201,162,75,.3);padding:7px 16px;border-radius:4px;cursor:pointer;letter-spacing:2px;transition:.2s;font-size:.92rem}
+.filterbar button:hover{border-color:var(--gold)}
+.filterbar button.active{background:var(--cinnabar);border-color:var(--cinnabar-d);color:#fff}
+.deck{display:grid;grid-template-columns:repeat(auto-fill,minmax(206px,1fr));gap:22px}
+
+.card{--c:var(--strat);--cd:var(--strat-d);aspect-ratio:5/7;border-radius:12px;position:relative;background:linear-gradient(150deg,var(--parch),var(--parch-deep));padding:7px;box-shadow:0 10px 26px rgba(0,0,0,.5),0 1px 0 rgba(255,255,255,.25) inset;transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s;animation:rise .6s both}
+.card:hover{transform:translateY(-8px) rotate(-.6deg) scale(1.015);box-shadow:0 22px 44px rgba(0,0,0,.6)}
+.card.wind{--c:var(--wind);--cd:var(--wind-d)}.card.forest{--c:var(--forest);--cd:var(--forest-d)}
+.card.fire{--c:var(--fire);--cd:var(--fire-d)}.card.mtn{--c:var(--mtn);--cd:var(--mtn-d)}
+.card .inner{position:absolute;inset:7px;border:1.5px solid var(--cd);border-radius:8px;background:linear-gradient(170deg,rgba(255,255,255,.35),rgba(0,0,0,.04));display:flex;flex-direction:column;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(201,162,75,.4)}
+.c-top{display:flex;align-items:center;gap:6px;padding:7px 9px 5px}
+.cost{width:30px;height:30px;flex:0 0 30px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--gold-b),var(--mtn-d));border:1.5px solid #6b4d18;color:#2a1c06;font-family:'Cinzel',serif;font-weight:700;display:grid;place-items:center;font-size:1.05rem;position:relative}
+.cost::after{content:"糧";position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);font-size:.5rem;color:#5d4620;font-weight:700}
+.c-name{flex:1;min-width:0}
+.c-name .zh{font-weight:700;color:#2a1c0c;font-size:1.1rem;line-height:1.05;letter-spacing:1px}
+.c-name .py{font-family:'Cinzel',serif;font-size:.54rem;letter-spacing:2px;color:#7a5e2e}
+.nat{width:28px;height:28px;flex:0 0 28px;border-radius:50%;display:grid;place-items:center;font-family:'Ma Shan Zheng',cursive;font-size:1.12rem;color:#fff;background:linear-gradient(150deg,var(--c),var(--cd));border:1.5px solid rgba(0,0,0,.25)}
+.c-art{margin:2px 9px 0;height:37%;border-radius:5px;position:relative;overflow:hidden;border:1px solid var(--cd);background:radial-gradient(circle at 50% 120%,rgba(255,255,255,.5),transparent 55%),linear-gradient(160deg,var(--c),var(--cd));display:grid;place-items:center}
+.c-art .sigil{font-weight:900;font-size:4rem;color:rgba(0,0,0,.22);line-height:1}
+.c-art .stamp{position:absolute;bottom:5px;right:6px;width:26px;height:26px;border:2px solid rgba(255,255,255,.55);border-radius:4px;display:grid;place-items:center;color:rgba(255,255,255,.85);font-weight:700;font-size:.7rem;transform:rotate(-7deg)}
+.c-art .mist{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(255,255,255,.25),transparent 50%)}
+.c-type{margin:7px 9px 0;font-size:.6rem;letter-spacing:1px;color:#5d4620;display:flex;justify-content:space-between;border-bottom:1px solid rgba(93,70,32,.35);padding-bottom:4px}
+.c-type .badge{color:var(--cd);font-weight:700}
+.c-text{margin:6px 9px;flex:1;font-size:.73rem;line-height:1.5;color:#33260f;overflow:auto}
+.c-text .key{color:var(--cinnabar-d);font-weight:700}
+.c-text .vanilla{font-style:italic;color:#8a6f43}
+.c-stats{display:flex;justify-content:space-between;align-items:flex-end;padding:0 10px 9px}
+.stat{display:flex;align-items:center;gap:4px;font-family:'Cinzel',serif;font-weight:700;font-size:1.2rem}
+.stat.shi{color:#9a2018}.stat.xing{color:#3a5e2a}
+.diamond{width:22px;height:22px;background:var(--fire);transform:rotate(45deg);display:grid;place-items:center;border:1.5px solid var(--fire-d)}
+.diamond span{transform:rotate(-45deg);color:#fff;font-size:.72rem;font-weight:700}
+.shield{width:22px;height:24px;background:var(--forest);clip-path:polygon(50% 0,100% 18%,100% 62%,50% 100%,0 62%,0 18%);display:grid;place-items:center}
+.shield span{color:#fff;font-size:.66rem;font-weight:700}
+.c-chapter{padding:0 10px 10px;display:flex;justify-content:center}
+.c-chapter .seal{font-weight:700;color:#fff;background:var(--cinnabar);border:2px solid var(--cinnabar-d);border-radius:5px;padding:4px 14px;font-size:.78rem;letter-spacing:3px}
+.deck-note{text-align:center;color:var(--muted);font-style:italic;margin:26px auto 0;max-width:680px}
+footer{padding:54px 0 70px;text-align:center;border-top:1px solid rgba(201,162,75,.2);margin-top:30px}
+footer .fseal{font-family:'Noto Serif SC',serif;color:#fff;background:var(--cinnabar);display:inline-grid;place-items:center;width:78px;height:78px;border-radius:8px;font-size:1rem;line-height:1.1;font-weight:700;transform:rotate(-5deg)}
+footer p{color:var(--muted);margin-top:18px;font-style:italic}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">山海兵法</div>
+    <div class="navlinks">
+      <a href="#demo">演示</a>
+      <a href="#qizheng">奇正</a>
+      <a href="#nature">風林火山</a>
+      <a href="#land">山牌</a>
+      <a href="#sea">海牌</a>
+      <a href="#stratagems">兵法</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="seal-bg">山海</div>
+  <div class="hero-inner wrap">
+    <h1>山海兵法</h1>
+    <p class="tag">以《<b>山海經</b>》之異獸為兵，承《<b>孫子兵法</b>》之詭道為謀。<br>上兵伐謀——<b>不戰而屈人之兵</b>。</p>
+    <div class="fan" id="hero-fan"></div>
+    <p class="cue">觀一回合之變</p>
+  </div>
+</header>
+
+<!-- ===== DEMO ===== -->
+<section id="demo" class="wrap">
+  <div class="sec-head"><span class="num">壹</span><h2>回合演示</h2><span class="cap">逐步動畫 · 山牌組對局</span></div>
+  <p class="lead">第七回合，輪到我方。點「下一步」逐格推演——或開「自動播放」，看一回合如何從徵糧、用間、布勢，到翻奇破守、連環收割。</p>
+
+  <div class="battlefield" id="bf">
+    <div class="bf-side enemy">
+      <span class="bf-tag">敵</span>
+      <div class="cmd">
+        <div class="orb foe" id="e-orb"><span class="num" id="e-life">22</span><span class="lab">龍脈</span></div>
+        <div class="supply" id="e-sup"></div>
+        <div class="piles" id="e-piles"></div>
+      </div>
+      <div class="field-row" id="enemy-row"></div>
+    </div>
+    <div class="bf-line"><span class="rule"></span><span class="clash">戰</span><span class="rule"></span></div>
+    <div class="bf-side you">
+      <span class="bf-tag">我</span>
+      <div class="cmd">
+        <div class="orb" id="y-orb"><span class="num" id="y-life">27</span><span class="lab">龍脈</span></div>
+        <div class="supply" id="y-sup"></div>
+        <div class="piles" id="y-piles"></div>
+      </div>
+      <div class="field-row" id="you-row"></div>
+    </div>
+  </div>
+
+  <div class="demo-cap"><div><span class="ph" id="d-phase">起手</span><span class="txt" id="d-txt"></span></div></div>
+  <div class="progress"><div class="bar" id="d-bar" style="width:0"></div></div>
+  <div class="demo-ctrl">
+    <button id="d-next">下一步 →</button>
+    <button class="ghost" id="d-auto">自動播放</button>
+    <button class="ghost" id="d-reset">重播</button>
+    <span class="ind" id="d-ind"></span>
+  </div>
+
+  <div class="legend-row">
+    <span><i class="dotc" style="background:var(--wind)"></i>風</span>
+    <span><i class="dotc" style="background:var(--forest)"></i>林</span>
+    <span><i class="dotc" style="background:var(--fire)"></i>火</span>
+    <span><i class="dotc" style="background:var(--mtn)"></i>山</span>
+    <span><i class="dotc" style="background:var(--cinnabar)"></i>勢（攻擊）</span>
+    <span><i class="dotc" style="background:var(--forest-d)"></i>形（防禦／生命）</span>
+  </div>
+</section>
+
+<!-- ===== 奇正 ===== -->
+<section id="qizheng" class="wrap">
+  <div class="sec-head"><span class="num">貳</span><h2>奇正之機</h2><span class="cap">本作之心臟</span></div>
+  <div class="qz-grid">
+    <div>
+      <div class="flip" id="flip" onclick="this.classList.toggle('on')">
+        <div class="flip-in"><div class="flip-face front-f" id="flip-front"></div><div class="flip-face back-f" id="flip-back"></div></div>
+      </div>
+      <p class="flip-hint">點按翻開 ↻</p>
+    </div>
+    <div class="qz-text">
+      <h3>明者為正，暗者為奇</h3>
+      <p>登場異獸時，你選擇其入場姿態。<span class="ch">兵者，詭道也</span>——每張暗置之牌，都是對手無法解答的問題。</p>
+      <div class="duo">
+        <div class="box"><div class="gz">正 <small>明置</small></div><p>正面登場，全數值、能力即時生效。誠實可靠——<i>以正合</i>。</p></div>
+        <div class="box"><div class="gz">奇 <small>暗置</small></div><p>背面伏兵，暗置時不能攻擊。可於任意時機翻開，觸發<span class="ch">出其不意</span>——<i>以奇勝</i>。</p></div>
+      </div>
+      <p style="margin-top:14px;font-size:.92rem;color:var(--muted)">破解之道唯有<span class="ch">用間</span>——窺敵手牌、翻其伏兵，此即<b>知己知彼，百戰不殆</b>。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== NATURES ===== -->
+<section id="nature" class="wrap">
+  <div class="sec-head"><span class="num">叁</span><h2>風林火山</h2><span class="cap">四種屬性</span></div>
+  <p class="lead">出自《孫子兵法·軍爭篇》：<i>其疾如風，其徐如林，侵掠如火，不動如山。</i>每隻異獸只屬一種，一眼便知其性。</p>
+  <div class="nat-legend">
+    <div class="nat-card nat-wind"><div class="g">風</div><div class="nm">疾風</div><p>迅捷。速戰與閃避，先發制人。</p></div>
+    <div class="nat-card nat-forest"><div class="g">林</div><div class="nm">幽林</div><p>沉潛。隱蔽、情報與控制。</p></div>
+    <div class="nat-card nat-fire"><div class="g">火</div><div class="nm">烈火</div><p>剛猛。焚燒與強攻，以命搏勢。</p></div>
+    <div class="nat-card nat-mtn"><div class="g">山</div><div class="nm">磐山</div><p>不動。城牆與耐久，熬死群敵。</p></div>
+  </div>
+  <div class="kw-row">
+    <div class="kw"><div class="k">疾</div><div class="d"><em>速戰</em>登場當回合即可攻擊。</div></div>
+    <div class="kw"><div class="k">守</div><div class="d"><em>守護</em>敵方須優先攻擊此獸。</div></div>
+    <div class="kw"><div class="k">隱</div><div class="d"><em>隱蔽</em>無法被攻擊、兵法或能力指定。</div></div>
+    <div class="kw"><div class="k">飛</div><div class="d"><em>飛行</em>可直擊龍脈，無視「守」。</div></div>
+    <div class="kw sea"><div class="k">沒</div><div class="d"><em>潛沒 · 海牌組</em>將被擊敗時，可改為返回手牌。</div></div>
+    <div class="kw"><div class="k">即</div><div class="d"><em>即時</em>可於任意時機打出，含敵方回合。</div></div>
+  </div>
+  <h3 style="font-family:'Ma Shan Zheng',cursive;color:var(--gold-b);font-size:1.6rem;letter-spacing:3px;margin:34px 0 8px">一回合 · 起計爭收</h3>
+  <div class="flow">
+    <div class="phase"><div class="big">起</div><div class="nm">徵糧</div><p>糧上限+1並補滿，抽1張牌。</p></div>
+    <div class="phase"><div class="big">計</div><div class="nm">布局</div><p>登場異獸（正／奇）、打出兵法與地形。</p></div>
+    <div class="phase"><div class="big">爭</div><div class="nm">交戰</div><p>異獸攻擊，伏兵翻開，結算傷害。</p></div>
+    <div class="phase"><div class="big">收</div><div class="nm">休整</div><p>結算回合末效果，手牌留至8張。</p></div>
+  </div>
+</section>
+
+<!-- ===== LAND DECK ===== -->
+<section id="land" class="wrap">
+  <div class="sec-head"><span class="num">肆</span><h2>山牌組 · 異獸</h2><span class="cap">二十四獸</span></div>
+  <div class="deck-banner land">
+    <div class="em">山</div>
+    <div><h3>磐山之軍 · 五藏山經</h3><p>以<b>城牆（守）</b>、<b>耐久</b>與<b>滾雪球</b>取勝。立壁壘、熬群敵，待饕餮貪食壯大、燭龍晝夜傾軋。沉穩而後發制人。</p></div>
+  </div>
+  <div class="filterbar" data-deck="land">
+    <button class="active" data-f="all">全部</button><button data-f="wind">風</button><button data-f="forest">林</button><button data-f="fire">火</button><button data-f="mtn">山</button>
+  </div>
+  <div class="deck" id="land-deck"></div>
+</section>
+
+<!-- ===== SEA DECK ===== -->
+<section id="sea" class="wrap">
+  <div class="sec-head"><span class="num">伍</span><h2>海牌組 · 異獸</h2><span class="cap">二十四獸 · 全新</span></div>
+  <div class="deck-banner seaB">
+    <div class="em">海</div>
+    <div><h3>滄海之眾 · 海經大荒</h3><p>以<b>潮汐</b>為魂：<b>迅捷</b>、<b>回彈</b>（將敵獸送回手牌）、<b>潛沒（沒）</b>。靠節奏與不息的浪頭壓制，而非山牌組的硬壁與滾雪球。天吳八首齊出、巴蛇吞象、巨鼇負山。</p></div>
+  </div>
+  <div class="filterbar" data-deck="sea">
+    <button class="active" data-f="all">全部</button><button data-f="wind">風</button><button data-f="forest">林</button><button data-f="fire">火</button><button data-f="mtn">山</button>
+  </div>
+  <div class="deck" id="sea-deck"></div>
+</section>
+
+<!-- ===== STRATAGEMS ===== -->
+<section id="stratagems" class="wrap">
+  <div class="sec-head"><span class="num">陸</span><h2>兵法十三篇</h2><span class="cap">兩牌組共用 · 十六張</span></div>
+  <p class="lead">《孫子兵法》十三篇各化為一種計策牌，機制對應其篇旨。山、海兩牌組<b>共用</b>同一套兵法——兵法乃通用之道，異者唯異獸耳。其中<b>火攻</b>、<b>用間</b>各收兩張（×2），合為十六張。</p>
+  <div class="deck" id="strat-deck"></div>
+  <p class="deck-note">整盒：<b>山牌組（24獸）＋ 海牌組（24獸）＋ 共用兵法（16張）</b>，兩位兵法家即可對壘。曲線為 30 龍脈賽制調校。</p>
+</section>
+
+<footer class="wrap">
+  <div class="fseal">山海<br>兵法</div>
+  <p>「不戰而屈人之兵，善之善者也。」——孫子</p>
+</footer>
+
+<script>
+const NAT={wind:{g:'風',t:'風 · 異獸'},forest:{g:'林',t:'林 · 異獸'},fire:{g:'火',t:'火 · 異獸'},mtn:{g:'山',t:'山 · 異獸'}};
+
+const land=[
+ {n:'帝江',py:'Dìjiāng',nat:'wind',cost:1,shi:2,xing:1,sig:'帝',sub:'混沌',t:'<span class="key">混沌：</span>以「奇」暗置時，抽一張牌。'},
+ {n:'蠱雕',py:'Gǔdiāo',nat:'wind',cost:2,shi:3,xing:1,sig:'蠱',sub:'角鷹',t:'<span class="key">疾</span>（速戰）。'},
+ {n:'鴸',py:'Zhū',nat:'wind',cost:2,shi:2,xing:2,sig:'鴸',sub:'兆鳥',t:'登場時：查看對手手牌。'},
+ {n:'顒',py:'Yóng',nat:'wind',cost:3,shi:2,xing:4,sig:'顒',sub:'旱梟',t:'顒攻擊獸時，該獸本回合無法增加「形」。'},
+ {n:'飛廉',py:'Fēilián',nat:'wind',cost:4,shi:4,xing:3,sig:'飛',sub:'風伯',t:'<span class="key">疾</span>。你的其他風獸獲得<span class="key">疾</span>。'},
+ {n:'鯤鵬',py:'Kūnpéng',nat:'wind',cost:6,shi:4,xing:4,sig:'鵬',sub:'鯤化為鵬',t:'<span class="key">化鵬：</span>每局一次，付<b>②</b>：化為<b>8/6</b>並獲得<span class="key">疾</span>＋<span class="key">飛</span>。'},
+ {n:'青鳥',py:'Qīngniǎo',nat:'forest',cost:1,shi:1,xing:1,sig:'青',sub:'信使',t:'登場時：抽一張牌。'},
+ {n:'精衛',py:'Jīngwèi',nat:'forest',cost:1,shi:1,xing:2,sig:'精',sub:'填海',t:'<span class="key">填海：</span>你的回合開始時，對敵方龍脈造成1點傷害。'},
+ {n:'文鰩魚',py:'Wényáo',nat:'forest',cost:2,shi:2,xing:2,sig:'鰩',sub:'飛魚',t:'登場時：本回合獲得<b>①</b>糧。'},
+ {n:'白澤',py:'Báizé',nat:'forest',cost:3,shi:2,xing:3,sig:'澤',sub:'通曉萬物',t:'登場時：查看對手手牌，然後抽一張牌。'},
+ {n:'化蛇',py:'Huàshé',nat:'forest',cost:3,shi:3,xing:3,sig:'蛇',sub:'水兆',t:'化蛇對敵方龍脈造成傷害時，對手棄一張牌。'},
+ {n:'蜚',py:'Fěi',nat:'forest',cost:5,shi:4,xing:4,sig:'蜚',sub:'疫獸',t:'登場時：所有敵方獸 <b>−0/−1</b>。'},
+ {n:'畢方',py:'Bìfāng',nat:'fire',cost:2,shi:3,xing:1,sig:'畢',sub:'火鳥',t:'登場時：對任一獸造成1點傷害。'},
+ {n:'朱厭',py:'Zhūyàn',nat:'fire',cost:3,shi:4,xing:2,sig:'朱',sub:'兵兆',t:'<span class="key">戰兆：</span>每當你打出一張兵法牌，本回合 <b>+1勢</b>。'},
+ {n:'狰',py:'Zhēng',nat:'fire',cost:4,shi:5,xing:3,sig:'狰',sub:'五尾',t:'<span class="vanilla">直率的猛獸，無特殊能力。</span>'},
+ {n:'窮奇',py:'Qióngqí',nat:'fire',cost:4,shi:4,xing:3,sig:'窮',sub:'飛虎',t:'窮奇攻擊「正」（明置）獸時，多造成 <b>2</b> 點傷害。'},
+ {n:'鳳凰',py:'Fènghuáng',nat:'fire',cost:5,shi:4,xing:3,sig:'鳳',sub:'涅槃',t:'<span class="key">涅槃：</span>首次被擊敗時，以 <b>2/2</b> 之姿返回戰場。'},
+ {n:'饕餮',py:'Tāotiè',nat:'fire',cost:5,shi:4,xing:4,sig:'饕',sub:'貪食',t:'<span class="key">貪食：</span>每當任一獸被擊敗，饕餮 <b>+1/+1</b>。'},
+ {n:'騶虞',py:'Zōuyú',nat:'mtn',cost:3,shi:1,xing:6,sig:'騶',sub:'仁獸',t:'<span class="key">守</span>（守護）。'},
+ {n:'刑天',py:'Xíngtiān',nat:'mtn',cost:4,shi:4,xing:4,sig:'刑',sub:'斷首之士',t:'<span class="key">不死：</span>首次將被擊敗時，改為以 <b>1形</b> 存活。'},
+ {n:'開明獸',py:'Kāimíng',nat:'mtn',cost:5,shi:3,xing:7,sig:'開',sub:'崑崙之守',t:'<span class="key">守</span>（守護）。'},
+ {n:'相柳',py:'Xiāngliǔ',nat:'mtn',cost:6,shi:5,xing:5,sig:'柳',sub:'九首',t:'<span class="key">劇毒：</span>對獸造成傷害時，該獸永久 <b>−0/−1</b>。'},
+ {n:'應龍',py:'Yìnglóng',nat:'mtn',cost:7,shi:6,xing:6,sig:'應',sub:'翼龍',t:'登場時：對敵方眾獸分配造成共 <b>3</b> 點傷害。'},
+ {n:'燭龍',py:'Zhúlóng',nat:'mtn',cost:8,shi:7,xing:7,sig:'燭',sub:'晝夜',t:'<span class="key">晝夜：</span>回合開始時交替——晝：你的獸本回合+1勢；夜：你的獸+1形，且你的「奇」牌無法被翻開。'},
+];
+
+const sea=[
+ {n:'飛魚',py:'Fēiyú',nat:'wind',cost:1,shi:1,xing:1,sig:'飛',sub:'翼魚',t:'<span class="key">疾</span>（速戰）。'},
+ {n:'蜮',py:'Yù',nat:'wind',cost:2,shi:2,xing:2,sig:'蜮',sub:'射影',t:'<span class="key">含沙射影：</span>登場時，對一隻獸造成1點傷害。'},
+ {n:'鮫人',py:'Jiāorén',nat:'wind',cost:3,shi:2,xing:3,sig:'鮫',sub:'泣珠',t:'登場時：抽一張牌（泣淚成珠）。'},
+ {n:'騰蛇',py:'Téngshé',nat:'wind',cost:4,shi:4,xing:2,sig:'騰',sub:'飛蛇',t:'<span class="key">疾</span>（速戰）。'},
+ {n:'禺彊',py:'Yúqiáng',nat:'wind',cost:5,shi:4,xing:3,sig:'禺',sub:'北海風神',t:'登場時：將一隻敵方獸返回其擁有者手牌。'},
+ {n:'天吳',py:'Tiānwú',nat:'wind',cost:6,shi:5,xing:4,sig:'吳',sub:'八首水神',t:'<span class="key">八首：</span>天吳攻擊時，可同時攻擊兩個不同目標。'},
+ {n:'赤鱬',py:'Chìrú',nat:'forest',cost:2,shi:2,xing:2,sig:'鱬',sub:'療疾',t:'登場時：你的龍脈回復 <b>2</b>。'},
+ {n:'計蒙',py:'Jìméng',nat:'forest',cost:3,shi:2,xing:4,sig:'計',sub:'行雲布雨',t:'你打出兵法牌時，對敵方龍脈造成1點傷害（每回合上限2）。'},
+ {n:'何羅魚',py:'Héluó',nat:'forest',cost:3,shi:3,xing:3,sig:'羅',sub:'一首十身',t:'<span class="key">沒</span>（潛沒）：將被擊敗時，可改為返回你的手牌。'},
+ {n:'罔象',py:'Wǎngxiàng',nat:'forest',cost:2,shi:1,xing:3,sig:'罔',sub:'水怪',t:'<span class="key">隱</span>（隱蔽）。'},
+ {n:'蜃',py:'Shèn',nat:'forest',cost:4,shi:3,xing:4,sig:'蜃',sub:'海市',t:'<span class="key">海市：</span>登場時，使一隻敵方獸本回合無法攻擊。'},
+ {n:'巴蛇',py:'Bāshé',nat:'forest',cost:6,shi:5,xing:6,sig:'巴',sub:'吞象',t:'<span class="key">吞象：</span>登場時，消滅一隻形 ≤3 的敵方獸。'},
+ {n:'鱄魚',py:'Tuānyú',nat:'fire',cost:2,shi:3,xing:1,sig:'鱄',sub:'旱兆',t:'登場時：對敵方龍脈造成1點傷害。'},
+ {n:'蠃魚',py:'Luóyú',nat:'fire',cost:3,shi:3,xing:2,sig:'蠃',sub:'水患',t:'你打出「火攻」時，蠃魚本回合 <b>+2勢</b>。'},
+ {n:'鳴蛇',py:'Míngshé',nat:'fire',cost:3,shi:4,xing:3,sig:'鳴',sub:'凶兆',t:'<span class="vanilla">凶兆猛獸，無特殊能力。</span>'},
+ {n:'珠蟞魚',py:'Zhūbiē',nat:'fire',cost:4,shi:4,xing:3,sig:'蟞',sub:'噴珠',t:'登場時：對至多兩隻敵方獸各造成1點傷害。'},
+ {n:'蛟',py:'Jiāo',nat:'fire',cost:4,shi:5,xing:3,sig:'蛟',sub:'興波',t:'蛟攻擊龍脈時，多造成 <b>1</b> 點傷害。'},
+ {n:'大蟹',py:'Dàxiè',nat:'fire',cost:5,shi:5,xing:4,sig:'蟹',sub:'巨螯',t:'<span class="key">巨螯：</span>大蟹擊敗目標後，可再攻擊一次。'},
+ {n:'旋龜',py:'Xuánguī',nat:'mtn',cost:2,shi:1,xing:4,sig:'龜',sub:'鳥首虺尾',t:'<span class="key">守</span>（守護）。'},
+ {n:'鯥',py:'Lù',nat:'mtn',cost:4,shi:3,xing:4,sig:'鯥',sub:'冬蟄',t:'<span class="key">冬蟄：</span>被擊敗時，於你下回合開始時以原數值返回戰場。'},
+ {n:'禺虢',py:'Yúguó',nat:'mtn',cost:4,shi:3,xing:5,sig:'虢',sub:'東海之神',t:'<span class="key">守</span>（守護）。'},
+ {n:'河伯',py:'Hébó',nat:'mtn',cost:5,shi:4,xing:6,sig:'河',sub:'馮夷',t:'登場時：你的龍脈回復 <b>3</b>。'},
+ {n:'龍伯',py:'Lóngbó',nat:'mtn',cost:6,shi:5,xing:6,sig:'龍',sub:'釣鼇巨人',t:'<span class="key">釣鼇：</span>登場時，消滅一隻敵方「守」獸。'},
+ {n:'巨鼇',py:'Jù\u2019áo',nat:'mtn',cost:8,shi:6,xing:9,sig:'鼇',sub:'負山',t:'<span class="key">負山：</span>你的其他海獸 <b>+0/+2</b>。'},
+];
+
+const strats=[
+ {n:'始計',ch:'計',cost:1,sig:'計',sub:'第一篇',t:'查看牌庫頂 3 張，抽 1 張，其餘以任意順序放回。'},
+ {n:'作戰',ch:'戰',cost:1,sig:'作',sub:'第二篇',t:'本回合獲得 <b>②</b> 糧。回合結束時棄一張牌。'},
+ {n:'謀攻',ch:'謀',cost:3,sig:'謀',sub:'第三篇',t:'<span class="key">不戰而屈人之兵：</span>將目標敵方獸返回其擁有者手牌。'},
+ {n:'軍形',ch:'形',cost:2,sig:'形',sub:'第四篇',t:'目標友方獸 <b>+0/+3</b>，並獲得<span class="key">隱</span>直到你的下回合。'},
+ {n:'兵勢',ch:'勢',cost:2,sig:'勢',sub:'第五篇',t:'本回合你控制的每隻獸，使友方獸各 <b>+1勢</b>。'},
+ {n:'虛實',ch:'虛',cost:2,sig:'虛',sub:'第六篇 · 即',t:'<span class="key">即 · 避實擊虛：</span>將一次攻擊轉移至另一隻獸或龍脈。'},
+ {n:'軍爭',ch:'爭',cost:2,sig:'爭',sub:'第七篇',t:'為一友方獸選其一至回合末：風 疾／林 隱／火 +2勢／山 +0/+3。'},
+ {n:'九變',ch:'變',cost:2,sig:'變',sub:'第八篇 · 即',t:'<span class="key">即：</span>抵消一張兵法或一個觸發能力；或改變一隻獸的屬性。'},
+ {n:'行軍',ch:'行',cost:2,sig:'行',sub:'第九篇',t:'以少 <b>①</b> 糧，將一隻獸面朝下（<span class="key">奇</span>）暗置登場。'},
+ {n:'崑崙墟',ch:'地',cost:2,sig:'崑',sub:'第十篇 · 地形',t:'<span class="key">地形：</span>留置。你的山獸 <b>+0/+1</b>。回合開始時龍脈回復 <b>1</b>。'},
+ {n:'歸墟',ch:'地',cost:2,sig:'歸',sub:'第十篇 · 地形',t:'<span class="key">地形：</span>留置。每回合一次，友方獸被擊敗時抽一張牌。'},
+ {n:'九地',ch:'地',cost:2,sig:'死',sub:'第十一篇',t:'<span class="key">置之死地而後生：</span>龍脈 ≤10 時友方獸本回合 <b>+3勢</b>，否則 <b>+1勢</b>。'},
+ {n:'火攻',ch:'火',cost:3,sig:'火',sub:'第十二篇 ×2',t:'對一隻獸造成 <b>3</b> 點傷害（若為林獸則改為 <b>5</b> 點）。'},
+ {n:'用間',ch:'間',cost:1,sig:'間',sub:'第十三篇 ×2',t:'<span class="key">知彼：</span>翻開一張敵方暗置（奇）獸，並查看對手手牌。該獸保持正面。'},
+];
+
+const ALL={}; [...land,...sea].forEach(b=>ALL[b.n]=b);
+const B=n=>ALL[n];
+
+/* renderers */
+function card(c,i){const nat=NAT[c.nat];
+ return `<div class="card ${c.nat}" data-nat="${c.nat}" style="animation-delay:${(i%8)*.04}s"><div class="inner">
+   <div class="c-top"><div class="cost">${c.cost}</div><div class="c-name"><div class="zh">${c.n}</div><div class="py">${c.py}</div></div><div class="nat">${nat.g}</div></div>
+   <div class="c-art"><div class="mist"></div><div class="sigil">${c.sig}</div><div class="stamp">${nat.g}</div></div>
+   <div class="c-type"><span>${nat.t}</span><span class="badge">${c.sub}</span></div>
+   <div class="c-text">${c.t}</div>
+   <div class="c-stats"><div class="stat shi"><span class="diamond"><span>勢</span></span>${c.shi}</div><div class="stat xing">${c.xing}<span class="shield"><span>形</span></span></div></div>
+ </div></div>`;}
+function strat(c,i){const tag=c.sub.includes('地形')?'地形':(c.sub.includes('即')?'即時':'兵法');
+ return `<div class="card strat" style="animation-delay:${(i%8)*.04}s"><div class="inner">
+   <div class="c-top"><div class="cost">${c.cost}</div><div class="c-name"><div class="zh">${c.n}</div></div><div class="nat">${c.ch}</div></div>
+   <div class="c-art"><div class="mist"></div><div class="sigil">${c.sig}</div><div class="stamp">兵</div></div>
+   <div class="c-type"><span>${tag} · 孫子兵法</span><span class="badge">${c.sub}</span></div>
+   <div class="c-text">${c.t}</div>
+   <div class="c-chapter"><div class="seal">${c.ch} 篇</div></div>
+ </div></div>`;}
+
+document.getElementById('land-deck').innerHTML=land.map(card).join('');
+document.getElementById('sea-deck').innerHTML=sea.map(card).join('');
+document.getElementById('strat-deck').innerHTML=strats.map(strat).join('');
+
+/* board mini-card */
+function floatHTML(b){return b.float?`<span class="float ${b.float.t}">${b.float.x}</span>`:'';}
+function bcardS(b){
+ if(b.face==='down') return `<div class="bc back ${b.fx?'fx-'+b.fx:''}"><div class="bi"><div class="bk">奇</div><div class="bkc">暗置·伏兵</div></div>${floatHTML(b)}</div>`;
+ const d=B(b.name);
+ return `<div class="bc ${d.nat} ${b.fx?'fx-'+b.fx:''} ${b.glow?'glow':''}"><div class="bi">
+   <div class="bc-cost">${d.cost}</div><div class="bc-nat">${NAT[d.nat].g}</div>
+   <div class="bc-art"><span class="bc-sig">${d.sig}</span></div>
+   <div class="bc-name">${d.n}</div>
+   ${b.kw?`<div class="bc-kw">${b.kw}</div>`:''}
+   <div class="bc-stats"><span class="s">${b.shi}</span><span class="x">${b.xing}</span></div>
+ </div>${floatHTML(b)}</div>`;
+}
+function bcardStatic(name){const d=B(name);return bcardS({name:name,shi:d.shi,xing:d.xing});}
+function terrainCard(g,n){return `<div class="terrain"><div class="ti"><div class="tg">${g}</div><div class="tn">${n}</div><div class="tl">地形</div></div></div>`;}
+
+/* hero fan + flip demo */
+document.getElementById('hero-fan').innerHTML=bcardStatic('鯤鵬')+bcardStatic('饕餮')+bcardStatic('燭龍');
+document.getElementById('flip-front').innerHTML=`<div class="bc back" style="width:100%;height:100%"><div class="bi"><div class="bk">奇</div><div class="bkc">暗置·伏兵</div></div></div>`;
+const fb=B('饕餮');
+document.getElementById('flip-back').innerHTML=`<div class="bc fire" style="width:100%;height:100%"><div class="bi"><div class="bc-cost">${fb.cost}</div><div class="bc-nat">火</div><div class="bc-art"><span class="bc-sig">饕</span></div><div class="bc-name">饕餮</div><div class="bc-stats"><span class="s">${fb.shi}</span><span class="x">${fb.xing}</span></div></div></div>`;
+
+/* gallery filters */
+document.querySelectorAll('.filterbar').forEach(bar=>{
+ const deckId=bar.dataset.deck==='sea'?'#sea-deck':'#land-deck';
+ bar.querySelectorAll('button').forEach(btn=>btn.addEventListener('click',()=>{
+   bar.querySelectorAll('button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
+   const f=btn.dataset.f;
+   document.querySelectorAll(deckId+' .card').forEach(c=>{c.style.display=(f==='all'||c.dataset.nat===f)?'':'none';});
+ }));
+});
+
+/* ============ DEMO ENGINE ============ */
+function coins(s,max){let h='<span class="on">';for(let i=0;i<s;i++)h+='●';h+='</span><span class="off">';for(let i=s;i<max;i++)h+='●';return h+'</span>';}
+function findDown(arr){return arr.find(b=>b.face==='down');}
+
+let S,cur,auto=null;
+function initS(){return {
+  enemy:{life:22,s:6,smax:10,deck:21,hand:3,ofloat:null,
+    terrain:{g:'崑',n:'崑崙墟'},
+    beasts:[{name:'開明獸',shi:3,xing:7,kw:'守'},{face:'down'},{name:'精衛',shi:1,xing:2}]},
+  you:{life:27,s:7,smax:10,deck:18,hand:4,ofloat:null,
+    terrain:{g:'歸',n:'歸墟'},
+    beasts:[{name:'窮奇',shi:4,xing:3,glow:true},{name:'饕餮',shi:4,xing:4},{face:'down'}]},
+  phase:'起手',txt:'第七回合 · 起手局面。輪到我方布局。'
+};}
+
+const steps=[
+ s=>{s.phase='起手';s.txt='第七回合 · 起手局面。我方場上有<b>窮奇</b>、<b>饕餮</b>與一張暗置之奇；敵方立<b>開明獸</b>（守）為壁。';},
+ s=>{s.you.s=8;s.hand=s.you.hand=5;s.you.ofloat={x:'+1糧',t:'buff'};s.phase='起 · 徵糧';
+     s.txt='糧草上限升至 <b>8</b> 並補滿，抽得 <b>應龍</b>。';},
+ s=>{s.you.s=7;const d=findDown(s.enemy.beasts);d.face=null;d.name='相柳';d.shi=5;d.xing=5;d.fx='flip';d.float={x:'用間·翻開',t:'info'};
+     s.phase='計 · 用間';s.txt='花 1 糧<b>用間</b>窺探——敵之伏兵竟是 <b>相柳</b>！<span class="r">知彼</span>，從容布陣。';},
+ s=>{s.you.s=5;const yb=s.you.beasts;yb[0].shi=7;yb[0].fx='grow';yb[0].float={x:'+3勢',t:'buff'};yb[1].shi=7;yb[1].fx='grow';yb[1].float={x:'+3勢',t:'buff'};
+     s.phase='計 · 兵勢';s.txt='打出 <b>兵勢</b>（2糧）：你控制 3 隻獸，友方各 <b>+3勢</b>。漲潮之勢已成。';},
+ s=>{const yb=s.you.beasts;const d=findDown(yb);d.face=null;d.name='鳳凰';d.shi=7;d.xing=3;d.fx='flip';d.float={x:'出其不意',t:'info'};
+     s.phase='計 · 翻奇';s.txt='翻開我方伏兵——竟是 <b>鳳凰</b>！觸發 <span class="r">出其不意</span>，三獸齊備。<i>以奇勝</i>。';},
+ s=>{const eb=s.enemy.beasts,yb=s.you.beasts;
+     const open=eb.find(b=>b.name==='開明獸');const qiong=yb.find(b=>b.name==='窮奇');const tao=yb.find(b=>b.name==='饕餮');
+     qiong.fx='atk';open.fx='die';open.float={x:'-7',t:'dmg'};qiong.xing=0;qiong.fx='die';qiong.float={x:'-3',t:'dmg'};
+     tao.shi=9;tao.xing=6;tao.glow=false;tao.float={x:'貪食 +2/+2',t:'buff'};setTimeout(()=>{},0);
+     s.you.hand=6;s.you.ofloat={x:'歸墟·抽牌',t:'heal'};
+     s.phase='爭 · 破守';s.txt='<b>窮奇</b>(7) 撞向 <b>開明獸</b>(守)，兩敗俱亡——但 <b>饕餮·貪食</b> 連吞二魂壯至 <b>9/6</b>，<b>歸墟</b>亦補一牌。連環！';},
+ s=>{const yb=s.you.beasts;const tao=yb.find(b=>b.name==='饕餮');const feng=yb.find(b=>b.name==='鳳凰');
+     tao.fx='atk';feng.fx='atk';
+     s.enemy.life=6;s.enemy.ofloat={x:'-16',t:'dmg'};
+     s.phase='爭 · 登龍脈';s.txt='守壁已破！<b>饕餮</b>(9) 與 <b>鳳凰</b>(7) 長驅直入，敵龍脈自 22 暴跌至 <span class="r">6</span>。';},
+ s=>{s.phase='收 · 勝勢';s.txt='一回合連環：<b>用間</b>知彼、<b>兵勢</b>漲潮、<b>翻奇</b>奇襲、<b>貪食/歸墟</b>滾動成雪球。敵龍脈僅餘 <span class="r">6</span>——勝勢已成。';},
+];
+
+function clearFx(s){[s.enemy,s.you].forEach(side=>{side.ofloat=null;side.beasts.forEach(b=>{b.fx=null;b.float=null;});});}
+
+function renderDemo(){
+ document.getElementById('e-life').textContent=S.enemy.life;
+ document.getElementById('y-life').textContent=S.you.life;
+ document.getElementById('e-sup').innerHTML='糧 <span class="coins">'+coins(S.enemy.s,S.enemy.smax)+'</span> '+S.enemy.s+'／10';
+ document.getElementById('y-sup').innerHTML='糧 <span class="coins">'+coins(S.you.s,S.you.smax)+'</span> '+S.you.s+'／10';
+ document.getElementById('e-piles').innerHTML='<span>牌庫 <b>'+S.enemy.deck+'</b></span><span>手牌 <b>'+S.enemy.hand+'</b></span>';
+ document.getElementById('y-piles').innerHTML='<span>牌庫 <b>'+S.you.deck+'</b></span><span>手牌 <b>'+S.you.hand+'</b></span>';
+ document.getElementById('enemy-row').innerHTML=terrainCard(S.enemy.terrain.g,S.enemy.terrain.n)+S.enemy.beasts.map(bcardS).join('');
+ document.getElementById('you-row').innerHTML=terrainCard(S.you.terrain.g,S.you.terrain.n)+S.you.beasts.map(bcardS).join('');
+ document.getElementById('d-phase').textContent=S.phase;
+ document.getElementById('d-txt').innerHTML=' '+S.txt;
+ // orb floats
+ if(S.enemy.ofloat){const o=document.getElementById('e-orb');const sp=document.createElement('span');sp.className='ofloat';sp.style.color=S.enemy.ofloat.t==='heal'?'#86e886':'#ff7a5c';sp.textContent=S.enemy.ofloat.x;o.appendChild(sp);}
+ if(S.you.ofloat){const o=document.getElementById('y-orb');const sp=document.createElement('span');sp.className='ofloat';sp.style.color=S.you.ofloat.t==='dmg'?'#ff7a5c':'#86e886';sp.textContent=S.you.ofloat.x;o.appendChild(sp);}
+ if(S.enemy.ofloat&&S.enemy.ofloat.t==='dmg')document.getElementById('e-orb').classList.add('flash');else document.getElementById('e-orb').classList.remove('flash');
+ // controls
+ document.getElementById('d-ind').textContent='步驟 '+(cur+1)+' / '+steps.length;
+ document.getElementById('d-bar').style.width=((cur)/(steps.length-1)*100)+'%';
+ document.getElementById('d-next').disabled=(cur>=steps.length-1);
+}
+
+function goTo(i){clearFx(S);cur=i;steps[i](S);renderDemo();
+ // auto-cleanup defeated
+ const dead=[...S.enemy.beasts,...S.you.beasts].some(b=>b.fx==='die');
+ if(dead){setTimeout(()=>{S.enemy.beasts=S.enemy.beasts.filter(b=>b.fx!=='die');S.you.beasts=S.you.beasts.filter(b=>b.fx!=='die');clearFx(S);renderDemo();},850);}
+}
+function next(){if(cur<steps.length-1)goTo(cur+1);if(cur>=steps.length-1)stopAuto();}
+function reset(){stopAuto();S=initS();goTo(0);}
+function stopAuto(){if(auto){clearInterval(auto);auto=null;document.getElementById('d-auto').textContent='自動播放';}}
+
+document.getElementById('d-next').addEventListener('click',next);
+document.getElementById('d-reset').addEventListener('click',reset);
+document.getElementById('d-auto').addEventListener('click',()=>{
+ if(auto){stopAuto();return;}
+ if(cur>=steps.length-1)reset();
+ document.getElementById('d-auto').textContent='暫停 ‖';
+ auto=setInterval(()=>{if(cur>=steps.length-1){stopAuto();}else{next();}},2900);
+});
+
+S=initS();goTo(0);
+</script>
+</body>
+</html>
