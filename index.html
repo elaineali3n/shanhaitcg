@@ -238,6 +238,31 @@ section{padding:52px 0;position:relative}
 footer{padding:54px 0 70px;text-align:center;border-top:1px solid rgba(201,162,75,.2);margin-top:30px}
 footer .fseal{font-family:'Noto Serif SC',serif;color:#fff;background:var(--cinnabar);display:inline-grid;place-items:center;width:78px;height:78px;border-radius:8px;font-size:1rem;line-height:1.1;font-weight:700;transform:rotate(-5deg)}
 footer p{color:var(--muted);margin-top:18px;font-style:italic}
+/* ===== MAP ===== */
+.mapwrap{position:relative;border-radius:14px;padding:14px;background:linear-gradient(150deg,var(--parch),var(--parch-deep));box-shadow:0 24px 60px rgba(0,0,0,.55);border:1px solid var(--gold)}
+.mapwrap::before{content:"";position:absolute;inset:8px;border:1.5px solid rgba(143,108,37,.45);border-radius:9px;pointer-events:none}
+.mapwrap svg{display:block;width:100%;height:auto}
+.smap .frame{fill:none;stroke:var(--gold-d);stroke-width:2}
+.smap .land{fill:#e7d6ad;stroke:rgba(110,83,40,.5);stroke-width:1.5}
+.smap .qline{stroke:rgba(143,108,37,.35);stroke-width:1;stroke-dasharray:5 5}
+.smap .river{fill:none;stroke:#6f93a6;stroke-width:2.2;opacity:.55}
+.smap .mtn{fill:none;stroke:#6e5328;stroke-width:1.6;opacity:.7}
+.smap .region{font-family:'Ma Shan Zheng',cursive;fill:#7a3a2c;opacity:.42;font-size:25px;text-anchor:middle}
+.smap .sea-lab{font-family:'Ma Shan Zheng',cursive;fill:#2f6f86;opacity:.72;font-size:21px;text-anchor:middle}
+.smap .waste{font-family:'Noto Serif SC',serif;fill:#8a6f43;opacity:.5;font-size:14px;letter-spacing:3px;text-anchor:middle}
+.smap .kunlun{font-family:'Ma Shan Zheng',cursive;fill:#8f6c25;font-size:19px;text-anchor:middle}
+.smap .mk circle{r:7;stroke:var(--parch);stroke-width:2;transition:.2s;cursor:pointer}
+.smap .mk text{font-family:'Noto Serif SC',serif;font-size:15px;font-weight:700;fill:#33260f;paint-order:stroke;stroke:rgba(244,234,208,.9);stroke-width:3.5px;pointer-events:none;dominant-baseline:middle}
+.smap .mk.le text{text-anchor:end}
+.smap .mk.wind circle{fill:var(--wind)}.smap .mk.forest circle{fill:var(--forest)}.smap .mk.fire circle{fill:var(--fire)}.smap .mk.mtn circle{fill:var(--mtn)}
+.smap .mk:hover circle,.smap .mk:focus circle{r:11;stroke:var(--gold-b);filter:drop-shadow(0 0 7px rgba(201,162,75,.95))}
+.smap .cartouche{fill:var(--cinnabar);stroke:var(--gold-b);stroke-width:2}
+.smap .ctext{font-family:'Ma Shan Zheng',cursive;fill:#fff;text-anchor:middle}
+.smap .compass{fill:none;stroke:var(--gold-d);stroke-width:1.4}
+.smap .clab{font-family:'Noto Serif SC',serif;fill:#7a3a2c;font-size:12px;font-weight:700;text-anchor:middle}
+.map-legend{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:16px;color:var(--muted);font-size:.84rem}
+.map-legend span{display:inline-flex;align-items:center;gap:6px}
+.map-cap{color:var(--muted);font-size:.82rem;font-style:italic;text-align:center;margin-top:10px}
 </style>
 </head>
 <body>
@@ -249,6 +274,7 @@ footer p{color:var(--muted);margin-top:18px;font-style:italic}
       <a href="#demo">演示</a>
       <a href="#qizheng">奇正</a>
       <a href="#nature">風林火山</a>
+      <a href="#map">輿圖</a>
       <a href="#land">山牌</a>
       <a href="#sea">海牌</a>
       <a href="#stratagems">兵法</a>
@@ -361,9 +387,123 @@ footer p{color:var(--muted);margin-top:18px;font-style:italic}
   </div>
 </section>
 
+<!-- ===== MAP ===== -->
+<section id="map" class="wrap">
+  <div class="sec-head"><span class="num">肆</span><h2>山海輿圖</h2><span class="cap">五藏山經 · 環以四海</span></div>
+  <p class="lead">《山海經》本是一部上古輿地之書——<b style="color:var(--gold-b)">五藏山經居中，環以四海，外接大荒</b>。下圖以此宇宙觀繪成：山牌組之獸踞於群山，海牌組之獸沒於四瀆。四弹發行亦應四方——東海、南山、西山、北海，各據一隅。</p>
+  <div class="mapwrap">
+    <svg class="smap" viewBox="0 0 1000 720" role="img" aria-label="山海經輿圖">
+      <defs>
+        <pattern id="waves" width="40" height="20" patternUnits="userSpaceOnUse">
+          <path d="M0 16 A10 9 0 0 1 20 16 A10 9 0 0 1 40 16" fill="none" stroke="#2f6f86" stroke-width="1.1" opacity="0.4"/>
+          <path d="M-20 8 A10 9 0 0 1 0 8 A10 9 0 0 1 20 8 A10 9 0 0 1 40 8 A10 9 0 0 1 60 8" fill="none" stroke="#2f6f86" stroke-width="1.1" opacity="0.3"/>
+        </pattern>
+        <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#e6c878" stop-opacity="0.5"/>
+          <stop offset="100%" stop-color="#e6c878" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+
+      <!-- sea base + waves -->
+      <rect x="28" y="28" width="944" height="664" rx="9" fill="#cdbf99"/>
+      <rect x="28" y="28" width="944" height="664" rx="9" fill="url(#waves)"/>
+      <rect class="frame" x="16" y="16" width="968" height="688" rx="12"/>
+
+      <!-- sea + waste labels -->
+      <text class="waste" x="78" y="50">大荒</text>
+      <text class="waste" x="922" y="50">大荒</text>
+      <text class="waste" x="78" y="676">大荒</text>
+      <text class="waste" x="922" y="676">大荒</text>
+      <text class="sea-lab" x="500" y="118">北 海</text>
+      <text class="sea-lab" x="500" y="606">南 海</text>
+      <text class="sea-lab" x="62" y="356" transform="rotate(-90 62 356)">東海</text>
+      <text class="sea-lab" x="938" y="356" transform="rotate(90 938 356)">西海</text>
+
+      <!-- rivers from Kunlun -->
+      <path class="river" d="M500 350 Q482 230 500 96"/>
+      <path class="river" d="M500 350 Q518 470 500 604"/>
+      <path class="river" d="M500 350 Q660 332 904 350"/>
+      <path class="river" d="M500 350 Q360 368 96 350"/>
+
+      <!-- land -->
+      <rect class="land" x="250" y="130" width="500" height="440" rx="8"/>
+      <!-- diagonal region dividers -->
+      <line class="qline" x1="250" y1="130" x2="500" y2="350"/>
+      <line class="qline" x1="750" y1="130" x2="500" y2="350"/>
+      <line class="qline" x1="250" y1="570" x2="500" y2="350"/>
+      <line class="qline" x1="750" y1="570" x2="500" y2="350"/>
+
+      <!-- scenery mountains -->
+      <path class="mtn" d="M300 200 l9 -15 l9 15 z"/>
+      <path class="mtn" d="M690 188 l9 -15 l9 15 z"/>
+      <path class="mtn" d="M305 498 l9 -15 l9 15 z"/>
+      <path class="mtn" d="M688 512 l9 -15 l9 15 z"/>
+      <path class="mtn" d="M598 196 l8 -13 l8 13 z"/>
+      <path class="mtn" d="M392 506 l8 -13 l8 13 z"/>
+
+      <!-- region labels -->
+      <text class="region" x="500" y="208">北山經</text>
+      <text class="region" x="656" y="356">東山經</text>
+      <text class="region" x="344" y="356">西山經</text>
+      <text class="region" x="500" y="512">南山經</text>
+
+      <!-- Kunlun centre -->
+      <circle cx="516" cy="345" r="46" fill="url(#glow)"/>
+      <path class="mtn" style="stroke:#8f6c25;stroke-width:2.4;opacity:1" d="M492 360 l16 -32 l16 32 z"/>
+      <path class="mtn" style="stroke:#8f6c25;stroke-width:2.6;opacity:1" d="M512 360 l20 -46 l20 46 z"/>
+      <path class="mtn" style="stroke:#8f6c25;stroke-width:2.4;opacity:1" d="M538 360 l15 -28 l15 28 z"/>
+      <text class="kunlun" x="520" y="388">崑崙墟 · 中山</text>
+
+      <!-- beast markers -->
+      <g class="mk wind"><circle cx="470" cy="185"/><text x="482" y="185">鯤鵬</text></g>
+      <g class="mk mtn"><circle cx="562" cy="205"/><text x="574" y="205">燭龍</text></g>
+      <g class="mk wind"><circle cx="612" cy="258"/><text x="624" y="258">禺彊</text></g>
+      <g class="mk mtn le"><circle cx="408" cy="252"/><text x="396" y="252">相柳</text></g>
+
+      <g class="mk wind le"><circle cx="662" cy="312"/><text x="650" y="312">天吳</text></g>
+      <g class="mk forest le"><circle cx="690" cy="362"/><text x="678" y="362">精衛</text></g>
+      <g class="mk forest le"><circle cx="652" cy="408"/><text x="640" y="408">蜃</text></g>
+
+      <g class="mk fire le"><circle cx="342" cy="305"/><text x="330" y="305">窮奇</text></g>
+      <g class="mk forest le"><circle cx="320" cy="362"/><text x="308" y="362">青鳥</text></g>
+      <g class="mk fire le"><circle cx="346" cy="408"/><text x="334" y="408">饕餮</text></g>
+
+      <g class="mk fire"><circle cx="468" cy="470"/><text x="480" y="470">鳳凰</text></g>
+      <g class="mk fire"><circle cx="560" cy="456"/><text x="572" y="456">畢方</text></g>
+      <g class="mk forest"><circle cx="604" cy="504"/><text x="616" y="504">巴蛇</text></g>
+      <g class="mk mtn le"><circle cx="446" cy="522"/><text x="434" y="522">應龍</text></g>
+
+      <g class="mk mtn le"><circle cx="452" cy="350"/><text x="440" y="350">開明獸</text></g>
+
+      <!-- compass -->
+      <g class="compass" transform="translate(98 130)">
+        <circle cx="0" cy="0" r="24"/>
+        <line x1="0" y1="-28" x2="0" y2="28"/><line x1="-28" y1="0" x2="28" y2="0"/>
+        <path d="M0 -30 l5 11 l-10 0 z" fill="#8f6c25" stroke="none"/>
+      </g>
+      <text class="clab" x="98" y="92">北</text>
+      <text class="clab" x="98" y="176">南</text>
+      <text class="clab" x="134" y="134">西</text>
+      <text class="clab" x="62" y="134">東</text>
+
+      <!-- title cartouche -->
+      <rect class="cartouche" x="426" y="34" width="148" height="44" rx="9"/>
+      <text class="ctext" x="500" y="66" font-size="27">山海輿圖</text>
+    </svg>
+  </div>
+  <div class="map-legend">
+    <span><i class="dotc" style="background:var(--wind)"></i>風</span>
+    <span><i class="dotc" style="background:var(--forest)"></i>林</span>
+    <span><i class="dotc" style="background:var(--fire)"></i>火</span>
+    <span><i class="dotc" style="background:var(--mtn)"></i>山</span>
+    <span style="color:var(--gold-b)">◈ 崑崙墟為天下之中</span>
+  </div>
+  <p class="map-cap">※ 方位採今制（上北下南）；異獸座標為風格化演繹，取其大略方位，非考據定位。</p>
+</section>
+
 <!-- ===== LAND DECK ===== -->
 <section id="land" class="wrap">
-  <div class="sec-head"><span class="num">肆</span><h2>山牌組 · 異獸</h2><span class="cap">二十四獸</span></div>
+  <div class="sec-head"><span class="num">伍</span><h2>山牌組 · 異獸</h2><span class="cap">二十四獸</span></div>
   <div class="deck-banner land">
     <div class="em">山</div>
     <div><h3>磐山之軍 · 五藏山經</h3><p>以<b>城牆（守）</b>、<b>耐久</b>與<b>滾雪球</b>取勝。立壁壘、熬群敵，待饕餮貪食壯大、燭龍晝夜傾軋。沉穩而後發制人。</p></div>
@@ -376,7 +516,7 @@ footer p{color:var(--muted);margin-top:18px;font-style:italic}
 
 <!-- ===== SEA DECK ===== -->
 <section id="sea" class="wrap">
-  <div class="sec-head"><span class="num">伍</span><h2>海牌組 · 異獸</h2><span class="cap">二十四獸 · 全新</span></div>
+  <div class="sec-head"><span class="num">陸</span><h2>海牌組 · 異獸</h2><span class="cap">二十四獸 · 全新</span></div>
   <div class="deck-banner seaB">
     <div class="em">海</div>
     <div><h3>滄海之眾 · 海經大荒</h3><p>以<b>潮汐</b>為魂：<b>迅捷</b>、<b>回彈</b>（將敵獸送回手牌）、<b>潛沒（沒）</b>。靠節奏與不息的浪頭壓制，而非山牌組的硬壁與滾雪球。天吳八首齊出、巴蛇吞象、巨鼇負山。</p></div>
@@ -389,7 +529,7 @@ footer p{color:var(--muted);margin-top:18px;font-style:italic}
 
 <!-- ===== STRATAGEMS ===== -->
 <section id="stratagems" class="wrap">
-  <div class="sec-head"><span class="num">陸</span><h2>兵法十三篇</h2><span class="cap">兩牌組共用 · 十六張</span></div>
+  <div class="sec-head"><span class="num">柒</span><h2>兵法十三篇</h2><span class="cap">兩牌組共用 · 十六張</span></div>
   <p class="lead">《孫子兵法》十三篇各化為一種計策牌，機制對應其篇旨。山、海兩牌組<b>共用</b>同一套兵法——兵法乃通用之道，異者唯異獸耳。其中<b>火攻</b>、<b>用間</b>各收兩張（×2），合為十六張。</p>
   <div class="deck" id="strat-deck"></div>
   <p class="deck-note">整盒：<b>山牌組（24獸）＋ 海牌組（24獸）＋ 共用兵法（16張）</b>，兩位兵法家即可對壘。曲線為 30 龍脈賽制調校。</p>
