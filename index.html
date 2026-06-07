@@ -263,6 +263,49 @@ footer p{color:var(--muted);margin-top:18px;font-style:italic}
 .map-legend{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:16px;color:var(--muted);font-size:.84rem}
 .map-legend span{display:inline-flex;align-items:center;gap:6px}
 .map-cap{color:var(--muted);font-size:.82rem;font-style:italic;text-align:center;margin-top:10px}
+/* ===== BEGINNER ===== */
+.baize{display:flex;gap:14px;align-items:flex-start;margin-bottom:20px}
+.baize .ava{flex:0 0 auto;width:60px;height:60px;border-radius:50%;display:grid;place-items:center;font-family:'Ma Shan Zheng',cursive;font-size:1.05rem;color:#fff;background:radial-gradient(circle at 35% 30%,var(--gold),var(--mtn-d));border:2px solid var(--gold-b);box-shadow:0 0 0 3px rgba(201,162,75,.2);line-height:1.05;text-align:center}
+.baize .bubble{position:relative;background:var(--panel2);border:1px solid rgba(201,162,75,.35);border-radius:10px;border-top-left-radius:2px;padding:13px 17px;color:var(--parch);font-size:1rem;font-weight:400}
+.baize .bubble::before{content:"";position:absolute;left:-8px;top:15px;border:7px solid transparent;border-right-color:var(--panel2)}
+.baize .bubble b{color:var(--gold-b)}
+.steps3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0 6px}
+@media(max-width:760px){.steps3{grid-template-columns:1fr}}
+.step3{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid rgba(201,162,75,.3);border-radius:10px;padding:20px 18px 16px;position:relative}
+.step3 .no{position:absolute;top:-13px;left:18px;width:30px;height:30px;border-radius:50%;background:var(--cinnabar);color:#fff;display:grid;place-items:center;font-family:'Cinzel',serif;font-weight:700;border:2px solid var(--gold-b)}
+.step3 h4{font-family:'Noto Serif SC',serif;color:var(--gold-b);font-size:1.1rem;margin:6px 0 6px}
+.step3 p{font-size:.92rem;color:var(--parch);font-weight:400}
+.step3 p b{color:var(--gold-b)}
+.subhead{font-family:'Ma Shan Zheng',cursive;color:var(--gold-b);font-size:1.55rem;letter-spacing:2px;margin:32px 0 14px}
+.anat-grid{display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:center}
+@media(max-width:760px){.anat-grid{grid-template-columns:1fr;justify-items:center}}
+.anat-card{position:relative;width:228px}
+.anat-dot{position:absolute;width:25px;height:25px;border-radius:50%;background:var(--cinnabar);color:#fff;display:grid;place-items:center;font-family:'Cinzel',serif;font-weight:700;font-size:.82rem;border:2px solid var(--gold-b);z-index:6;box-shadow:0 2px 6px rgba(0,0,0,.55)}
+.anat-list{list-style:none;max-width:440px}
+.anat-list li{display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-bottom:1px dashed rgba(201,162,75,.16);color:var(--parch);font-size:.95rem;font-weight:400}
+.anat-list li:last-child{border-bottom:0}
+.anat-list .n{flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:var(--cinnabar);color:#fff;display:grid;place-items:center;font-family:'Cinzel',serif;font-weight:700;font-size:.76rem;border:1px solid var(--gold-b)}
+.anat-list b{color:var(--gold-b)}
+.bridge{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px}
+@media(max-width:760px){.bridge{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.bridge{grid-template-columns:1fr}}
+.bridge .b{background:var(--panel2);border:1px solid rgba(201,162,75,.28);border-radius:9px;padding:13px 15px}
+.bridge .b .eq{font-family:'Noto Serif SC',serif;color:var(--gold-b);font-size:1rem;margin-bottom:4px;font-weight:700}
+.bridge .b p{font-size:.85rem;color:var(--muted);font-weight:400}
+.bridge .b p b{color:var(--parch)}
+.stars{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:6px}
+@media(max-width:760px){.stars{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.stars{grid-template-columns:1fr}}
+.star{display:flex;gap:14px;align-items:center;background:var(--panel2);border:1px solid rgba(201,162,75,.25);border-radius:10px;padding:12px}
+.star .bc{width:72px}
+.star .bio h5{font-family:'Noto Serif SC',serif;color:var(--gold-b);font-size:1rem;margin-bottom:3px}
+.star .bio p{font-size:.84rem;color:var(--muted);font-weight:400;line-height:1.6}
+.dabaihua{width:100%;border-collapse:collapse;font-size:.93rem}
+.dabaihua th{font-family:'Noto Serif SC',serif;color:var(--gold-b);text-align:left;padding:10px 12px;border-bottom:2px solid rgba(201,162,75,.4);font-weight:700;white-space:nowrap}
+.dabaihua td{padding:10px 12px;border-bottom:1px solid rgba(201,162,75,.15);color:var(--parch);vertical-align:top;font-weight:400}
+.dabaihua td.src{font-family:'Noto Serif SC',serif;color:var(--gold-b);white-space:nowrap}
+.dabaihua tr:last-child td{border-bottom:0}
+.dbh-wrap{overflow-x:auto;background:var(--panel2);border:1px solid rgba(201,162,75,.3);border-radius:10px;padding:6px 16px;margin-bottom:24px}
 </style>
 </head>
 <body>
@@ -271,6 +314,7 @@ footer p{color:var(--muted);margin-top:18px;font-style:italic}
   <div class="wrap">
     <div class="brand">山海兵法</div>
     <div class="navlinks">
+      <a href="#start">入門</a>
       <a href="#demo">演示</a>
       <a href="#qizheng">奇正</a>
       <a href="#nature">風林火山</a>
@@ -292,10 +336,67 @@ footer p{color:var(--muted);margin-top:18px;font-style:italic}
   </div>
 </header>
 
+<!-- ===== BEGINNER ===== -->
+<section id="start" class="wrap">
+  <div class="sec-head"><span class="num">壹</span><h2>新手入門</h2><span class="cap">三分鐘上手 · 白澤帶路</span></div>
+
+  <div class="baize">
+    <div class="ava">白澤</div>
+    <div class="bubble">嗨，我是<b>白澤</b>——傳說中通曉天下萬物的神獸。別被「山海經」「孫子兵法」唬住，這遊戲其實超好懂。給我三分鐘，你就能開打。</div>
+  </div>
+
+  <div class="steps3">
+    <div class="step3"><span class="no">1</span><h4>你的目標</h4><p>把對手的<b>龍脈</b>（生命，從 30 開始）打到 <b>0</b>，你就贏了。就這麼簡單。</p></div>
+    <div class="step3"><span class="no">2</span><h4>每回合做三件事</h4><p><b>抽一張牌</b> → 花<b>「糧」</b>召喚異獸 → 派牠們<b>進攻</b>。糧每回合多 1、自動補滿，越往後能召喚越強的怪。</p></div>
+    <div class="step3"><span class="no">3</span><h4>王牌機制：奇正</h4><p>異獸可<b>正面放（正）</b>，也可<b>蓋著放（奇）</b>當伏兵，時機到了翻開偷襲。會不會虛張聲勢，就是高手與菜鳥的差別。</p></div>
+  </div>
+
+  <h3 class="subhead">看懂一張卡</h3>
+  <div class="anat-grid">
+    <div class="anat-card">
+      <div id="anat-card-slot"></div>
+      <span class="anat-dot" style="top:4%;left:5%">1</span>
+      <span class="anat-dot" style="top:4%;right:5%">2</span>
+      <span class="anat-dot" style="top:58%;left:50%;transform:translateX(-50%)">5</span>
+      <span class="anat-dot" style="bottom:5%;left:7%">3</span>
+      <span class="anat-dot" style="bottom:5%;right:7%">4</span>
+    </div>
+    <ul class="anat-list">
+      <li><span class="n">1</span><div><b>糧（左上）</b>：召喚這隻怪要花的資源。</div></li>
+      <li><span class="n">2</span><div><b>屬性（右上）</b>：風／林／火／山，決定打法風格。</div></li>
+      <li><span class="n">3</span><div><b>勢（左下·紅）</b>：攻擊力——牠一擊能打出多少傷害。</div></li>
+      <li><span class="n">4</span><div><b>形（右下·綠）</b>：生命值——能扛多少傷害，歸 0 就陣亡。</div></li>
+      <li><span class="n">5</span><div><b>能力（中間文字）</b>：這隻怪的特殊招式。</div></li>
+    </ul>
+  </div>
+  <div class="baize" style="margin-top:18px">
+    <div class="ava">白澤</div>
+    <div class="bubble">記住一句話就夠：<b>紅色＝攻擊，綠色＝血量</b>。其餘慢慢學。</div>
+  </div>
+
+  <h3 class="subhead">你其實早就會了</h3>
+  <p class="lead" style="margin-bottom:14px">玩過下面這些嗎？那這些規則你一秒就懂——</p>
+  <div class="bridge">
+    <div class="b"><div class="eq">糧 ≈《爐石戰記》水晶</div><p>每回合多 1，用來出牌。</p></div>
+    <div class="b"><div class="eq">形 ≈ 血條</div><p>任何遊戲都有的<b>生命值</b>。</p></div>
+    <div class="b"><div class="eq">勢 ≈ 攻擊力</div><p>一拳能打掉多少血。</p></div>
+    <div class="b"><div class="eq">奇正 ≈ 撲克蓋牌</div><p>對手猜不到你<b>藏了什麼</b>，這就是詐唬。</p></div>
+    <div class="b"><div class="eq">用間 ≈ 狼人殺查驗</div><p>像預言家一樣<b>偷看對手底牌</b>。</p></div>
+    <div class="b"><div class="eq">守 ≈ 嘲諷／坦克</div><p>敵人得<b>先打牠</b>，才碰得到你後排。</p></div>
+  </div>
+
+  <h3 class="subhead">先認識幾位明星</h3>
+  <div class="baize" style="margin-bottom:16px">
+    <div class="ava">白澤</div>
+    <div class="bubble">這些怪你一定會遇到。記住牠們的<b>個性</b>，比記名字更重要——</div>
+  </div>
+  <div class="stars" id="stars"></div>
+</section>
+
 <!-- ===== DEMO ===== -->
 <section id="demo" class="wrap">
-  <div class="sec-head"><span class="num">壹</span><h2>回合演示</h2><span class="cap">逐步動畫 · 山牌組對局</span></div>
-  <p class="lead">第七回合，輪到我方。點「下一步」逐格推演——或開「自動播放」，看一回合如何從徵糧、用間、布勢，到翻奇破守、連環收割。</p>
+  <div class="sec-head"><span class="num">貳</span><h2>回合演示</h2><span class="cap">逐步動畫 · 山牌組對局</span></div>
+  <p class="lead"><b style="color:var(--gold-b)">白澤：</b>學完上面三步，來看一場實戰示範——第七回合，輪到我方。點「下一步」逐格推演，或開「自動播放」。看到不懂的詞（用間、兵勢…），回上面「新手入門」就好。</p>
 
   <div class="battlefield" id="bf">
     <div class="bf-side enemy">
@@ -340,7 +441,7 @@ footer p{color:var(--muted);margin-top:18px;font-style:italic}
 
 <!-- ===== 奇正 ===== -->
 <section id="qizheng" class="wrap">
-  <div class="sec-head"><span class="num">貳</span><h2>奇正之機</h2><span class="cap">本作之心臟</span></div>
+  <div class="sec-head"><span class="num">叁</span><h2>奇正之機</h2><span class="cap">本作之心臟</span></div>
   <div class="qz-grid">
     <div>
       <div class="flip" id="flip" onclick="this.classList.toggle('on')">
@@ -362,7 +463,7 @@ footer p{color:var(--muted);margin-top:18px;font-style:italic}
 
 <!-- ===== NATURES ===== -->
 <section id="nature" class="wrap">
-  <div class="sec-head"><span class="num">叁</span><h2>風林火山</h2><span class="cap">四種屬性</span></div>
+  <div class="sec-head"><span class="num">肆</span><h2>風林火山</h2><span class="cap">四種屬性</span></div>
   <p class="lead">出自《孫子兵法·軍爭篇》：<i>其疾如風，其徐如林，侵掠如火，不動如山。</i>每隻異獸只屬一種，一眼便知其性。</p>
   <div class="nat-legend">
     <div class="nat-card nat-wind"><div class="g">風</div><div class="nm">疾風</div><p>迅捷。速戰與閃避，先發制人。</p></div>
@@ -389,7 +490,7 @@ footer p{color:var(--muted);margin-top:18px;font-style:italic}
 
 <!-- ===== MAP ===== -->
 <section id="map" class="wrap">
-  <div class="sec-head"><span class="num">肆</span><h2>山海輿圖</h2><span class="cap">五藏山經 · 環以四海</span></div>
+  <div class="sec-head"><span class="num">伍</span><h2>山海輿圖</h2><span class="cap">五藏山經 · 環以四海</span></div>
   <p class="lead">《山海經》本是一部上古輿地之書——<b style="color:var(--gold-b)">五藏山經居中，環以四海，外接大荒</b>。下圖以此宇宙觀繪成：山牌組之獸踞於群山，海牌組之獸沒於四瀆。四弹發行亦應四方——東海、南山、西山、北海，各據一隅。</p>
   <div class="mapwrap">
     <svg class="smap" viewBox="0 0 1000 720" role="img" aria-label="山海經輿圖">
@@ -503,7 +604,7 @@ footer p{color:var(--muted);margin-top:18px;font-style:italic}
 
 <!-- ===== LAND DECK ===== -->
 <section id="land" class="wrap">
-  <div class="sec-head"><span class="num">伍</span><h2>山牌組 · 異獸</h2><span class="cap">二十四獸</span></div>
+  <div class="sec-head"><span class="num">陸</span><h2>山牌組 · 異獸</h2><span class="cap">二十四獸</span></div>
   <div class="deck-banner land">
     <div class="em">山</div>
     <div><h3>磐山之軍 · 五藏山經</h3><p>以<b>城牆（守）</b>、<b>耐久</b>與<b>滾雪球</b>取勝。立壁壘、熬群敵，待饕餮貪食壯大、燭龍晝夜傾軋。沉穩而後發制人。</p></div>
@@ -516,7 +617,7 @@ footer p{color:var(--muted);margin-top:18px;font-style:italic}
 
 <!-- ===== SEA DECK ===== -->
 <section id="sea" class="wrap">
-  <div class="sec-head"><span class="num">陸</span><h2>海牌組 · 異獸</h2><span class="cap">二十四獸 · 全新</span></div>
+  <div class="sec-head"><span class="num">柒</span><h2>海牌組 · 異獸</h2><span class="cap">二十四獸 · 全新</span></div>
   <div class="deck-banner seaB">
     <div class="em">海</div>
     <div><h3>滄海之眾 · 海經大荒</h3><p>以<b>潮汐</b>為魂：<b>迅捷</b>、<b>回彈</b>（將敵獸送回手牌）、<b>潛沒（沒）</b>。靠節奏與不息的浪頭壓制，而非山牌組的硬壁與滾雪球。天吳八首齊出、巴蛇吞象、巨鼇負山。</p></div>
@@ -529,8 +630,24 @@ footer p{color:var(--muted);margin-top:18px;font-style:italic}
 
 <!-- ===== STRATAGEMS ===== -->
 <section id="stratagems" class="wrap">
-  <div class="sec-head"><span class="num">柒</span><h2>兵法十三篇</h2><span class="cap">兩牌組共用 · 十六張</span></div>
+  <div class="sec-head"><span class="num">捌</span><h2>兵法十三篇</h2><span class="cap">兩牌組共用 · 十六張</span></div>
   <p class="lead">《孫子兵法》十三篇各化為一種計策牌，機制對應其篇旨。山、海兩牌組<b>共用</b>同一套兵法——兵法乃通用之道，異者唯異獸耳。其中<b>火攻</b>、<b>用間</b>各收兩張（×2），合為十六張。</p>
+  <div class="baize">
+    <div class="ava">白澤</div>
+    <div class="bubble">孫子兵法聽起來很高深？其實全是大白話。看這張對照表，你會發現這些道理你早就懂——</div>
+  </div>
+  <div class="dbh-wrap">
+    <table class="dabaihua">
+      <thead><tr><th>孫子原文</th><th>大白話</th><th>在遊戲裡</th></tr></thead>
+      <tbody>
+        <tr><td class="src">兵者，詭道也</td><td>打仗就是鬥智鬥騙</td><td>蓋牌（奇）偷襲，虛實難辨</td></tr>
+        <tr><td class="src">知己知彼，百戰不殆</td><td>先摸清對手的底</td><td>用間：偷看手牌、翻開伏兵</td></tr>
+        <tr><td class="src">不戰而屈人之兵</td><td>不動手就贏，最高級的炫</td><td>讓對手抽空牌庫即可獲勝</td></tr>
+        <tr><td class="src">出其不意，攻其無備</td><td>趁他沒準備就突襲</td><td>奇兵翻開瞬間的爆發傷害</td></tr>
+        <tr><td class="src">置之死地而後生</td><td>絕境反而能爆發</td><td>龍脈越低，「九地」加成越猛</td></tr>
+      </tbody>
+    </table>
+  </div>
   <div class="deck" id="strat-deck"></div>
   <p class="deck-note">整盒：<b>山牌組（24獸）＋ 海牌組（24獸）＋ 共用兵法（16張）</b>，兩位兵法家即可對壘。曲線為 30 龍脈賽制調校。</p>
 </section>
@@ -750,6 +867,16 @@ document.getElementById('d-auto').addEventListener('click',()=>{
  auto=setInterval(()=>{if(cur>=steps.length-1){stopAuto();}else{next();}},2900);
 });
 
+const stars=[
+ {n:'饕餮',bio:'神話級吃貨。場上每死一隻怪，牠就 +1/+1，越打越肥。'},
+ {n:'燭龍',bio:'睜眼是白天、閉眼是黑夜的巨龍，掌管晝夜、增益全場。'},
+ {n:'精衛',bio:'銜石填海、永不放棄的小鳥。每回合默默磨對手 1 滴血。'},
+ {n:'窮奇',bio:'長翅膀的惡虎，專咬「正面」的老實怪，傷害 +2。'},
+ {n:'巴蛇',bio:'能吞象的巨蛇（海牌組）。登場直接吃掉一隻小怪。'},
+ {n:'天吳',bio:'八個頭的水神（海牌組），一次能攻擊兩個目標。'},
+];
+document.getElementById('stars').innerHTML=stars.map(s=>`<div class="star">${bcardStatic(s.n)}<div class="bio"><h5>${s.n}</h5><p>${s.bio}</p></div></div>`).join('');
+document.getElementById('anat-card-slot').innerHTML=card(B('窮奇'),0);
 S=initS();goTo(0);
 </script>
 </body>
