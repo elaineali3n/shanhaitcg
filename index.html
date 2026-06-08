@@ -6,7 +6,7 @@
 <title>山海兵法 · 逐步動畫</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700;900&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700;900&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --ink:#15110d;--ink2:#1e1813;--panel:#241c15;--panel2:#2c2219;
@@ -18,10 +18,10 @@
   --sea:#2f6f86;--sea-d:#173d4d;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;font-size:15px}
 body{background:radial-gradient(900px 600px at 80% -10%,rgba(188,54,42,.12),transparent 60%),
   radial-gradient(1100px 700px at 10% 110%,rgba(201,162,75,.1),transparent 55%),var(--ink);
-  color:var(--text);font-family:'Noto Serif SC',Georgia,serif;line-height:1.8;overflow-x:hidden}
+  color:var(--text);font-family:'Roboto','Noto Serif SC',Georgia,sans-serif;line-height:1.75;overflow-x:hidden}
 body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.05;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .wrap{max-width:1180px;margin:0 auto;padding:0 22px;position:relative;z-index:2}
@@ -306,22 +306,37 @@ footer p{color:var(--muted);margin-top:18px;font-style:italic}
 .dabaihua td.src{font-family:'Noto Serif SC',serif;color:var(--gold-b);white-space:nowrap}
 .dabaihua tr:last-child td{border-bottom:0}
 .dbh-wrap{overflow-x:auto;background:var(--panel2);border:1px solid rgba(201,162,75,.3);border-radius:10px;padding:6px 16px;margin-bottom:24px}
+.lang-zh .L-en{display:none}
+.lang-en .L-zh{display:none}
+.langtoggle{font-family:'Cinzel',serif;letter-spacing:2px;border:1px solid var(--gold);border-radius:4px;padding:5px 12px!important;color:var(--gold-b)!important}
+.langtoggle:hover{background:rgba(201,162,75,.15)}
+.lang-wrap{position:relative;display:inline-flex}
+.lang-hint{position:absolute;top:calc(100% + 11px);right:0;width:max-content;max-width:210px;background:linear-gradient(155deg,#9a2b1e,#6f1d14);color:#fff;border:1px solid var(--gold-b);border-radius:10px;padding:9px 30px 9px 13px;font-size:.8rem;line-height:1.4;font-family:'Noto Serif SC',serif;letter-spacing:.3px;box-shadow:0 10px 24px rgba(0,0,0,.5);cursor:pointer;z-index:200;opacity:0;transform:translateY(-6px);pointer-events:none;transition:opacity .45s ease,transform .45s ease}
+.lang-hint.show{opacity:1;transform:translateY(0);pointer-events:auto;animation:lhbob 2s ease-in-out 1.4s infinite}
+.lang-hint::after{content:"";position:absolute;top:-7px;right:17px;width:12px;height:12px;background:#9a2b1e;border-left:1px solid var(--gold-b);border-top:1px solid var(--gold-b);transform:rotate(45deg)}
+.lang-hint b{color:#f3d99a}
+.lang-hint .x{position:absolute;top:4px;right:9px;font-size:1.05rem;line-height:1;opacity:.75;font-family:system-ui,sans-serif}
+.lang-hint .x:hover{opacity:1}
+@keyframes lhbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@media print{.lang-hint{display:none!important}}
+@media(max-width:560px){.lang-hint{max-width:160px;font-size:.74rem;padding:8px 26px 8px 11px}}
 </style>
 </head>
-<body>
+<body class="lang-zh">
 
 <nav>
   <div class="wrap">
     <div class="brand">山海兵法</div>
     <div class="navlinks">
-      <a href="#start">入門</a>
-      <a href="#demo">演示</a>
-      <a href="#qizheng">奇正</a>
-      <a href="#nature">風林火山</a>
-      <a href="#map">輿圖</a>
-      <a href="#land">山牌</a>
-      <a href="#sea">海牌</a>
-      <a href="#stratagems">兵法</a>
+      <a href="#start"><span class="L-zh">入門</span><span class="L-en">Start</span></a>
+      <a href="#demo"><span class="L-zh">演示</span><span class="L-en">Demo</span></a>
+      <a href="#qizheng"><span class="L-zh">奇正</span><span class="L-en">Qí&amp;Zhèng</span></a>
+      <a href="#nature"><span class="L-zh">風林火山</span><span class="L-en">Natures</span></a>
+      <a href="#map"><span class="L-zh">輿圖</span><span class="L-en">Map</span></a>
+      <a href="#land"><span class="L-zh">山牌</span><span class="L-en">Mtn Deck</span></a>
+      <a href="#sea"><span class="L-zh">海牌</span><span class="L-en">Sea Deck</span></a>
+      <a href="#stratagems"><span class="L-zh">兵法</span><span class="L-en">Stratagems</span></a>
+      <span class="lang-wrap"><a href="#" class="langtoggle" id="langtoggle">EN</a><span class="lang-hint" id="langhint"><span class="x" id="langhint-x" title="dismiss">×</span><span>Read this in <b>English</b> ↑</span></span></span>
     </div>
   </div>
 </nav>
@@ -330,28 +345,28 @@ footer p{color:var(--muted);margin-top:18px;font-style:italic}
   <div class="seal-bg">山海</div>
   <div class="hero-inner wrap">
     <h1>山海兵法</h1>
-    <p class="tag">以《<b>山海經</b>》之異獸為兵，承《<b>孫子兵法</b>》之詭道為謀。<br>上兵伐謀——<b>不戰而屈人之兵</b>。</p>
+    <p class="tag"><span class="L-zh">以《<b>山海經</b>》之異獸為兵，承《<b>孫子兵法</b>》之詭道為謀。<br>上兵伐謀——<b>不戰而屈人之兵</b>。</span><span class="L-en">Command the divine beasts of the <b>Classic of Mountains &amp; Seas</b> with the cunning of <b>Sun Tzu’s Art of War</b>.<br>The supreme victory — <b>win without fighting</b>.</span></p>
     <div class="fan" id="hero-fan"></div>
-    <p class="cue">觀一回合之變</p>
+    <p class="cue"><span class="L-zh">觀一回合之變</span><span class="L-en">Watch a turn unfold</span></p>
   </div>
 </header>
 
 <!-- ===== BEGINNER ===== -->
 <section id="start" class="wrap">
-  <div class="sec-head"><span class="num">壹</span><h2>新手入門</h2><span class="cap">三分鐘上手 · 白澤帶路</span></div>
+  <div class="sec-head"><span class="num">壹</span><h2><span class="L-zh">新手入門</span><span class="L-en">Getting Started</span></h2><span class="cap"><span class="L-zh">三分鐘上手 · 白澤帶路</span><span class="L-en">3-minute start · guided by Baize</span></span></div>
 
   <div class="baize">
     <div class="ava">白澤</div>
-    <div class="bubble">嗨，我是<b>白澤</b>——傳說中通曉天下萬物的神獸。別被「山海經」「孫子兵法」唬住，這遊戲其實超好懂。給我三分鐘，你就能開打。</div>
+    <div class="bubble"><span class="L-zh">嗨，我是<b>白澤</b>——傳說中通曉天下萬物的神獸。別被「山海經」「孫子兵法」唬住，這遊戲其實超好懂。給我三分鐘，你就能開打。</span><span class="L-en">Hey, I’m <b>Baize</b> — the mythical beast who knows every creature under heaven. Don’t let “Shan Hai Jing” or “The Art of War” scare you; this game is easy. Give me three minutes.</span></div>
   </div>
 
   <div class="steps3">
-    <div class="step3"><span class="no">1</span><h4>你的目標</h4><p>把對手的<b>龍脈</b>（生命，從 30 開始）打到 <b>0</b>，你就贏了。就這麼簡單。</p></div>
-    <div class="step3"><span class="no">2</span><h4>每回合做三件事</h4><p><b>抽一張牌</b> → 花<b>「糧」</b>召喚異獸 → 派牠們<b>進攻</b>。糧每回合多 1、自動補滿，越往後能召喚越強的怪。</p></div>
-    <div class="step3"><span class="no">3</span><h4>王牌機制：奇正</h4><p>異獸可<b>正面放（正）</b>，也可<b>蓋著放（奇）</b>當伏兵，時機到了翻開偷襲。會不會虛張聲勢，就是高手與菜鳥的差別。</p></div>
+    <div class="step3"><span class="no">1</span><h4><span class="L-zh">你的目標</span><span class="L-en">Your Goal</span></h4><p><span class="L-zh">把對手的<b>龍脈</b>（生命，從 30 開始）打到 <b>0</b>，你就贏了。就這麼簡單。</span><span class="L-en">Knock your opponent’s <b>Dragon-Vein</b> (life, starts at 30) down to <b>0</b>. That’s the whole game.</span></p></div>
+    <div class="step3"><span class="no">2</span><h4><span class="L-zh">每回合做三件事</span><span class="L-en">Each Turn: 3 Things</span></h4><p><span class="L-zh"><b>抽一張牌</b> → 花<b>「糧」</b>召喚異獸 → 派牠們<b>進攻</b>。糧每回合多 1、自動補滿，越往後能召喚越強的怪。</span><span class="L-en"><b>Draw a card</b> → spend <b>Supply (糧)</b> to summon beasts → send them to <b>attack</b>. Supply grows by 1 each turn and refills, so you summon stronger beasts over time.</span></p></div>
+    <div class="step3"><span class="no">3</span><h4><span class="L-zh">王牌機制：奇正</span><span class="L-en">Star Mechanic: Qí &amp; Zhèng</span></h4><p><span class="L-zh">異獸可<b>正面放（正）</b>，也可<b>蓋著放（奇）</b>當伏兵，時機到了翻開偷襲。會不會虛張聲勢，就是高手與菜鳥的差別。</span><span class="L-en">A beast can be played <b>face-up (Zhèng)</b> or <b>face-down (Qí)</b> as an ambush, then flipped up to strike at the right moment. Bluffing well is what separates pros from rookies.</span></p></div>
   </div>
 
-  <h3 class="subhead">看懂一張卡</h3>
+  <h3 class="subhead"><span class="L-zh">看懂一張卡</span><span class="L-en">Read a Card</span></h3>
   <div class="anat-grid">
     <div class="anat-card">
       <div id="anat-card-slot"></div>
@@ -362,47 +377,47 @@ footer p{color:var(--muted);margin-top:18px;font-style:italic}
       <span class="anat-dot" style="bottom:5%;right:7%">4</span>
     </div>
     <ul class="anat-list">
-      <li><span class="n">1</span><div><b>糧（左上）</b>：召喚這隻怪要花的資源。</div></li>
-      <li><span class="n">2</span><div><b>屬性（右上）</b>：風／林／火／山，決定打法風格。</div></li>
-      <li><span class="n">3</span><div><b>勢（左下·紅）</b>：攻擊力——牠一擊能打出多少傷害。</div></li>
-      <li><span class="n">4</span><div><b>形（右下·綠）</b>：生命值——能扛多少傷害，歸 0 就陣亡。</div></li>
-      <li><span class="n">5</span><div><b>能力（中間文字）</b>：這隻怪的特殊招式。</div></li>
+      <li><span class="n">1</span><div><span class="L-zh"><b>糧（左上）</b>：召喚這隻怪要花的資源。</span><span class="L-en"><b>Supply (top-left)</b>: what it costs to summon this beast.</span></div></li>
+      <li><span class="n">2</span><div><span class="L-zh"><b>屬性（右上）</b>：風／林／火／山，決定打法風格。</span><span class="L-en"><b>Nature (top-right)</b>: Wind / Forest / Fire / Mountain — its play style.</span></div></li>
+      <li><span class="n">3</span><div><span class="L-zh"><b>勢（左下·紅）</b>：攻擊力——牠一擊能打出多少傷害。</span><span class="L-en"><b>勢 ATK (bottom-left, red)</b>: how much damage it deals in one hit.</span></div></li>
+      <li><span class="n">4</span><div><span class="L-zh"><b>形（右下·綠）</b>：生命值——能扛多少傷害，歸 0 就陣亡。</span><span class="L-en"><b>形 HP (bottom-right, green)</b>: how much it can take; at 0 it’s defeated.</span></div></li>
+      <li><span class="n">5</span><div><span class="L-zh"><b>能力（中間文字）</b>：這隻怪的特殊招式。</span><span class="L-en"><b>Ability (center text)</b>: this beast’s special move.</span></div></li>
     </ul>
   </div>
   <div class="baize" style="margin-top:18px">
     <div class="ava">白澤</div>
-    <div class="bubble">記住一句話就夠：<b>紅色＝攻擊，綠色＝血量</b>。其餘慢慢學。</div>
+    <div class="bubble"><span class="L-zh">記住一句話就夠：<b>紅色＝攻擊，綠色＝血量</b>。其餘慢慢學。</span><span class="L-en">Just remember: <b>red = attack, green = health</b>. The rest comes with play.</span></div>
   </div>
 
-  <h3 class="subhead">你其實早就會了</h3>
-  <p class="lead" style="margin-bottom:14px">玩過下面這些嗎？那這些規則你一秒就懂——</p>
+  <h3 class="subhead"><span class="L-zh">你其實早就會了</span><span class="L-en">You Already Know This</span></h3>
+  <p class="lead" style="margin-bottom:14px"><span class="L-zh">玩過下面這些嗎？那這些規則你一秒就懂——</span><span class="L-en">Played any of these? Then these rules click instantly —</span></p>
   <div class="bridge">
-    <div class="b"><div class="eq">糧 ≈《爐石戰記》水晶</div><p>每回合多 1，用來出牌。</p></div>
-    <div class="b"><div class="eq">形 ≈ 血條</div><p>任何遊戲都有的<b>生命值</b>。</p></div>
-    <div class="b"><div class="eq">勢 ≈ 攻擊力</div><p>一拳能打掉多少血。</p></div>
-    <div class="b"><div class="eq">奇正 ≈ 撲克蓋牌</div><p>對手猜不到你<b>藏了什麼</b>，這就是詐唬。</p></div>
-    <div class="b"><div class="eq">用間 ≈ 狼人殺查驗</div><p>像預言家一樣<b>偷看對手底牌</b>。</p></div>
-    <div class="b"><div class="eq">守 ≈ 嘲諷／坦克</div><p>敵人得<b>先打牠</b>，才碰得到你後排。</p></div>
+    <div class="b"><div class="eq"><span class="L-zh">糧 ≈《爐石戰記》水晶</span><span class="L-en">Supply ≈ Hearthstone mana</span></div><p><span class="L-zh">每回合多 1，用來出牌。</span><span class="L-en">Grows by 1 each turn; pays for your cards.</span></p></div>
+    <div class="b"><div class="eq"><span class="L-zh">形 ≈ 血條</span><span class="L-en">形 (HP) ≈ a health bar</span></div><p><span class="L-zh">任何遊戲都有的<b>生命值</b>。</span><span class="L-en">The <b>health</b> every game has.</span></p></div>
+    <div class="b"><div class="eq"><span class="L-zh">勢 ≈ 攻擊力</span><span class="L-en">勢 (ATK) ≈ attack power</span></div><p><span class="L-zh">一拳能打掉多少血。</span><span class="L-en">How much a hit takes off.</span></p></div>
+    <div class="b"><div class="eq"><span class="L-zh">奇正 ≈ 撲克蓋牌</span><span class="L-en">Qí/Zhèng ≈ a poker face-down</span></div><p><span class="L-zh">對手猜不到你<b>藏了什麼</b>，這就是詐唬。</span><span class="L-en">They can’t see <b>what you’re hiding</b> — that’s the bluff.</span></p></div>
+    <div class="b"><div class="eq"><span class="L-zh">用間 ≈ 狼人殺查驗</span><span class="L-en">Espionage ≈ a Werewolf seer check</span></div><p><span class="L-zh">像預言家一樣<b>偷看對手底牌</b>。</span><span class="L-en">Peek at the opponent’s hand, like the Seer.</span></p></div>
+    <div class="b"><div class="eq"><span class="L-zh">守 ≈ 嘲諷／坦克</span><span class="L-en">Guard ≈ a taunt / tank</span></div><p><span class="L-zh">敵人得<b>先打牠</b>，才碰得到你後排。</span><span class="L-en">Enemies must <b>hit it first</b> before reaching your back line.</span></p></div>
   </div>
 
-  <h3 class="subhead">先認識幾位明星</h3>
+  <h3 class="subhead"><span class="L-zh">先認識幾位明星</span><span class="L-en">Meet a Few Stars</span></h3>
   <div class="baize" style="margin-bottom:16px">
     <div class="ava">白澤</div>
-    <div class="bubble">這些怪你一定會遇到。記住牠們的<b>個性</b>，比記名字更重要——</div>
+    <div class="bubble"><span class="L-zh">這些怪你一定會遇到。記住牠們的<b>個性</b>，比記名字更重要——</span><span class="L-en">You’ll run into these. Remembering their <b>personalities</b> beats memorizing names —</span></div>
   </div>
   <div class="stars" id="stars"></div>
 </section>
 
 <!-- ===== DEMO ===== -->
 <section id="demo" class="wrap">
-  <div class="sec-head"><span class="num">貳</span><h2>回合演示</h2><span class="cap">逐步動畫 · 山牌組對局</span></div>
-  <p class="lead"><b style="color:var(--gold-b)">白澤：</b>學完上面三步，來看一場實戰示範——第七回合，輪到我方。點「下一步」逐格推演，或開「自動播放」。看到不懂的詞（用間、兵勢…），回上面「新手入門」就好。</p>
+  <div class="sec-head"><span class="num">貳</span><h2><span class="L-zh">回合演示</span><span class="L-en">Turn Demo</span></h2><span class="cap"><span class="L-zh">逐步動畫 · 山牌組對局</span><span class="L-en">Step-by-step · a Mountain-deck game</span></span></div>
+  <p class="lead"><span class="L-zh"><b style="color:var(--gold-b)">白澤：</b>學完上面三步，來看一場實戰示範——第七回合，輪到我方。點「下一步」逐格推演，或開「自動播放」。看到不懂的詞（用間、兵勢…），回上面「新手入門」就好。</span><span class="L-en"><b style="color:var(--gold-b)">Baize:</b> Now you know the three steps — watch a real turn. Turn 7, your move. Click “Next” to step through, or hit “Auto”. See a term you don’t know? Scroll back to Getting Started.</span></p>
 
   <div class="battlefield" id="bf">
     <div class="bf-side enemy">
-      <span class="bf-tag">敵</span>
+      <span class="bf-tag"><span class="L-zh">敵</span><span class="L-en">Foe</span></span>
       <div class="cmd">
-        <div class="orb foe" id="e-orb"><span class="num" id="e-life">22</span><span class="lab">龍脈</span></div>
+        <div class="orb foe" id="e-orb"><span class="num" id="e-life">22</span><span class="lab"><span class="L-zh">龍脈</span><span class="L-en">Vein</span></span></div>
         <div class="supply" id="e-sup"></div>
         <div class="piles" id="e-piles"></div>
       </div>
@@ -410,9 +425,9 @@ footer p{color:var(--muted);margin-top:18px;font-style:italic}
     </div>
     <div class="bf-line"><span class="rule"></span><span class="clash">戰</span><span class="rule"></span></div>
     <div class="bf-side you">
-      <span class="bf-tag">我</span>
+      <span class="bf-tag"><span class="L-zh">我</span><span class="L-en">You</span></span>
       <div class="cmd">
-        <div class="orb" id="y-orb"><span class="num" id="y-life">27</span><span class="lab">龍脈</span></div>
+        <div class="orb" id="y-orb"><span class="num" id="y-life">27</span><span class="lab"><span class="L-zh">龍脈</span><span class="L-en">Vein</span></span></div>
         <div class="supply" id="y-sup"></div>
         <div class="piles" id="y-piles"></div>
       </div>
@@ -430,68 +445,68 @@ footer p{color:var(--muted);margin-top:18px;font-style:italic}
   </div>
 
   <div class="legend-row">
-    <span><i class="dotc" style="background:var(--wind)"></i>風</span>
-    <span><i class="dotc" style="background:var(--forest)"></i>林</span>
-    <span><i class="dotc" style="background:var(--fire)"></i>火</span>
-    <span><i class="dotc" style="background:var(--mtn)"></i>山</span>
-    <span><i class="dotc" style="background:var(--cinnabar)"></i>勢（攻擊）</span>
-    <span><i class="dotc" style="background:var(--forest-d)"></i>形（防禦／生命）</span>
+    <span><i class="dotc" style="background:var(--wind)"></i><span class="L-zh">風</span><span class="L-en">Wind</span></span>
+    <span><i class="dotc" style="background:var(--forest)"></i><span class="L-zh">林</span><span class="L-en">Forest</span></span>
+    <span><i class="dotc" style="background:var(--fire)"></i><span class="L-zh">火</span><span class="L-en">Fire</span></span>
+    <span><i class="dotc" style="background:var(--mtn)"></i><span class="L-zh">山</span><span class="L-en">Mtn</span></span>
+    <span><i class="dotc" style="background:var(--cinnabar)"></i><span class="L-zh">勢（攻擊）</span><span class="L-en">勢 ATK</span></span>
+    <span><i class="dotc" style="background:var(--forest-d)"></i><span class="L-zh">形（防禦／生命）</span><span class="L-en">形 HP</span></span>
   </div>
 </section>
 
 <!-- ===== 奇正 ===== -->
 <section id="qizheng" class="wrap">
-  <div class="sec-head"><span class="num">叁</span><h2>奇正之機</h2><span class="cap">本作之心臟</span></div>
+  <div class="sec-head"><span class="num">叁</span><h2><span class="L-zh">奇正之機</span><span class="L-en">Qí &amp; Zhèng</span></h2><span class="cap"><span class="L-zh">本作之心臟</span><span class="L-en">The heart of the game</span></span></div>
   <div class="qz-grid">
     <div>
       <div class="flip" id="flip" onclick="this.classList.toggle('on')">
         <div class="flip-in"><div class="flip-face front-f" id="flip-front"></div><div class="flip-face back-f" id="flip-back"></div></div>
       </div>
-      <p class="flip-hint">點按翻開 ↻</p>
+      <p class="flip-hint"><span class="L-zh">點按翻開 ↻</span><span class="L-en">Tap to flip ↻</span></p>
     </div>
     <div class="qz-text">
-      <h3>明者為正，暗者為奇</h3>
-      <p>登場異獸時，你選擇其入場姿態。<span class="ch">兵者，詭道也</span>——每張暗置之牌，都是對手無法解答的問題。</p>
+      <h3><span class="L-zh">明者為正，暗者為奇</span><span class="L-en">Open is Zhèng, hidden is Qí</span></h3>
+      <p><span class="L-zh">登場異獸時，你選擇其入場姿態。<span class="ch">兵者，詭道也</span>——每張暗置之牌，都是對手無法解答的問題。</span><span class="L-en">When you summon a beast, you choose how it enters. <span class="ch">All war is deception.</span> Every face-down card is a question your opponent can’t answer.</span></p>
       <div class="duo">
-        <div class="box"><div class="gz">正 <small>明置</small></div><p>正面登場，全數值、能力即時生效。誠實可靠——<i>以正合</i>。</p></div>
-        <div class="box"><div class="gz">奇 <small>暗置</small></div><p>背面伏兵，暗置時不能攻擊。可於任意時機翻開，觸發<span class="ch">出其不意</span>——<i>以奇勝</i>。</p></div>
+        <div class="box"><div class="gz">正 <small><span class="L-zh">明置</span><span class="L-en">Face-up</span></small></div><p><span class="L-zh">正面登場，全數值、能力即時生效。誠實可靠——<i>以正合</i>。</span><span class="L-en">Enters face-up; full stats and abilities active at once. Honest and reliable — <i>engage with the orthodox</i>.</span></p></div>
+        <div class="box"><div class="gz">奇 <small><span class="L-zh">暗置</span><span class="L-en">Face-down</span></small></div><p><span class="L-zh">背面伏兵，暗置時不能攻擊。可於任意時機翻開，觸發<span class="ch">出其不意</span>——<i>以奇勝</i>。</span><span class="L-en">A face-down ambush; can’t attack while hidden. Flip it any time to trigger <span class="ch">the unexpected</span> — <i>win with the unorthodox</i>.</span></p></div>
       </div>
-      <p style="margin-top:14px;font-size:.92rem;color:var(--muted)">破解之道唯有<span class="ch">用間</span>——窺敵手牌、翻其伏兵，此即<b>知己知彼，百戰不殆</b>。</p>
+      <p style="margin-top:14px;font-size:.92rem;color:var(--muted)"><span class="L-zh">破解之道唯有<span class="ch">用間</span>——窺敵手牌、翻其伏兵，此即<b>知己知彼，百戰不殆</b>。</span><span class="L-en">The only counter is <span class="ch">Espionage</span> — peek at their hand, flip their ambush. This is <b>know the enemy and know yourself</b>.</span></p>
     </div>
   </div>
 </section>
 
 <!-- ===== NATURES ===== -->
 <section id="nature" class="wrap">
-  <div class="sec-head"><span class="num">肆</span><h2>風林火山</h2><span class="cap">四種屬性</span></div>
-  <p class="lead">出自《孫子兵法·軍爭篇》：<i>其疾如風，其徐如林，侵掠如火，不動如山。</i>每隻異獸只屬一種，一眼便知其性。</p>
+  <div class="sec-head"><span class="num">肆</span><h2><span class="L-zh">風林火山</span><span class="L-en">The Four Natures</span></h2><span class="cap"><span class="L-zh">四種屬性</span><span class="L-en">Wind · Forest · Fire · Mountain</span></span></div>
+  <p class="lead"><span class="L-zh">出自《孫子兵法·軍爭篇》：<i>其疾如風，其徐如林，侵掠如火，不動如山。</i>每隻異獸只屬一種，一眼便知其性。</span><span class="L-en">From Sun Tzu’s Art of War: <i>swift as Wind, quiet as Forest, fierce as Fire, immovable as Mountain.</i> Each beast is one nature — read its style at a glance.</span></p>
   <div class="nat-legend">
-    <div class="nat-card nat-wind"><div class="g">風</div><div class="nm">疾風</div><p>迅捷。速戰與閃避，先發制人。</p></div>
-    <div class="nat-card nat-forest"><div class="g">林</div><div class="nm">幽林</div><p>沉潛。隱蔽、情報與控制。</p></div>
-    <div class="nat-card nat-fire"><div class="g">火</div><div class="nm">烈火</div><p>剛猛。焚燒與強攻，以命搏勢。</p></div>
-    <div class="nat-card nat-mtn"><div class="g">山</div><div class="nm">磐山</div><p>不動。城牆與耐久，熬死群敵。</p></div>
+    <div class="nat-card nat-wind"><div class="g">風</div><div class="nm"><span class="L-zh">疾風</span><span class="L-en">Wind</span></div><p><span class="L-zh">迅捷。速戰與閃避，先發制人。</span><span class="L-en">Swift. Haste and evasion; strike first.</span></p></div>
+    <div class="nat-card nat-forest"><div class="g">林</div><div class="nm"><span class="L-zh">幽林</span><span class="L-en">Forest</span></div><p><span class="L-zh">沉潛。隱蔽、情報與控制。</span><span class="L-en">Patient. Stealth, intel and control.</span></p></div>
+    <div class="nat-card nat-fire"><div class="g">火</div><div class="nm"><span class="L-zh">烈火</span><span class="L-en">Fire</span></div><p><span class="L-zh">剛猛。焚燒與強攻，以命搏勢。</span><span class="L-en">Fierce. Burn and aggression; trade life for power.</span></p></div>
+    <div class="nat-card nat-mtn"><div class="g">山</div><div class="nm"><span class="L-zh">磐山</span><span class="L-en">Mountain</span></div><p><span class="L-zh">不動。城牆與耐久，熬死群敵。</span><span class="L-en">Immovable. Walls and endurance; outlast them all.</span></p></div>
   </div>
   <div class="kw-row">
-    <div class="kw"><div class="k">疾</div><div class="d"><em>速戰</em>登場當回合即可攻擊。</div></div>
-    <div class="kw"><div class="k">守</div><div class="d"><em>守護</em>敵方須優先攻擊此獸。</div></div>
-    <div class="kw"><div class="k">隱</div><div class="d"><em>隱蔽</em>無法被攻擊、兵法或能力指定。</div></div>
-    <div class="kw"><div class="k">飛</div><div class="d"><em>飛行</em>可直擊龍脈，無視「守」。</div></div>
-    <div class="kw sea"><div class="k">沒</div><div class="d"><em>潛沒 · 海牌組</em>將被擊敗時，可改為返回手牌。</div></div>
-    <div class="kw"><div class="k">即</div><div class="d"><em>即時</em>可於任意時機打出，含敵方回合。</div></div>
+    <div class="kw"><div class="k">疾</div><div class="d"><span class="L-zh"><em>速戰</em>登場當回合即可攻擊。</span><span class="L-en"><em>Haste</em>Can attack the turn it’s deployed.</span></div></div>
+    <div class="kw"><div class="k">守</div><div class="d"><span class="L-zh"><em>守護</em>敵方須優先攻擊此獸。</span><span class="L-en"><em>Guard</em>Enemies must attack this beast first.</span></div></div>
+    <div class="kw"><div class="k">隱</div><div class="d"><span class="L-zh"><em>隱蔽</em>無法被攻擊、兵法或能力指定。</span><span class="L-en"><em>Veiled</em>Can’t be targeted by attacks, stratagems or abilities.</span></div></div>
+    <div class="kw"><div class="k">飛</div><div class="d"><span class="L-zh"><em>飛行</em>可直擊龍脈，無視「守」。</span><span class="L-en"><em>Flight</em>May hit the Dragon-Vein directly, ignoring Guard.</span></div></div>
+    <div class="kw sea"><div class="k">沒</div><div class="d"><span class="L-zh"><em>潛沒 · 海牌組</em>將被擊敗時，可改為返回手牌。</span><span class="L-en"><em>Submerge · Sea deck</em>When it would be defeated, return it to hand instead.</span></div></div>
+    <div class="kw"><div class="k">即</div><div class="d"><span class="L-zh"><em>即時</em>可於任意時機打出，含敵方回合。</span><span class="L-en"><em>Instant</em>Play any time, even on the enemy’s turn.</span></div></div>
   </div>
-  <h3 style="font-family:'Ma Shan Zheng',cursive;color:var(--gold-b);font-size:1.6rem;letter-spacing:3px;margin:34px 0 8px">一回合 · 起計爭收</h3>
+  <h3 style="font-family:'Ma Shan Zheng',cursive;color:var(--gold-b);font-size:1.6rem;letter-spacing:3px;margin:34px 0 8px"><span class="L-zh">一回合 · 起計爭收</span><span class="L-en">One Turn · Muster · Plan · Battle · Settle</span></h3>
   <div class="flow">
-    <div class="phase"><div class="big">起</div><div class="nm">徵糧</div><p>糧上限+1並補滿，抽1張牌。</p></div>
-    <div class="phase"><div class="big">計</div><div class="nm">布局</div><p>登場異獸（正／奇）、打出兵法與地形。</p></div>
-    <div class="phase"><div class="big">爭</div><div class="nm">交戰</div><p>異獸攻擊，伏兵翻開，結算傷害。</p></div>
-    <div class="phase"><div class="big">收</div><div class="nm">休整</div><p>結算回合末效果，手牌留至8張。</p></div>
+    <div class="phase"><div class="big">起</div><div class="nm"><span class="L-zh">徵糧</span><span class="L-en">Muster</span></div><p><span class="L-zh">糧上限+1並補滿，抽1張牌。</span><span class="L-en">Supply +1 and refill; draw a card.</span></p></div>
+    <div class="phase"><div class="big">計</div><div class="nm"><span class="L-zh">布局</span><span class="L-en">Plan</span></div><p><span class="L-zh">登場異獸（正／奇）、打出兵法與地形。</span><span class="L-en">Summon beasts (open/hidden); play stratagems &amp; terrain.</span></p></div>
+    <div class="phase"><div class="big">爭</div><div class="nm"><span class="L-zh">交戰</span><span class="L-en">Battle</span></div><p><span class="L-zh">異獸攻擊，伏兵翻開，結算傷害。</span><span class="L-en">Beasts attack; ambushes flip; deal damage.</span></p></div>
+    <div class="phase"><div class="big">收</div><div class="nm"><span class="L-zh">休整</span><span class="L-en">Settle</span></div><p><span class="L-zh">結算回合末效果，手牌留至8張。</span><span class="L-en">End-of-turn effects; keep up to 8 cards.</span></p></div>
   </div>
 </section>
 
 <!-- ===== MAP ===== -->
 <section id="map" class="wrap">
-  <div class="sec-head"><span class="num">伍</span><h2>山海輿圖</h2><span class="cap">五藏山經 · 環以四海</span></div>
-  <p class="lead">《山海經》本是一部上古輿地之書——<b style="color:var(--gold-b)">五藏山經居中，環以四海，外接大荒</b>。下圖以此宇宙觀繪成：山牌組之獸踞於群山，海牌組之獸沒於四瀆。四弹發行亦應四方——東海、南山、西山、北海，各據一隅。</p>
+  <div class="sec-head"><span class="num">伍</span><h2><span class="L-zh">山海輿圖</span><span class="L-en">Map of Mountains &amp; Seas</span></h2><span class="cap"><span class="L-zh">五藏山經 · 環以四海</span><span class="L-en">Five Mountains, ringed by Four Seas</span></span></div>
+  <p class="lead"><span class="L-zh">《山海經》本是一部上古輿地之書——<b style="color:var(--gold-b)">五藏山經居中，環以四海，外接大荒</b>。下圖以此宇宙觀繪成：山牌組之獸踞於群山，海牌組之獸沒於四瀆。四弹發行亦應四方——東海、南山、西山、北海，各據一隅。</span><span class="L-en">The Classic of Mountains &amp; Seas is, at heart, an ancient atlas — <b style="color:var(--gold-b)">five mountain regions at the center, ringed by four seas, with the great wilds beyond</b>. The chart follows that cosmology: Mountain-deck beasts hold the highlands; Sea-deck beasts lurk in the deeps. The four releases map to the four directions too — East Sea, South Mtn, West Mtn, North Sea.</span></p>
   <div class="mapwrap">
     <svg class="smap" viewBox="0 0 1000 720" role="img" aria-label="山海經輿圖">
       <defs>
@@ -593,192 +608,214 @@ footer p{color:var(--muted);margin-top:18px;font-style:italic}
     </svg>
   </div>
   <div class="map-legend">
-    <span><i class="dotc" style="background:var(--wind)"></i>風</span>
-    <span><i class="dotc" style="background:var(--forest)"></i>林</span>
-    <span><i class="dotc" style="background:var(--fire)"></i>火</span>
-    <span><i class="dotc" style="background:var(--mtn)"></i>山</span>
-    <span style="color:var(--gold-b)">◈ 崑崙墟為天下之中</span>
+    <span><i class="dotc" style="background:var(--wind)"></i><span class="L-zh">風</span><span class="L-en">Wind</span></span>
+    <span><i class="dotc" style="background:var(--forest)"></i><span class="L-zh">林</span><span class="L-en">Forest</span></span>
+    <span><i class="dotc" style="background:var(--fire)"></i><span class="L-zh">火</span><span class="L-en">Fire</span></span>
+    <span><i class="dotc" style="background:var(--mtn)"></i><span class="L-zh">山</span><span class="L-en">Mtn</span></span>
+    <span style="color:var(--gold-b)"><span class="L-zh">◈ 崑崙墟為天下之中</span><span class="L-en">◈ Kunlun is the center of the world</span></span>
   </div>
-  <p class="map-cap">※ 方位採今制（上北下南）；異獸座標為風格化演繹，取其大略方位，非考據定位。</p>
+  <p class="map-cap"><span class="L-zh">※ 方位採今制（上北下南）；異獸座標為風格化演繹，取其大略方位，非考據定位。</span><span class="L-en">※ North is up (modern convention); beast positions are stylized, not scholarly. Place names on the chart are kept in classical Chinese.</span></p>
 </section>
 
 <!-- ===== LAND DECK ===== -->
 <section id="land" class="wrap">
-  <div class="sec-head"><span class="num">陸</span><h2>山牌組 · 異獸</h2><span class="cap">二十四獸</span></div>
+  <div class="sec-head"><span class="num">陸</span><h2><span class="L-zh">山牌組 · 異獸</span><span class="L-en">Mountain Deck · Beasts</span></h2><span class="cap"><span class="L-zh">二十四獸</span><span class="L-en">24 beasts</span></span></div>
   <div class="deck-banner land">
     <div class="em">山</div>
-    <div><h3>磐山之軍 · 五藏山經</h3><p>以<b>城牆（守）</b>、<b>耐久</b>與<b>滾雪球</b>取勝。立壁壘、熬群敵，待饕餮貪食壯大、燭龍晝夜傾軋。沉穩而後發制人。</p></div>
+    <div><h3><span class="L-zh">磐山之軍 · 五藏山經</span><span class="L-en">Army of the Steadfast Mountains</span></h3><p><span class="L-zh">以<b>城牆（守）</b>、<b>耐久</b>與<b>滾雪球</b>取勝。立壁壘、熬群敵，待饕餮貪食壯大、燭龍晝夜傾軋。沉穩而後發制人。</span><span class="L-en">Wins through <b>walls (Guard)</b>, <b>endurance</b> and <b>snowballing</b>. Build a fortress, outlast the swarm, let 饕餮 grow fat and 燭龍 grind day into night. Patient, then overwhelming.</span></p></div>
   </div>
   <div class="filterbar" data-deck="land">
-    <button class="active" data-f="all">全部</button><button data-f="wind">風</button><button data-f="forest">林</button><button data-f="fire">火</button><button data-f="mtn">山</button>
+    <button class="active" data-f="all"><span class="L-zh">全部</span><span class="L-en">All</span></button><button data-f="wind"><span class="L-zh">風</span><span class="L-en">Wind</span></button><button data-f="forest"><span class="L-zh">林</span><span class="L-en">Forest</span></button><button data-f="fire"><span class="L-zh">火</span><span class="L-en">Fire</span></button><button data-f="mtn"><span class="L-zh">山</span><span class="L-en">Mtn</span></button>
   </div>
   <div class="deck" id="land-deck"></div>
 </section>
 
 <!-- ===== SEA DECK ===== -->
 <section id="sea" class="wrap">
-  <div class="sec-head"><span class="num">柒</span><h2>海牌組 · 異獸</h2><span class="cap">二十四獸 · 全新</span></div>
+  <div class="sec-head"><span class="num">柒</span><h2><span class="L-zh">海牌組 · 異獸</span><span class="L-en">Sea Deck · Beasts</span></h2><span class="cap"><span class="L-zh">二十四獸 · 全新</span><span class="L-en">24 beasts · all-new</span></span></div>
   <div class="deck-banner seaB">
     <div class="em">海</div>
-    <div><h3>滄海之眾 · 海經大荒</h3><p>以<b>潮汐</b>為魂：<b>迅捷</b>、<b>回彈</b>（將敵獸送回手牌）、<b>潛沒（沒）</b>。靠節奏與不息的浪頭壓制，而非山牌組的硬壁與滾雪球。天吳八首齊出、巴蛇吞象、巨鼇負山。</p></div>
+    <div><h3><span class="L-zh">滄海之眾 · 海經大荒</span><span class="L-en">Hosts of the Boundless Sea</span></h3><p><span class="L-zh">以<b>潮汐</b>為魂：<b>迅捷</b>、<b>回彈</b>（將敵獸送回手牌）、<b>潛沒（沒）</b>。靠節奏與不息的浪頭壓制，而非山牌組的硬壁與滾雪球。天吳八首齊出、巴蛇吞象、巨鼇負山。</span><span class="L-en">Built on <b>the tide</b>: <b>speed</b>, <b>bounce</b> (send enemy beasts back to hand) and <b>Submerge</b>. It wins on tempo and relentless waves, not walls and snowball. 天吳’s eight heads strike, 巴蛇 swallows whole, 巨鼇 bears the mountain.</span></p></div>
   </div>
   <div class="filterbar" data-deck="sea">
-    <button class="active" data-f="all">全部</button><button data-f="wind">風</button><button data-f="forest">林</button><button data-f="fire">火</button><button data-f="mtn">山</button>
+    <button class="active" data-f="all"><span class="L-zh">全部</span><span class="L-en">All</span></button><button data-f="wind"><span class="L-zh">風</span><span class="L-en">Wind</span></button><button data-f="forest"><span class="L-zh">林</span><span class="L-en">Forest</span></button><button data-f="fire"><span class="L-zh">火</span><span class="L-en">Fire</span></button><button data-f="mtn"><span class="L-zh">山</span><span class="L-en">Mtn</span></button>
   </div>
   <div class="deck" id="sea-deck"></div>
 </section>
 
 <!-- ===== STRATAGEMS ===== -->
 <section id="stratagems" class="wrap">
-  <div class="sec-head"><span class="num">捌</span><h2>兵法十三篇</h2><span class="cap">兩牌組共用 · 十六張</span></div>
-  <p class="lead">《孫子兵法》十三篇各化為一種計策牌，機制對應其篇旨。山、海兩牌組<b>共用</b>同一套兵法——兵法乃通用之道，異者唯異獸耳。其中<b>火攻</b>、<b>用間</b>各收兩張（×2），合為十六張。</p>
+  <div class="sec-head"><span class="num">捌</span><h2><span class="L-zh">兵法十三篇</span><span class="L-en">The 13 Stratagems</span></h2><span class="cap"><span class="L-zh">兩牌組共用 · 十六張</span><span class="L-en">Shared by both decks · 16 cards</span></span></div>
+  <p class="lead"><span class="L-zh">《孫子兵法》十三篇各化為一種計策牌，機制對應其篇旨。山、海兩牌組<b>共用</b>同一套兵法——兵法乃通用之道，異者唯異獸耳。其中<b>火攻</b>、<b>用間</b>各收兩張（×2），合為十六張。</span><span class="L-en">Each of the 13 chapters of Sun Tzu’s Art of War becomes a stratagem card whose mechanic mirrors the chapter. Both decks <b>share</b> the same stratagems — the art is universal; only the beasts differ. <b>Fire Attack</b> and <b>Espionage</b> are included ×2, for 16 cards total.</span></p>
   <div class="baize">
     <div class="ava">白澤</div>
-    <div class="bubble">孫子兵法聽起來很高深？其實全是大白話。看這張對照表，你會發現這些道理你早就懂——</div>
+    <div class="bubble"><span class="L-zh">孫子兵法聽起來很高深？其實全是大白話。看這張對照表，你會發現這些道理你早就懂——</span><span class="L-en">Sounds lofty? It’s all plain sense. Read this table and you’ll see you already knew these ideas —</span></div>
   </div>
   <div class="dbh-wrap">
     <table class="dabaihua">
-      <thead><tr><th>孫子原文</th><th>大白話</th><th>在遊戲裡</th></tr></thead>
+      <thead><tr><th><span class="L-zh">孫子原文</span><span class="L-en">Sun Tzu</span></th><th><span class="L-zh">大白話</span><span class="L-en">In plain words</span></th><th><span class="L-zh">在遊戲裡</span><span class="L-en">In the game</span></th></tr></thead>
       <tbody>
-        <tr><td class="src">兵者，詭道也</td><td>打仗就是鬥智鬥騙</td><td>蓋牌（奇）偷襲，虛實難辨</td></tr>
-        <tr><td class="src">知己知彼，百戰不殆</td><td>先摸清對手的底</td><td>用間：偷看手牌、翻開伏兵</td></tr>
-        <tr><td class="src">不戰而屈人之兵</td><td>不動手就贏，最高級的炫</td><td>讓對手抽空牌庫即可獲勝</td></tr>
-        <tr><td class="src">出其不意，攻其無備</td><td>趁他沒準備就突襲</td><td>奇兵翻開瞬間的爆發傷害</td></tr>
-        <tr><td class="src">置之死地而後生</td><td>絕境反而能爆發</td><td>龍脈越低，「九地」加成越猛</td></tr>
+        <tr><td class="src"><span class="L-zh">兵者，詭道也</span><span class="L-en">All war is deception</span></td><td><span class="L-zh">打仗就是鬥智鬥騙</span><span class="L-en">War is a battle of wits and tricks</span></td><td><span class="L-zh">蓋牌（奇）偷襲，虛實難辨</span><span class="L-en">Face-down (Qí) ambushes; bluff and misdirect</span></td></tr>
+        <tr><td class="src"><span class="L-zh">知己知彼，百戰不殆</span><span class="L-en">Know the enemy and yourself</span></td><td><span class="L-zh">先摸清對手的底</span><span class="L-en">Scout the opponent first</span></td><td><span class="L-zh">用間：偷看手牌、翻開伏兵</span><span class="L-en">Espionage: peek at hand, flip ambushes</span></td></tr>
+        <tr><td class="src"><span class="L-zh">不戰而屈人之兵</span><span class="L-en">Subdue without fighting</span></td><td><span class="L-zh">不動手就贏，最高級的炫</span><span class="L-en">Win without a swing — the ultimate flex</span></td><td><span class="L-zh">讓對手抽空牌庫即可獲勝</span><span class="L-en">Deck them out to win</span></td></tr>
+        <tr><td class="src"><span class="L-zh">出其不意，攻其無備</span><span class="L-en">Strike where unprepared</span></td><td><span class="L-zh">趁他沒準備就突襲</span><span class="L-en">Hit them before they’re ready</span></td><td><span class="L-zh">奇兵翻開瞬間的爆發傷害</span><span class="L-en">Burst damage the instant an ambush flips</span></td></tr>
+        <tr><td class="src"><span class="L-zh">置之死地而後生</span><span class="L-en">On death ground, survive</span></td><td><span class="L-zh">絕境反而能爆發</span><span class="L-en">Desperation fuels the comeback</span></td><td><span class="L-zh">龍脈越低，「九地」加成越猛</span><span class="L-en">The lower your Vein, the bigger Death Ground’s buff</span></td></tr>
       </tbody>
     </table>
   </div>
   <div class="deck" id="strat-deck"></div>
-  <p class="deck-note">整盒：<b>山牌組（24獸）＋ 海牌組（24獸）＋ 共用兵法（16張）</b>，兩位兵法家即可對壘。曲線為 30 龍脈賽制調校。</p>
+  <p class="deck-note"><span class="L-zh">整盒：<b>山牌組（24獸）＋ 海牌組（24獸）＋ 共用兵法（16張）</b>，兩位兵法家即可對壘。曲線為 30 龍脈賽制調校。</span><span class="L-en">Full box: <b>Mountain deck (24) + Sea deck (24) + shared stratagems (16)</b> — enough for two strategists to duel. Tuned for the 30-life format.</span></p>
 </section>
 
 <footer class="wrap">
   <div class="fseal">山海<br>兵法</div>
-  <p>「不戰而屈人之兵，善之善者也。」——孫子</p>
+  <p><span class="L-zh">「不戰而屈人之兵，善之善者也。」——孫子</span><span class="L-en">“To subdue the enemy without fighting is the highest skill.” — Sun Tzu</span></p>
 </footer>
 
 <script>
-const NAT={wind:{g:'風',t:'風 · 異獸'},forest:{g:'林',t:'林 · 異獸'},fire:{g:'火',t:'火 · 異獸'},mtn:{g:'山',t:'山 · 異獸'}};
+let LANG='zh';
+const t=(zh,en)=>LANG==='en'?en:zh;
+
+const NAT={
+ wind:{g:'風',t:'風 · 異獸',te:'Wind · Beast'},
+ forest:{g:'林',t:'林 · 異獸',te:'Forest · Beast'},
+ fire:{g:'火',t:'火 · 異獸',te:'Fire · Beast'},
+ mtn:{g:'山',t:'山 · 異獸',te:'Mountain · Beast'}};
 
 const land=[
- {n:'帝江',py:'Dìjiāng',nat:'wind',cost:1,shi:2,xing:1,sig:'帝',sub:'混沌',t:'<span class="key">混沌：</span>以「奇」暗置時，抽一張牌。'},
- {n:'蠱雕',py:'Gǔdiāo',nat:'wind',cost:2,shi:3,xing:1,sig:'蠱',sub:'角鷹',t:'<span class="key">疾</span>（速戰）。'},
- {n:'鴸',py:'Zhū',nat:'wind',cost:2,shi:2,xing:2,sig:'鴸',sub:'兆鳥',t:'登場時：查看對手手牌。'},
- {n:'顒',py:'Yóng',nat:'wind',cost:3,shi:2,xing:4,sig:'顒',sub:'旱梟',t:'顒攻擊獸時，該獸本回合無法增加「形」。'},
- {n:'飛廉',py:'Fēilián',nat:'wind',cost:4,shi:4,xing:3,sig:'飛',sub:'風伯',t:'<span class="key">疾</span>。你的其他風獸獲得<span class="key">疾</span>。'},
- {n:'鯤鵬',py:'Kūnpéng',nat:'wind',cost:6,shi:4,xing:4,sig:'鵬',sub:'鯤化為鵬',t:'<span class="key">化鵬：</span>每局一次，付<b>②</b>：化為<b>8/6</b>並獲得<span class="key">疾</span>＋<span class="key">飛</span>。'},
- {n:'青鳥',py:'Qīngniǎo',nat:'forest',cost:1,shi:1,xing:1,sig:'青',sub:'信使',t:'登場時：抽一張牌。'},
- {n:'精衛',py:'Jīngwèi',nat:'forest',cost:1,shi:1,xing:2,sig:'精',sub:'填海',t:'<span class="key">填海：</span>你的回合開始時，對敵方龍脈造成1點傷害。'},
- {n:'文鰩魚',py:'Wényáo',nat:'forest',cost:2,shi:2,xing:2,sig:'鰩',sub:'飛魚',t:'登場時：本回合獲得<b>①</b>糧。'},
- {n:'白澤',py:'Báizé',nat:'forest',cost:3,shi:2,xing:3,sig:'澤',sub:'通曉萬物',t:'登場時：查看對手手牌，然後抽一張牌。'},
- {n:'化蛇',py:'Huàshé',nat:'forest',cost:3,shi:3,xing:3,sig:'蛇',sub:'水兆',t:'化蛇對敵方龍脈造成傷害時，對手棄一張牌。'},
- {n:'蜚',py:'Fěi',nat:'forest',cost:5,shi:4,xing:4,sig:'蜚',sub:'疫獸',t:'登場時：所有敵方獸 <b>−0/−1</b>。'},
- {n:'畢方',py:'Bìfāng',nat:'fire',cost:2,shi:3,xing:1,sig:'畢',sub:'火鳥',t:'登場時：對任一獸造成1點傷害。'},
- {n:'朱厭',py:'Zhūyàn',nat:'fire',cost:3,shi:4,xing:2,sig:'朱',sub:'兵兆',t:'<span class="key">戰兆：</span>每當你打出一張兵法牌，本回合 <b>+1勢</b>。'},
- {n:'狰',py:'Zhēng',nat:'fire',cost:4,shi:5,xing:3,sig:'狰',sub:'五尾',t:'<span class="vanilla">直率的猛獸，無特殊能力。</span>'},
- {n:'窮奇',py:'Qióngqí',nat:'fire',cost:4,shi:4,xing:3,sig:'窮',sub:'飛虎',t:'窮奇攻擊「正」（明置）獸時，多造成 <b>2</b> 點傷害。'},
- {n:'鳳凰',py:'Fènghuáng',nat:'fire',cost:5,shi:4,xing:3,sig:'鳳',sub:'涅槃',t:'<span class="key">涅槃：</span>首次被擊敗時，以 <b>2/2</b> 之姿返回戰場。'},
- {n:'饕餮',py:'Tāotiè',nat:'fire',cost:5,shi:4,xing:4,sig:'饕',sub:'貪食',t:'<span class="key">貪食：</span>每當任一獸被擊敗，饕餮 <b>+1/+1</b>。'},
- {n:'騶虞',py:'Zōuyú',nat:'mtn',cost:3,shi:1,xing:6,sig:'騶',sub:'仁獸',t:'<span class="key">守</span>（守護）。'},
- {n:'刑天',py:'Xíngtiān',nat:'mtn',cost:4,shi:4,xing:4,sig:'刑',sub:'斷首之士',t:'<span class="key">不死：</span>首次將被擊敗時，改為以 <b>1形</b> 存活。'},
- {n:'開明獸',py:'Kāimíng',nat:'mtn',cost:5,shi:3,xing:7,sig:'開',sub:'崑崙之守',t:'<span class="key">守</span>（守護）。'},
- {n:'相柳',py:'Xiāngliǔ',nat:'mtn',cost:6,shi:5,xing:5,sig:'柳',sub:'九首',t:'<span class="key">劇毒：</span>對獸造成傷害時，該獸永久 <b>−0/−1</b>。'},
- {n:'應龍',py:'Yìnglóng',nat:'mtn',cost:7,shi:6,xing:6,sig:'應',sub:'翼龍',t:'登場時：對敵方眾獸分配造成共 <b>3</b> 點傷害。'},
- {n:'燭龍',py:'Zhúlóng',nat:'mtn',cost:8,shi:7,xing:7,sig:'燭',sub:'晝夜',t:'<span class="key">晝夜：</span>回合開始時交替——晝：你的獸本回合+1勢；夜：你的獸+1形，且你的「奇」牌無法被翻開。'},
+ {n:'帝江',py:'Dìjiāng',nat:'wind',cost:1,shi:2,xing:1,sig:'帝',sub:'混沌',t:'<span class="key">混沌：</span>以「奇」暗置時，抽一張牌。',sube:'Chaos',te:'<span class="key">Chaos:</span> When deployed face-down (Qi), draw a card.'},
+ {n:'蠱雕',py:'Gǔdiāo',nat:'wind',cost:2,shi:3,xing:1,sig:'蠱',sub:'角鷹',t:'<span class="key">疾</span>（速戰）。',sube:'Horned Eagle',te:'<span class="key">Haste</span>.'},
+ {n:'鴸',py:'Zhū',nat:'wind',cost:2,shi:2,xing:2,sig:'鴸',sub:'兆鳥',t:'登場時：查看對手手牌。',sube:'Omen Bird',te:'On deploy: look at the opponent\u2019s hand.'},
+ {n:'顒',py:'Yóng',nat:'wind',cost:3,shi:2,xing:4,sig:'顒',sub:'旱梟',t:'顒攻擊獸時，該獸本回合無法增加「形」。',sube:'Drought Owl',te:'When Yong attacks a beast, that beast can\u2019t gain Form this turn.'},
+ {n:'飛廉',py:'Fēilián',nat:'wind',cost:4,shi:4,xing:3,sig:'飛',sub:'風伯',t:'<span class="key">疾</span>。你的其他風獸獲得<span class="key">疾</span>。',sube:'Wind God',te:'<span class="key">Haste</span>. Your other Wind beasts gain <span class="key">Haste</span>.'},
+ {n:'鯤鵬',py:'Kūnpéng',nat:'wind',cost:6,shi:4,xing:4,sig:'鵬',sub:'鯤化為鵬',t:'<span class="key">化鵬：</span>每局一次，付<b>②</b>：化為<b>8/6</b>並獲得<span class="key">疾</span>＋<span class="key">飛</span>。',sube:'Leviathan-Roc',te:'<span class="key">Transform:</span> Once per game, pay <b>②</b>: becomes <b>8/6</b> and gains <span class="key">Haste</span> + <span class="key">Flight</span>.'},
+ {n:'青鳥',py:'Qīngniǎo',nat:'forest',cost:1,shi:1,xing:1,sig:'青',sub:'信使',t:'登場時：抽一張牌。',sube:'Azure Messenger',te:'On deploy: draw a card.'},
+ {n:'精衛',py:'Jīngwèi',nat:'forest',cost:1,shi:1,xing:2,sig:'精',sub:'填海',t:'<span class="key">填海：</span>你的回合開始時，對敵方龍脈造成1點傷害。',sube:'Sea-Filler',te:'<span class="key">Sea-Filling:</span> At the start of your turn, deal 1 damage to the enemy Life.'},
+ {n:'文鰩魚',py:'Wényáo',nat:'forest',cost:2,shi:2,xing:2,sig:'鰩',sub:'飛魚',t:'登場時：本回合獲得<b>①</b>糧。',sube:'Flying Fish',te:'On deploy: gain <b>①</b> Supply this turn.'},
+ {n:'白澤',py:'Báizé',nat:'forest',cost:3,shi:2,xing:3,sig:'澤',sub:'通曉萬物',t:'登場時：查看對手手牌，然後抽一張牌。',sube:'The All-Knowing',te:'On deploy: look at the opponent\u2019s hand, then draw a card.'},
+ {n:'化蛇',py:'Huàshé',nat:'forest',cost:3,shi:3,xing:3,sig:'蛇',sub:'水兆',t:'化蛇對敵方龍脈造成傷害時，對手棄一張牌。',sube:'Flood Serpent',te:'When Huashe damages the enemy Life, the opponent discards a card.'},
+ {n:'蜚',py:'Fěi',nat:'forest',cost:5,shi:4,xing:4,sig:'蜚',sub:'疫獸',t:'登場時：所有敵方獸 <b>−0/−1</b>。',sube:'Pestilence',te:'On deploy: all enemy beasts get <b>−0/−1</b>.'},
+ {n:'畢方',py:'Bìfāng',nat:'fire',cost:2,shi:3,xing:1,sig:'畢',sub:'火鳥',t:'登場時：對任一獸造成1點傷害。',sube:'Firebird',te:'On deploy: deal 1 damage to any beast.'},
+ {n:'朱厭',py:'Zhūyàn',nat:'fire',cost:3,shi:4,xing:2,sig:'朱',sub:'兵兆',t:'<span class="key">戰兆：</span>每當你打出一張兵法牌，本回合 <b>+1勢</b>。',sube:'War Ape',te:'<span class="key">War Omen:</span> Whenever you play a Stratagem, +1 Force this turn.'},
+ {n:'狰',py:'Zhēng',nat:'fire',cost:4,shi:5,xing:3,sig:'狰',sub:'五尾',t:'<span class="vanilla">直率的猛獸，無特殊能力。</span>',sube:'Five-Tailed Beast',te:'<span class="vanilla">A straightforward brute. No ability.</span>'},
+ {n:'窮奇',py:'Qióngqí',nat:'fire',cost:4,shi:4,xing:3,sig:'窮',sub:'飛虎',t:'窮奇攻擊「正」（明置）獸時，多造成 <b>2</b> 點傷害。',sube:'Winged Tiger',te:'When Qiongqi attacks a face-up (Zheng) beast, deal <b>+2</b> damage.'},
+ {n:'鳳凰',py:'Fènghuáng',nat:'fire',cost:5,shi:4,xing:3,sig:'鳳',sub:'涅槃',t:'<span class="key">涅槃：</span>首次被擊敗時，以 <b>2/2</b> 之姿返回戰場。',sube:'Phoenix',te:'<span class="key">Rebirth:</span> The first time it is defeated, return it as a <b>2/2</b>.'},
+ {n:'饕餮',py:'Tāotiè',nat:'fire',cost:5,shi:4,xing:4,sig:'饕',sub:'貪食',t:'<span class="key">貪食：</span>每當任一獸被擊敗，饕餮 <b>+1/+1</b>。',sube:'The Devourer',te:'<span class="key">Gluttony:</span> Whenever any beast is defeated, Taotie gains <b>+1/+1</b>.'},
+ {n:'騶虞',py:'Zōuyú',nat:'mtn',cost:3,shi:1,xing:6,sig:'騶',sub:'仁獸',t:'<span class="key">守</span>（守護）。',sube:'Gentle Guardian',te:'<span class="key">Guard</span>.'},
+ {n:'刑天',py:'Xíngtiān',nat:'mtn',cost:4,shi:4,xing:4,sig:'刑',sub:'斷首之士',t:'<span class="key">不死：</span>首次將被擊敗時，改為以 <b>1形</b> 存活。',sube:'Headless Warrior',te:'<span class="key">Undying:</span> The first time it would be defeated, it survives with <b>1 Form</b>.'},
+ {n:'開明獸',py:'Kāimíng',nat:'mtn',cost:5,shi:3,xing:7,sig:'開',sub:'崑崙之守',t:'<span class="key">守</span>（守護）。',sube:'Gate of Kunlun',te:'<span class="key">Guard</span>.'},
+ {n:'相柳',py:'Xiāngliǔ',nat:'mtn',cost:6,shi:5,xing:5,sig:'柳',sub:'九首',t:'<span class="key">劇毒：</span>對獸造成傷害時，該獸永久 <b>−0/−1</b>。',sube:'Nine-Headed Hydra',te:'<span class="key">Venom:</span> When it damages a beast, that beast gets <b>−0/−1</b> permanently.'},
+ {n:'應龍',py:'Yìnglóng',nat:'mtn',cost:7,shi:6,xing:6,sig:'應',sub:'翼龍',t:'登場時：對敵方眾獸分配造成共 <b>3</b> 點傷害。',sube:'Winged Dragon',te:'On deploy: deal <b>3</b> damage split among enemy beasts.'},
+ {n:'燭龍',py:'Zhúlóng',nat:'mtn',cost:8,shi:7,xing:7,sig:'燭',sub:'晝夜',t:'<span class="key">晝夜：</span>回合開始時交替——晝：你的獸本回合+1勢；夜：你的獸+1形，且你的「奇」牌無法被翻開。',sube:'Torch Dragon',te:'<span class="key">Day &amp; Night:</span> Each turn alternates — Day: your beasts +1 Force; Night: your beasts +1 Form, and your face-down (Qi) cards can\u2019t be revealed.'},
 ];
 
 const sea=[
- {n:'飛魚',py:'Fēiyú',nat:'wind',cost:1,shi:1,xing:1,sig:'飛',sub:'翼魚',t:'<span class="key">疾</span>（速戰）。'},
- {n:'蜮',py:'Yù',nat:'wind',cost:2,shi:2,xing:2,sig:'蜮',sub:'射影',t:'<span class="key">含沙射影：</span>登場時，對一隻獸造成1點傷害。'},
- {n:'鮫人',py:'Jiāorén',nat:'wind',cost:3,shi:2,xing:3,sig:'鮫',sub:'泣珠',t:'登場時：抽一張牌（泣淚成珠）。'},
- {n:'騰蛇',py:'Téngshé',nat:'wind',cost:4,shi:4,xing:2,sig:'騰',sub:'飛蛇',t:'<span class="key">疾</span>（速戰）。'},
- {n:'禺彊',py:'Yúqiáng',nat:'wind',cost:5,shi:4,xing:3,sig:'禺',sub:'北海風神',t:'登場時：將一隻敵方獸返回其擁有者手牌。'},
- {n:'天吳',py:'Tiānwú',nat:'wind',cost:6,shi:5,xing:4,sig:'吳',sub:'八首水神',t:'<span class="key">八首：</span>天吳攻擊時，可同時攻擊兩個不同目標。'},
- {n:'赤鱬',py:'Chìrú',nat:'forest',cost:2,shi:2,xing:2,sig:'鱬',sub:'療疾',t:'登場時：你的龍脈回復 <b>2</b>。'},
- {n:'計蒙',py:'Jìméng',nat:'forest',cost:3,shi:2,xing:4,sig:'計',sub:'行雲布雨',t:'你打出兵法牌時，對敵方龍脈造成1點傷害（每回合上限2）。'},
- {n:'何羅魚',py:'Héluó',nat:'forest',cost:3,shi:3,xing:3,sig:'羅',sub:'一首十身',t:'<span class="key">沒</span>（潛沒）：將被擊敗時，可改為返回你的手牌。'},
- {n:'罔象',py:'Wǎngxiàng',nat:'forest',cost:2,shi:1,xing:3,sig:'罔',sub:'水怪',t:'<span class="key">隱</span>（隱蔽）。'},
- {n:'蜃',py:'Shèn',nat:'forest',cost:4,shi:3,xing:4,sig:'蜃',sub:'海市',t:'<span class="key">海市：</span>登場時，使一隻敵方獸本回合無法攻擊。'},
- {n:'巴蛇',py:'Bāshé',nat:'forest',cost:6,shi:5,xing:6,sig:'巴',sub:'吞象',t:'<span class="key">吞象：</span>登場時，消滅一隻形 ≤3 的敵方獸。'},
- {n:'鱄魚',py:'Tuānyú',nat:'fire',cost:2,shi:3,xing:1,sig:'鱄',sub:'旱兆',t:'登場時：對敵方龍脈造成1點傷害。'},
- {n:'蠃魚',py:'Luóyú',nat:'fire',cost:3,shi:3,xing:2,sig:'蠃',sub:'水患',t:'你打出「火攻」時，蠃魚本回合 <b>+2勢</b>。'},
- {n:'鳴蛇',py:'Míngshé',nat:'fire',cost:3,shi:4,xing:3,sig:'鳴',sub:'凶兆',t:'<span class="vanilla">凶兆猛獸，無特殊能力。</span>'},
- {n:'珠蟞魚',py:'Zhūbiē',nat:'fire',cost:4,shi:4,xing:3,sig:'蟞',sub:'噴珠',t:'登場時：對至多兩隻敵方獸各造成1點傷害。'},
- {n:'蛟',py:'Jiāo',nat:'fire',cost:4,shi:5,xing:3,sig:'蛟',sub:'興波',t:'蛟攻擊龍脈時，多造成 <b>1</b> 點傷害。'},
- {n:'大蟹',py:'Dàxiè',nat:'fire',cost:5,shi:5,xing:4,sig:'蟹',sub:'巨螯',t:'<span class="key">巨螯：</span>大蟹擊敗目標後，可再攻擊一次。'},
- {n:'旋龜',py:'Xuánguī',nat:'mtn',cost:2,shi:1,xing:4,sig:'龜',sub:'鳥首虺尾',t:'<span class="key">守</span>（守護）。'},
- {n:'鯥',py:'Lù',nat:'mtn',cost:4,shi:3,xing:4,sig:'鯥',sub:'冬蟄',t:'<span class="key">冬蟄：</span>被擊敗時，於你下回合開始時以原數值返回戰場。'},
- {n:'禺虢',py:'Yúguó',nat:'mtn',cost:4,shi:3,xing:5,sig:'虢',sub:'東海之神',t:'<span class="key">守</span>（守護）。'},
- {n:'河伯',py:'Hébó',nat:'mtn',cost:5,shi:4,xing:6,sig:'河',sub:'馮夷',t:'登場時：你的龍脈回復 <b>3</b>。'},
- {n:'龍伯',py:'Lóngbó',nat:'mtn',cost:6,shi:5,xing:6,sig:'龍',sub:'釣鼇巨人',t:'<span class="key">釣鼇：</span>登場時，消滅一隻敵方「守」獸。'},
- {n:'巨鼇',py:'Jù\u2019áo',nat:'mtn',cost:8,shi:6,xing:9,sig:'鼇',sub:'負山',t:'<span class="key">負山：</span>你的其他海獸 <b>+0/+2</b>。'},
+ {n:'飛魚',py:'Fēiyú',nat:'wind',cost:1,shi:1,xing:1,sig:'飛',sub:'翼魚',t:'<span class="key">疾</span>（速戰）。',sube:'Winged Fish',te:'<span class="key">Haste</span>.'},
+ {n:'蜮',py:'Yù',nat:'wind',cost:2,shi:2,xing:2,sig:'蜮',sub:'射影',t:'<span class="key">含沙射影：</span>登場時，對一隻獸造成1點傷害。',sube:'Sand-Shooter',te:'<span class="key">Shadow Strike:</span> On deploy, deal 1 damage to a beast.'},
+ {n:'鮫人',py:'Jiāorén',nat:'wind',cost:3,shi:2,xing:3,sig:'鮫',sub:'泣珠',t:'登場時：抽一張牌（泣淚成珠）。',sube:'Merfolk',te:'On deploy: draw a card (tears turn to pearls).'},
+ {n:'騰蛇',py:'Téngshé',nat:'wind',cost:4,shi:4,xing:2,sig:'騰',sub:'飛蛇',t:'<span class="key">疾</span>（速戰）。',sube:'Flying Serpent',te:'<span class="key">Haste</span>.'},
+ {n:'禺彊',py:'Yúqiáng',nat:'wind',cost:5,shi:4,xing:3,sig:'禺',sub:'北海風神',t:'登場時：將一隻敵方獸返回其擁有者手牌。',sube:'North Sea Wind God',te:'On deploy: return an enemy beast to its owner\u2019s hand.'},
+ {n:'天吳',py:'Tiānwú',nat:'wind',cost:6,shi:5,xing:4,sig:'吳',sub:'八首水神',t:'<span class="key">八首：</span>天吳攻擊時，可同時攻擊兩個不同目標。',sube:'Eight-Headed Sea God',te:'<span class="key">Eight Heads:</span> When Tianwu attacks, it may strike two different targets.'},
+ {n:'赤鱬',py:'Chìrú',nat:'forest',cost:2,shi:2,xing:2,sig:'鱬',sub:'療疾',t:'登場時：你的龍脈回復 <b>2</b>。',sube:'Healing Fish',te:'On deploy: restore <b>2</b> Life.'},
+ {n:'計蒙',py:'Jìméng',nat:'forest',cost:3,shi:2,xing:4,sig:'計',sub:'行雲布雨',t:'你打出兵法牌時，對敵方龍脈造成1點傷害（每回合上限2）。',sube:'Rain-Bringer',te:'When you play a Stratagem, deal 1 damage to the enemy Life (max 2 per turn).'},
+ {n:'何羅魚',py:'Héluó',nat:'forest',cost:3,shi:3,xing:3,sig:'羅',sub:'一首十身',t:'<span class="key">沒</span>（潛沒）：將被擊敗時，可改為返回你的手牌。',sube:'Ten-Bodied Fish',te:'<span class="key">Submerge:</span> When it would be defeated, you may return it to your hand instead.'},
+ {n:'罔象',py:'Wǎngxiàng',nat:'forest',cost:2,shi:1,xing:3,sig:'罔',sub:'水怪',t:'<span class="key">隱</span>（隱蔽）。',sube:'Water Wraith',te:'<span class="key">Veiled</span>.'},
+ {n:'蜃',py:'Shèn',nat:'forest',cost:4,shi:3,xing:4,sig:'蜃',sub:'海市',t:'<span class="key">海市：</span>登場時，使一隻敵方獸本回合無法攻擊。',sube:'Mirage Clam',te:'<span class="key">Mirage:</span> On deploy, an enemy beast can\u2019t attack this turn.'},
+ {n:'巴蛇',py:'Bāshé',nat:'forest',cost:6,shi:5,xing:6,sig:'巴',sub:'吞象',t:'<span class="key">吞象：</span>登場時，消滅一隻形 ≤3 的敵方獸。',sube:'Elephant-Eater',te:'<span class="key">Swallow:</span> On deploy, destroy an enemy beast with Form ≤3.'},
+ {n:'鱄魚',py:'Tuānyú',nat:'fire',cost:2,shi:3,xing:1,sig:'鱄',sub:'旱兆',t:'登場時：對敵方龍脈造成1點傷害。',sube:'Drought Omen',te:'On deploy: deal 1 damage to the enemy Life.'},
+ {n:'蠃魚',py:'Luóyú',nat:'fire',cost:3,shi:3,xing:2,sig:'蠃',sub:'水患',t:'你打出「火攻」時，蠃魚本回合 <b>+2勢</b>。',sube:'Flood Fish',te:'When you play Fire Attack, Luoyu gains <b>+2 Force</b> this turn.'},
+ {n:'鳴蛇',py:'Míngshé',nat:'fire',cost:3,shi:4,xing:3,sig:'鳴',sub:'凶兆',t:'<span class="vanilla">凶兆猛獸，無特殊能力。</span>',sube:'Ill-Omen Serpent',te:'<span class="vanilla">An ill-omened brute. No ability.</span>'},
+ {n:'珠蟞魚',py:'Zhūbiē',nat:'fire',cost:4,shi:4,xing:3,sig:'蟞',sub:'噴珠',t:'登場時：對至多兩隻敵方獸各造成1點傷害。',sube:'Pearl-Spitter',te:'On deploy: deal 1 damage to up to two enemy beasts.'},
+ {n:'蛟',py:'Jiāo',nat:'fire',cost:4,shi:5,xing:3,sig:'蛟',sub:'興波',t:'蛟攻擊龍脈時，多造成 <b>1</b> 點傷害。',sube:'Flood Dragon',te:'When Jiao attacks the Life, deal <b>+1</b> damage.'},
+ {n:'大蟹',py:'Dàxiè',nat:'fire',cost:5,shi:5,xing:4,sig:'蟹',sub:'巨螯',t:'<span class="key">巨螯：</span>大蟹擊敗目標後，可再攻擊一次。',sube:'Giant Crab',te:'<span class="key">Great Claw:</span> After Daxie defeats its target, it may attack again.'},
+ {n:'旋龜',py:'Xuánguī',nat:'mtn',cost:2,shi:1,xing:4,sig:'龜',sub:'鳥首虺尾',t:'<span class="key">守</span>（守護）。',sube:'Bird-Headed Turtle',te:'<span class="key">Guard</span>.'},
+ {n:'鯥',py:'Lù',nat:'mtn',cost:4,shi:3,xing:4,sig:'鯥',sub:'冬蟄',t:'<span class="key">冬蟄：</span>被擊敗時，於你下回合開始時以原數值返回戰場。',sube:'Hibernator',te:'<span class="key">Hibernation:</span> When defeated, return at full stats at the start of your next turn.'},
+ {n:'禺虢',py:'Yúguó',nat:'mtn',cost:4,shi:3,xing:5,sig:'虢',sub:'東海之神',t:'<span class="key">守</span>（守護）。',sube:'East Sea God',te:'<span class="key">Guard</span>.'},
+ {n:'河伯',py:'Hébó',nat:'mtn',cost:5,shi:4,xing:6,sig:'河',sub:'馮夷',t:'登場時：你的龍脈回復 <b>3</b>。',sube:'River Lord',te:'On deploy: restore <b>3</b> Life.'},
+ {n:'龍伯',py:'Lóngbó',nat:'mtn',cost:6,shi:5,xing:6,sig:'龍',sub:'釣鼇巨人',t:'<span class="key">釣鼇：</span>登場時，消滅一隻敵方「守」獸。',sube:'Turtle-Fishing Giant',te:'<span class="key">Turtle Haul:</span> On deploy, destroy an enemy Guard beast.'},
+ {n:'巨鼇',py:'Jù\u2019áo',nat:'mtn',cost:8,shi:6,xing:9,sig:'鼇',sub:'負山',t:'<span class="key">負山：</span>你的其他海獸 <b>+0/+2</b>。',sube:'World-Turtle',te:'<span class="key">Bearer of Mountains:</span> Your other Sea beasts get <b>+0/+2</b>.'},
 ];
 
 const strats=[
- {n:'始計',ch:'計',cost:1,sig:'計',sub:'第一篇',t:'查看牌庫頂 3 張，抽 1 張，其餘以任意順序放回。'},
- {n:'作戰',ch:'戰',cost:1,sig:'作',sub:'第二篇',t:'本回合獲得 <b>②</b> 糧。回合結束時棄一張牌。'},
- {n:'謀攻',ch:'謀',cost:3,sig:'謀',sub:'第三篇',t:'<span class="key">不戰而屈人之兵：</span>將目標敵方獸返回其擁有者手牌。'},
- {n:'軍形',ch:'形',cost:2,sig:'形',sub:'第四篇',t:'目標友方獸 <b>+0/+3</b>，並獲得<span class="key">隱</span>直到你的下回合。'},
- {n:'兵勢',ch:'勢',cost:2,sig:'勢',sub:'第五篇',t:'本回合你控制的每隻獸，使友方獸各 <b>+1勢</b>。'},
- {n:'虛實',ch:'虛',cost:2,sig:'虛',sub:'第六篇 · 即',t:'<span class="key">即 · 避實擊虛：</span>將一次攻擊轉移至另一隻獸或龍脈。'},
- {n:'軍爭',ch:'爭',cost:2,sig:'爭',sub:'第七篇',t:'為一友方獸選其一至回合末：風 疾／林 隱／火 +2勢／山 +0/+3。'},
- {n:'九變',ch:'變',cost:2,sig:'變',sub:'第八篇 · 即',t:'<span class="key">即：</span>抵消一張兵法或一個觸發能力；或改變一隻獸的屬性。'},
- {n:'行軍',ch:'行',cost:2,sig:'行',sub:'第九篇',t:'以少 <b>①</b> 糧，將一隻獸面朝下（<span class="key">奇</span>）暗置登場。'},
- {n:'崑崙墟',ch:'地',cost:2,sig:'崑',sub:'第十篇 · 地形',t:'<span class="key">地形：</span>留置。你的山獸 <b>+0/+1</b>。回合開始時龍脈回復 <b>1</b>。'},
- {n:'歸墟',ch:'地',cost:2,sig:'歸',sub:'第十篇 · 地形',t:'<span class="key">地形：</span>留置。每回合一次，友方獸被擊敗時抽一張牌。'},
- {n:'九地',ch:'地',cost:2,sig:'死',sub:'第十一篇',t:'<span class="key">置之死地而後生：</span>龍脈 ≤10 時友方獸本回合 <b>+3勢</b>，否則 <b>+1勢</b>。'},
- {n:'火攻',ch:'火',cost:3,sig:'火',sub:'第十二篇 ×2',t:'對一隻獸造成 <b>3</b> 點傷害（若為林獸則改為 <b>5</b> 點）。'},
- {n:'用間',ch:'間',cost:1,sig:'間',sub:'第十三篇 ×2',t:'<span class="key">知彼：</span>翻開一張敵方暗置（奇）獸，並查看對手手牌。該獸保持正面。'},
+ {n:'始計',en:'Calculation',ch:'計',cost:1,sig:'計',sub:'第一篇',sube:'Ch.1',t:'查看牌庫頂 3 張，抽 1 張，其餘以任意順序放回。',te:'Look at the top 3 cards of your deck. Draw 1; return the rest in any order.'},
+ {n:'作戰',en:'Waging War',ch:'戰',cost:1,sig:'作',sub:'第二篇',sube:'Ch.2',t:'本回合獲得 <b>②</b> 糧。回合結束時棄一張牌。',te:'Gain <b>②</b> Supply this turn. Discard a card at end of turn.'},
+ {n:'謀攻',en:'Subdue',ch:'謀',cost:3,sig:'謀',sub:'第三篇',sube:'Ch.3',t:'<span class="key">不戰而屈人之兵：</span>將目標敵方獸返回其擁有者手牌。',te:'<span class="key">Win Without Fighting:</span> Return a target enemy beast to its owner\u2019s hand.'},
+ {n:'軍形',en:'Form',ch:'形',cost:2,sig:'形',sub:'第四篇',sube:'Ch.4',t:'目標友方獸 <b>+0/+3</b>，並獲得<span class="key">隱</span>直到你的下回合。',te:'A friendly beast gains <b>+0/+3</b> and <span class="key">Veiled</span> until your next turn.'},
+ {n:'兵勢',en:'Force',ch:'勢',cost:2,sig:'勢',sub:'第五篇',sube:'Ch.5',t:'本回合你控制的每隻獸，使友方獸各 <b>+1勢</b>。',te:'Friendly beasts get <b>+1 Force</b> this turn for each beast you control.'},
+ {n:'虛實',en:'Void &amp; Solid',ch:'虛',cost:2,sig:'虛',sub:'第六篇 · 即',sube:'Ch.6 · Instant',t:'<span class="key">即 · 避實擊虛：</span>將一次攻擊轉移至另一隻獸或龍脈。',te:'<span class="key">Instant · Strike the Weak:</span> Redirect an attack to another beast or to a Life total.'},
+ {n:'軍爭',en:'Maneuver',ch:'爭',cost:2,sig:'爭',sub:'第七篇',sube:'Ch.7',t:'為一友方獸選其一至回合末：風 疾／林 隱／火 +2勢／山 +0/+3。',te:'Choose one for a friendly beast until end of turn: Wind=Haste / Forest=Veiled / Fire=+2 Force / Mountain=+0/+3.'},
+ {n:'九變',en:'Adaptation',ch:'變',cost:2,sig:'變',sub:'第八篇 · 即',sube:'Ch.8 · Instant',t:'<span class="key">即：</span>抵消一張兵法或一個觸發能力；或改變一隻獸的屬性。',te:'<span class="key">Instant:</span> Negate a Stratagem or a triggered ability; or change a beast\u2019s nature.'},
+ {n:'行軍',en:'The March',ch:'行',cost:2,sig:'行',sub:'第九篇',sube:'Ch.9',t:'以少 <b>①</b> 糧，將一隻獸面朝下（<span class="key">奇</span>）暗置登場。',te:'Deploy a beast face-down (<span class="key">Qi</span>) for <b>①</b> less Supply.'},
+ {n:'崑崙墟',en:'Kunlun Ruins',ch:'地',cost:2,sig:'崑',sub:'第十篇 · 地形',sube:'Ch.10 · Terrain',t:'<span class="key">地形：</span>留置。你的山獸 <b>+0/+1</b>。回合開始時龍脈回復 <b>1</b>。',te:'<span class="key">Terrain:</span> Stays in play. Your Mountain beasts get <b>+0/+1</b>. At the start of your turn, restore <b>1</b> Life.'},
+ {n:'歸墟',en:'The Abyss',ch:'地',cost:2,sig:'歸',sub:'第十篇 · 地形',sube:'Ch.10 · Terrain',t:'<span class="key">地形：</span>留置。每回合一次，友方獸被擊敗時抽一張牌。',te:'<span class="key">Terrain:</span> Stays in play. Once per turn, when a friendly beast is defeated, draw a card.'},
+ {n:'九地',en:'Death Ground',ch:'地',cost:2,sig:'死',sub:'第十一篇',sube:'Ch.11',t:'<span class="key">置之死地而後生：</span>龍脈 ≤10 時友方獸本回合 <b>+3勢</b>，否則 <b>+1勢</b>。',te:'<span class="key">Desperate Ground:</span> If your Life ≤10, friendly beasts get <b>+3 Force</b> this turn; otherwise <b>+1 Force</b>.'},
+ {n:'火攻',en:'Fire Attack',ch:'火',cost:3,sig:'火',sub:'第十二篇 ×2',sube:'Ch.12 ×2',t:'對一隻獸造成 <b>3</b> 點傷害（若為林獸則改為 <b>5</b> 點）。',te:'Deal <b>3</b> damage to a beast (<b>5</b> if it is Forest).'},
+ {n:'用間',en:'Espionage',ch:'間',cost:1,sig:'間',sub:'第十三篇 ×2',sube:'Ch.13 ×2',t:'<span class="key">知彼：</span>翻開一張敵方暗置（奇）獸，並查看對手手牌。該獸保持正面。',te:'<span class="key">Know the Enemy:</span> Reveal a hidden (Qi) enemy beast and look at the opponent\u2019s hand. It stays face-up.'},
 ];
 
-const ALL={}; [...land,...sea].forEach(b=>ALL[b.n]=b);
-const B=n=>ALL[n];
+const ALL={};[...land,...sea].forEach(b=>ALL[b.n]=b);const B=n=>ALL[n];
 
 /* renderers */
-function card(c,i){const nat=NAT[c.nat];
+function card(c,i){const nat=NAT[c.nat];const big=LANG==='en'?c.py:c.n;const small=LANG==='en'?c.n:c.py;
  return `<div class="card ${c.nat}" data-nat="${c.nat}" style="animation-delay:${(i%8)*.04}s"><div class="inner">
-   <div class="c-top"><div class="cost">${c.cost}</div><div class="c-name"><div class="zh">${c.n}</div><div class="py">${c.py}</div></div><div class="nat">${nat.g}</div></div>
+   <div class="c-top"><div class="cost">${c.cost}</div><div class="c-name"><div class="zh">${big}</div><div class="py">${small}</div></div><div class="nat">${nat.g}</div></div>
    <div class="c-art"><div class="mist"></div><div class="sigil">${c.sig}</div><div class="stamp">${nat.g}</div></div>
-   <div class="c-type"><span>${nat.t}</span><span class="badge">${c.sub}</span></div>
-   <div class="c-text">${c.t}</div>
+   <div class="c-type"><span>${LANG==='en'?nat.te:nat.t}</span><span class="badge">${LANG==='en'?c.sube:c.sub}</span></div>
+   <div class="c-text">${LANG==='en'?c.te:c.t}</div>
    <div class="c-stats"><div class="stat shi"><span class="diamond"><span>勢</span></span>${c.shi}</div><div class="stat xing">${c.xing}<span class="shield"><span>形</span></span></div></div>
  </div></div>`;}
-function strat(c,i){const tag=c.sub.includes('地形')?'地形':(c.sub.includes('即')?'即時':'兵法');
+function strat(c,i){const tag=c.sub.includes('地形')?t('地形','Terrain'):(c.sub.includes('即')?t('即時','Instant'):t('兵法','Stratagem'));const big=LANG==='en'?c.en:c.n;
  return `<div class="card strat" style="animation-delay:${(i%8)*.04}s"><div class="inner">
-   <div class="c-top"><div class="cost">${c.cost}</div><div class="c-name"><div class="zh">${c.n}</div></div><div class="nat">${c.ch}</div></div>
+   <div class="c-top"><div class="cost">${c.cost}</div><div class="c-name"><div class="zh">${big}</div></div><div class="nat">${c.ch}</div></div>
    <div class="c-art"><div class="mist"></div><div class="sigil">${c.sig}</div><div class="stamp">兵</div></div>
-   <div class="c-type"><span>${tag} · 孫子兵法</span><span class="badge">${c.sub}</span></div>
-   <div class="c-text">${c.t}</div>
-   <div class="c-chapter"><div class="seal">${c.ch} 篇</div></div>
+   <div class="c-type"><span>${tag} · ${t('孫子兵法','Sun Tzu')}</span><span class="badge">${LANG==='en'?c.sube:c.sub}</span></div>
+   <div class="c-text">${LANG==='en'?c.te:c.t}</div>
+   <div class="c-chapter"><div class="seal">${c.ch}${t(' 篇','')}</div></div>
  </div></div>`;}
 
-document.getElementById('land-deck').innerHTML=land.map(card).join('');
-document.getElementById('sea-deck').innerHTML=sea.map(card).join('');
-document.getElementById('strat-deck').innerHTML=strats.map(strat).join('');
-
 /* board mini-card */
-function floatHTML(b){return b.float?`<span class="float ${b.float.t}">${b.float.x}</span>`:'';}
+function floatHTML(b){if(!b.float)return '';const x=(LANG==='en'&&b.float.xe)?b.float.xe:b.float.x;return `<span class="float ${b.float.t}">${x}</span>`;}
 function bcardS(b){
- if(b.face==='down') return `<div class="bc back ${b.fx?'fx-'+b.fx:''}"><div class="bi"><div class="bk">奇</div><div class="bkc">暗置·伏兵</div></div>${floatHTML(b)}</div>`;
- const d=B(b.name);
+ if(b.face==='down') return `<div class="bc back ${b.fx?'fx-'+b.fx:''}"><div class="bi"><div class="bk">奇</div><div class="bkc">${t('暗置·伏兵','Face-down')}</div></div>${floatHTML(b)}</div>`;
+ const d=B(b.name);const nm=LANG==='en'?d.py:d.n;
  return `<div class="bc ${d.nat} ${b.fx?'fx-'+b.fx:''} ${b.glow?'glow':''}"><div class="bi">
    <div class="bc-cost">${d.cost}</div><div class="bc-nat">${NAT[d.nat].g}</div>
    <div class="bc-art"><span class="bc-sig">${d.sig}</span></div>
-   <div class="bc-name">${d.n}</div>
+   <div class="bc-name">${nm}</div>
    ${b.kw?`<div class="bc-kw">${b.kw}</div>`:''}
    <div class="bc-stats"><span class="s">${b.shi}</span><span class="x">${b.xing}</span></div>
  </div>${floatHTML(b)}</div>`;
 }
 function bcardStatic(name){const d=B(name);return bcardS({name:name,shi:d.shi,xing:d.xing});}
-function terrainCard(g,n){return `<div class="terrain"><div class="ti"><div class="tg">${g}</div><div class="tn">${n}</div><div class="tl">地形</div></div></div>`;}
+function terrainCard(ter){const nm=LANG==='en'?ter.ne:ter.n;return `<div class="terrain"><div class="ti"><div class="tg">${ter.g}</div><div class="tn">${nm}</div><div class="tl">${t('地形','Terrain')}</div></div></div>`;}
 
-/* hero fan + flip demo */
-document.getElementById('hero-fan').innerHTML=bcardStatic('鯤鵬')+bcardStatic('饕餮')+bcardStatic('燭龍');
-document.getElementById('flip-front').innerHTML=`<div class="bc back" style="width:100%;height:100%"><div class="bi"><div class="bk">奇</div><div class="bkc">暗置·伏兵</div></div></div>`;
-const fb=B('饕餮');
-document.getElementById('flip-back').innerHTML=`<div class="bc fire" style="width:100%;height:100%"><div class="bi"><div class="bc-cost">${fb.cost}</div><div class="bc-nat">火</div><div class="bc-art"><span class="bc-sig">饕</span></div><div class="bc-name">饕餮</div><div class="bc-stats"><span class="s">${fb.shi}</span><span class="x">${fb.xing}</span></div></div></div>`;
+const stars=[
+ {n:'饕餮',bio:'神話級吃貨。場上每死一隻怪，牠就 +1/+1，越打越肥。',bioe:'A legendary glutton. Every time a beast dies it gains +1/+1 — the more carnage, the bigger it grows.'},
+ {n:'燭龍',bio:'睜眼是白天、閉眼是黑夜的巨龍，掌管晝夜、增益全場。',bioe:'A dragon whose open eyes are day and closed eyes are night — buffs your whole board each turn.'},
+ {n:'精衛',bio:'銜石填海、永不放棄的小鳥。每回合默默磨對手 1 滴血。',bioe:'A little bird endlessly filling the sea. Chips 1 damage off the enemy every turn.'},
+ {n:'窮奇',bio:'長翅膀的惡虎，專咬「正面」的老實怪，傷害 +2。',bioe:'A winged tiger that preys on honest, face-up beasts — +2 damage to them.'},
+ {n:'巴蛇',bio:'能吞象的巨蛇（海牌組）。登場直接吃掉一隻小怪。',bioe:'A serpent that swallows elephants (Sea deck). On arrival it devours a small enemy.'},
+ {n:'天吳',bio:'八個頭的水神（海牌組），一次能攻擊兩個目標。',bioe:'An eight-headed sea god (Sea deck) — it can strike two targets at once.'},
+];
 
-/* gallery filters */
+function renderGalleries(){
+ document.getElementById('land-deck').innerHTML=land.map(card).join('');
+ document.getElementById('sea-deck').innerHTML=sea.map(card).join('');
+ document.getElementById('strat-deck').innerHTML=strats.map(strat).join('');
+ const F={all:t('全部','All'),wind:t('風','Wind'),forest:t('林','Forest'),fire:t('火','Fire'),mtn:t('山','Mountain')};
+ document.querySelectorAll('.filterbar').forEach(bar=>{bar.querySelectorAll('button').forEach((b,i)=>{b.classList.toggle('active',i===0);if(F[b.dataset.f])b.textContent=F[b.dataset.f];});});
+ document.querySelectorAll('.deck .card').forEach(c=>c.style.display='');
+}
+function renderExtras(){
+ document.getElementById('hero-fan').innerHTML=bcardStatic('鯤鵬')+bcardStatic('饕餮')+bcardStatic('燭龍');
+ const fb=B('饕餮');const fbn=LANG==='en'?fb.py:fb.n;
+ document.getElementById('flip-front').innerHTML=`<div class="bc back" style="width:100%;height:100%"><div class="bi"><div class="bk">奇</div><div class="bkc">${t('暗置·伏兵','Face-down')}</div></div></div>`;
+ document.getElementById('flip-back').innerHTML=`<div class="bc fire" style="width:100%;height:100%"><div class="bi"><div class="bc-cost">${fb.cost}</div><div class="bc-nat">火</div><div class="bc-art"><span class="bc-sig">饕</span></div><div class="bc-name">${fbn}</div><div class="bc-stats"><span class="s">${fb.shi}</span><span class="x">${fb.xing}</span></div></div></div>`;
+ document.getElementById('stars').innerHTML=stars.map(s=>{const d=B(s.n);const nm=LANG==='en'?d.py:d.n;const bio=LANG==='en'?s.bioe:s.bio;return `<div class="star">${bcardStatic(s.n)}<div class="bio"><h5>${nm}</h5><p>${bio}</p></div></div>`;}).join('');
+ document.getElementById('anat-card-slot').innerHTML=card(B('窮奇'),0);
+}
+
+/* gallery filters (attach once) */
 document.querySelectorAll('.filterbar').forEach(bar=>{
  const deckId=bar.dataset.deck==='sea'?'#sea-deck':'#land-deck';
  bar.querySelectorAll('button').forEach(btn=>btn.addEventListener('click',()=>{
@@ -795,89 +832,97 @@ function findDown(arr){return arr.find(b=>b.face==='down');}
 let S,cur,auto=null;
 function initS(){return {
   enemy:{life:22,s:6,smax:10,deck:21,hand:3,ofloat:null,
-    terrain:{g:'崑',n:'崑崙墟'},
+    terrain:{g:'崑',n:'崑崙墟',ne:'Kunlun Ruins'},
     beasts:[{name:'開明獸',shi:3,xing:7,kw:'守'},{face:'down'},{name:'精衛',shi:1,xing:2}]},
   you:{life:27,s:7,smax:10,deck:18,hand:4,ofloat:null,
-    terrain:{g:'歸',n:'歸墟'},
+    terrain:{g:'歸',n:'歸墟',ne:'The Abyss'},
     beasts:[{name:'窮奇',shi:4,xing:3,glow:true},{name:'饕餮',shi:4,xing:4},{face:'down'}]},
-  phase:'起手',txt:'第七回合 · 起手局面。輪到我方布局。'
+  phZh:'起手',phEn:'Setup',txtZh:'第七回合 · 起手局面。',txtEn:'Turn 7 · opening board.'
 };}
 
 const steps=[
- s=>{s.phase='起手';s.txt='第七回合 · 起手局面。我方場上有<b>窮奇</b>、<b>饕餮</b>與一張暗置之奇；敵方立<b>開明獸</b>（守）為壁。';},
- s=>{s.you.s=8;s.hand=s.you.hand=5;s.you.ofloat={x:'+1糧',t:'buff'};s.phase='起 · 徵糧';
-     s.txt='糧草上限升至 <b>8</b> 並補滿，抽得 <b>應龍</b>。';},
- s=>{s.you.s=7;const d=findDown(s.enemy.beasts);d.face=null;d.name='相柳';d.shi=5;d.xing=5;d.fx='flip';d.float={x:'用間·翻開',t:'info'};
-     s.phase='計 · 用間';s.txt='花 1 糧<b>用間</b>窺探——敵之伏兵竟是 <b>相柳</b>！<span class="r">知彼</span>，從容布陣。';},
- s=>{s.you.s=5;const yb=s.you.beasts;yb[0].shi=7;yb[0].fx='grow';yb[0].float={x:'+3勢',t:'buff'};yb[1].shi=7;yb[1].fx='grow';yb[1].float={x:'+3勢',t:'buff'};
-     s.phase='計 · 兵勢';s.txt='打出 <b>兵勢</b>（2糧）：你控制 3 隻獸，友方各 <b>+3勢</b>。漲潮之勢已成。';},
- s=>{const yb=s.you.beasts;const d=findDown(yb);d.face=null;d.name='鳳凰';d.shi=7;d.xing=3;d.fx='flip';d.float={x:'出其不意',t:'info'};
-     s.phase='計 · 翻奇';s.txt='翻開我方伏兵——竟是 <b>鳳凰</b>！觸發 <span class="r">出其不意</span>，三獸齊備。<i>以奇勝</i>。';},
+ s=>{s.phZh='起手';s.phEn='Setup';s.txtZh='第七回合 · 起手局面。我方場上有<b>窮奇</b>、<b>饕餮</b>與一張暗置之奇；敵方立<b>開明獸</b>（守）為壁。';s.txtEn='Turn 7 · opening board. You have <b>Qiongqi</b>, <b>Taotie</b> and one face-down ambush; the enemy holds <b>Kaiming</b> (Guard) as a wall.';},
+ s=>{s.you.s=8;s.hand=s.you.hand=5;s.you.ofloat={x:'+1糧',xe:'+1 Supply',t:'buff'};s.phZh='起 · 徵糧';s.phEn='Muster';
+     s.txtZh='糧草上限升至 <b>8</b> 並補滿，抽得 <b>應龍</b>。';s.txtEn='Supply rises to <b>8</b> and refills; you draw <b>Yinglong</b>.';},
+ s=>{s.you.s=7;const d=findDown(s.enemy.beasts);d.face=null;d.name='相柳';d.shi=5;d.xing=5;d.fx='flip';d.float={x:'用間·翻開',xe:'Reveal!',t:'info'};
+     s.phZh='計 · 用間';s.phEn='Espionage';s.txtZh='花 1 糧<b>用間</b>窺探——敵之伏兵竟是 <b>相柳</b>！<span class="r">知彼</span>，從容布陣。';s.txtEn='Spend 1 Supply on <b>Espionage</b> — the enemy ambush is <b>Xiangliu</b>! <span class="r">Know the enemy</span>, and plan freely.';},
+ s=>{s.you.s=5;const yb=s.you.beasts;yb[0].shi=7;yb[0].fx='grow';yb[0].float={x:'+3勢',xe:'+3 Force',t:'buff'};yb[1].shi=7;yb[1].fx='grow';yb[1].float={x:'+3勢',xe:'+3 Force',t:'buff'};
+     s.phZh='計 · 兵勢';s.phEn='Force';s.txtZh='打出 <b>兵勢</b>（2糧）：你控制 3 隻獸，友方各 <b>+3勢</b>。漲潮之勢已成。';s.txtEn='Play <b>Force</b> (2 Supply): you control 3 beasts, so each friendly gets <b>+3 Force</b>. The tide is rising.';},
+ s=>{const yb=s.you.beasts;const d=findDown(yb);d.face=null;d.name='鳳凰';d.shi=7;d.xing=3;d.fx='flip';d.float={x:'出其不意',xe:'Ambush!',t:'info'};
+     s.phZh='計 · 翻奇';s.phEn='Reveal Qi';s.txtZh='翻開我方伏兵——竟是 <b>鳳凰</b>！觸發 <span class="r">出其不意</span>，三獸齊備。<i>以奇勝</i>。';s.txtEn='Flip your ambush — it is <b>Fenghuang</b>! Triggers <span class="r">surprise attack</span>; three beasts ready. <i>Win with the unorthodox.</i>';},
  s=>{const eb=s.enemy.beasts,yb=s.you.beasts;
      const open=eb.find(b=>b.name==='開明獸');const qiong=yb.find(b=>b.name==='窮奇');const tao=yb.find(b=>b.name==='饕餮');
      qiong.fx='atk';open.fx='die';open.float={x:'-7',t:'dmg'};qiong.xing=0;qiong.fx='die';qiong.float={x:'-3',t:'dmg'};
-     tao.shi=9;tao.xing=6;tao.glow=false;tao.float={x:'貪食 +2/+2',t:'buff'};setTimeout(()=>{},0);
-     s.you.hand=6;s.you.ofloat={x:'歸墟·抽牌',t:'heal'};
-     s.phase='爭 · 破守';s.txt='<b>窮奇</b>(7) 撞向 <b>開明獸</b>(守)，兩敗俱亡——但 <b>饕餮·貪食</b> 連吞二魂壯至 <b>9/6</b>，<b>歸墟</b>亦補一牌。連環！';},
+     tao.shi=9;tao.xing=6;tao.glow=false;tao.float={x:'貪食 +2/+2',xe:'Gluttony +2/+2',t:'buff'};
+     s.you.hand=6;s.you.ofloat={x:'歸墟·抽牌',xe:'Abyss · draw',t:'heal'};
+     s.phZh='爭 · 破守';s.phEn='Break the Wall';s.txtZh='<b>窮奇</b>(7) 撞向 <b>開明獸</b>(守)，兩敗俱亡——但 <b>饕餮·貪食</b> 連吞二魂壯至 <b>9/6</b>，<b>歸墟</b>亦補一牌。連環！';s.txtEn='<b>Qiongqi</b>(7) crashes into <b>Kaiming</b>(Guard) — both fall. But <b>Taotie · Gluttony</b> devours two souls and swells to <b>9/6</b>; <b>The Abyss</b> draws you a card. Chain!';},
  s=>{const yb=s.you.beasts;const tao=yb.find(b=>b.name==='饕餮');const feng=yb.find(b=>b.name==='鳳凰');
      tao.fx='atk';feng.fx='atk';
      s.enemy.life=6;s.enemy.ofloat={x:'-16',t:'dmg'};
-     s.phase='爭 · 登龍脈';s.txt='守壁已破！<b>饕餮</b>(9) 與 <b>鳳凰</b>(7) 長驅直入，敵龍脈自 22 暴跌至 <span class="r">6</span>。';},
- s=>{s.phase='收 · 勝勢';s.txt='一回合連環：<b>用間</b>知彼、<b>兵勢</b>漲潮、<b>翻奇</b>奇襲、<b>貪食/歸墟</b>滾動成雪球。敵龍脈僅餘 <span class="r">6</span>——勝勢已成。';},
+     s.phZh='爭 · 登龍脈';s.phEn='Strike the Life';s.txtZh='守壁已破！<b>饕餮</b>(9) 與 <b>鳳凰</b>(7) 長驅直入，敵龍脈自 22 暴跌至 <span class="r">6</span>。';s.txtEn='The wall is down! <b>Taotie</b>(9) and <b>Fenghuang</b>(7) charge in — enemy Life plummets from 22 to <span class="r">6</span>.';},
+ s=>{s.phZh='收 · 勝勢';s.phEn='Victory in Sight';s.txtZh='一回合連環：<b>用間</b>知彼、<b>兵勢</b>漲潮、<b>翻奇</b>奇襲、<b>貪食/歸墟</b>滾動成雪球。敵龍脈僅餘 <span class="r">6</span>——勝勢已成。';s.txtEn='One turn, one chain: <b>Espionage</b> read them, <b>Force</b> surged, the <b>ambush</b> struck, <b>Gluttony/Abyss</b> snowballed. Enemy Life just <span class="r">6</span> — the win is in hand.';},
 ];
 
 function clearFx(s){[s.enemy,s.you].forEach(side=>{side.ofloat=null;side.beasts.forEach(b=>{b.fx=null;b.float=null;});});}
 
+function orbFloat(side,id){if(!side.ofloat)return;const o=document.getElementById(id);const sp=document.createElement('span');sp.className='ofloat';sp.style.color=side.ofloat.t==='dmg'?'#ff7a5c':'#86e886';sp.textContent=(LANG==='en'&&side.ofloat.xe)?side.ofloat.xe:side.ofloat.x;o.appendChild(sp);}
+
 function renderDemo(){
  document.getElementById('e-life').textContent=S.enemy.life;
  document.getElementById('y-life').textContent=S.you.life;
- document.getElementById('e-sup').innerHTML='糧 <span class="coins">'+coins(S.enemy.s,S.enemy.smax)+'</span> '+S.enemy.s+'／10';
- document.getElementById('y-sup').innerHTML='糧 <span class="coins">'+coins(S.you.s,S.you.smax)+'</span> '+S.you.s+'／10';
- document.getElementById('e-piles').innerHTML='<span>牌庫 <b>'+S.enemy.deck+'</b></span><span>手牌 <b>'+S.enemy.hand+'</b></span>';
- document.getElementById('y-piles').innerHTML='<span>牌庫 <b>'+S.you.deck+'</b></span><span>手牌 <b>'+S.you.hand+'</b></span>';
- document.getElementById('enemy-row').innerHTML=terrainCard(S.enemy.terrain.g,S.enemy.terrain.n)+S.enemy.beasts.map(bcardS).join('');
- document.getElementById('you-row').innerHTML=terrainCard(S.you.terrain.g,S.you.terrain.n)+S.you.beasts.map(bcardS).join('');
- document.getElementById('d-phase').textContent=S.phase;
- document.getElementById('d-txt').innerHTML=' '+S.txt;
- // orb floats
- if(S.enemy.ofloat){const o=document.getElementById('e-orb');const sp=document.createElement('span');sp.className='ofloat';sp.style.color=S.enemy.ofloat.t==='heal'?'#86e886':'#ff7a5c';sp.textContent=S.enemy.ofloat.x;o.appendChild(sp);}
- if(S.you.ofloat){const o=document.getElementById('y-orb');const sp=document.createElement('span');sp.className='ofloat';sp.style.color=S.you.ofloat.t==='dmg'?'#ff7a5c':'#86e886';sp.textContent=S.you.ofloat.x;o.appendChild(sp);}
+ const sup=t('糧','Supply');
+ document.getElementById('e-sup').innerHTML=sup+' <span class="coins">'+coins(S.enemy.s,S.enemy.smax)+'</span> '+S.enemy.s+'／10';
+ document.getElementById('y-sup').innerHTML=sup+' <span class="coins">'+coins(S.you.s,S.you.smax)+'</span> '+S.you.s+'／10';
+ const dk=t('牌庫','Deck'),hd=t('手牌','Hand');
+ document.getElementById('e-piles').innerHTML='<span>'+dk+' <b>'+S.enemy.deck+'</b></span><span>'+hd+' <b>'+S.enemy.hand+'</b></span>';
+ document.getElementById('y-piles').innerHTML='<span>'+dk+' <b>'+S.you.deck+'</b></span><span>'+hd+' <b>'+S.you.hand+'</b></span>';
+ document.getElementById('enemy-row').innerHTML=terrainCard(S.enemy.terrain)+S.enemy.beasts.map(bcardS).join('');
+ document.getElementById('you-row').innerHTML=terrainCard(S.you.terrain)+S.you.beasts.map(bcardS).join('');
+ document.getElementById('d-phase').textContent=LANG==='en'?S.phEn:S.phZh;
+ document.getElementById('d-txt').innerHTML=' '+(LANG==='en'?S.txtEn:S.txtZh);
+ orbFloat(S.enemy,'e-orb');orbFloat(S.you,'y-orb');
  if(S.enemy.ofloat&&S.enemy.ofloat.t==='dmg')document.getElementById('e-orb').classList.add('flash');else document.getElementById('e-orb').classList.remove('flash');
- // controls
- document.getElementById('d-ind').textContent='步驟 '+(cur+1)+' / '+steps.length;
+ document.getElementById('d-ind').textContent=t('步驟','Step')+' '+(cur+1)+' / '+steps.length;
  document.getElementById('d-bar').style.width=((cur)/(steps.length-1)*100)+'%';
  document.getElementById('d-next').disabled=(cur>=steps.length-1);
 }
 
 function goTo(i){clearFx(S);cur=i;steps[i](S);renderDemo();
- // auto-cleanup defeated
  const dead=[...S.enemy.beasts,...S.you.beasts].some(b=>b.fx==='die');
  if(dead){setTimeout(()=>{S.enemy.beasts=S.enemy.beasts.filter(b=>b.fx!=='die');S.you.beasts=S.you.beasts.filter(b=>b.fx!=='die');clearFx(S);renderDemo();},850);}
 }
 function next(){if(cur<steps.length-1)goTo(cur+1);if(cur>=steps.length-1)stopAuto();}
 function reset(){stopAuto();S=initS();goTo(0);}
-function stopAuto(){if(auto){clearInterval(auto);auto=null;document.getElementById('d-auto').textContent='自動播放';}}
+function stopAuto(){if(auto){clearInterval(auto);auto=null;}document.getElementById('d-auto').textContent=t('自動播放','Auto-play');}
 
 document.getElementById('d-next').addEventListener('click',next);
 document.getElementById('d-reset').addEventListener('click',reset);
 document.getElementById('d-auto').addEventListener('click',()=>{
  if(auto){stopAuto();return;}
  if(cur>=steps.length-1)reset();
- document.getElementById('d-auto').textContent='暫停 ‖';
+ document.getElementById('d-auto').textContent=t('暫停 ‖','Pause ‖');
  auto=setInterval(()=>{if(cur>=steps.length-1){stopAuto();}else{next();}},2900);
 });
 
-const stars=[
- {n:'饕餮',bio:'神話級吃貨。場上每死一隻怪，牠就 +1/+1，越打越肥。'},
- {n:'燭龍',bio:'睜眼是白天、閉眼是黑夜的巨龍，掌管晝夜、增益全場。'},
- {n:'精衛',bio:'銜石填海、永不放棄的小鳥。每回合默默磨對手 1 滴血。'},
- {n:'窮奇',bio:'長翅膀的惡虎，專咬「正面」的老實怪，傷害 +2。'},
- {n:'巴蛇',bio:'能吞象的巨蛇（海牌組）。登場直接吃掉一隻小怪。'},
- {n:'天吳',bio:'八個頭的水神（海牌組），一次能攻擊兩個目標。'},
-];
-document.getElementById('stars').innerHTML=stars.map(s=>`<div class="star">${bcardStatic(s.n)}<div class="bio"><h5>${s.n}</h5><p>${s.bio}</p></div></div>`).join('');
-document.getElementById('anat-card-slot').innerHTML=card(B('窮奇'),0);
-S=initS();goTo(0);
+function setLang(l){LANG=l;document.body.classList.remove('lang-zh','lang-en');document.body.classList.add('lang-'+l);document.body.dataset.lang=l;document.documentElement.lang=l==='en'?'en':'zh-Hant';
+ renderGalleries();renderExtras();renderDemo();
+ document.getElementById('langtoggle').textContent=l==='en'?'中文':'EN';
+ document.getElementById('d-next').textContent=t('下一步 →','Next →');
+ document.getElementById('d-reset').textContent=t('重播','Replay');
+ document.getElementById('d-auto').textContent=auto?t('暫停 ‖','Pause ‖'):t('自動播放','Auto-play');
+}
+
+document.getElementById('langtoggle').addEventListener('click',function(e){e.preventDefault();setLang(LANG==='en'?'zh':'en');});
+S=initS();goTo(0);setLang('zh');
+(function(){var KEY='shb_lang_hint_v1';var hint=document.getElementById('langhint');if(!hint)return;
+ function seen(){try{return localStorage.getItem(KEY)==='1';}catch(e){return window.__shbHintSeen===true;}}
+ function mark(){try{localStorage.setItem(KEY,'1');}catch(e){window.__shbHintSeen=true;}}
+ function dismiss(){hint.classList.remove('show');mark();}
+ var lc=(navigator.language||navigator.userLanguage||'').toLowerCase();
+ if(!seen() && lc.indexOf('zh')!==0){setTimeout(function(){if(LANG==='zh')hint.classList.add('show');},1000);}
+ hint.addEventListener('click',function(e){if(e.target&&e.target.id==='langhint-x'){e.stopPropagation();dismiss();return;}dismiss();setLang('en');});
+ document.getElementById('langtoggle').addEventListener('click',dismiss);
+}());
 </script>
 </body>
 </html>
